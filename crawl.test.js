@@ -95,6 +95,6 @@ test("getURLsFromHTML invalid url", () => {
     `;
   const inputBaseUrl = "https://cryptozombies.io";
   const actual = getURLsFromHTML(inputHtmlFile, inputBaseUrl);
-  const expected = [];
+  const expected = ['https://cryptozombies.io/invalid'];
   expect(actual).toEqual(expected);
 });

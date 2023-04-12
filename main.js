@@ -12,8 +12,8 @@ async function main(){
     const baseURL = process.argv[2];
     // const baseURL = 'https://cryptozombies.io/';
 
-    const result = await crawlPage(baseURL, baseURL, {});
     console.log(`starting crawl of ${baseURL}`);
+    const result = await crawlPage(baseURL, baseURL, {});
     console.log(`crawling result:`, result);
 
 }
