@@ -16,5 +16,8 @@
   "devDependencies": {
     "jest": "^29.5.0",
     "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "jsdom": "^21.1.1"
   }
 }
