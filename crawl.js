@@ -1,4 +1,30 @@
 const { JSDOM } = require("jsdom");
+
+async function crawlPage(currentURL){
+    currentURL = 'https://cryptozombies.io/'; // TODO: Comment it out
+    console.log('activaly crawling: ' + currentURL);
+
+    try {
+        const resp = await fetch(currentURL);
+
+        if(resp.status > 399){
+            console.log('Error in fetch status code: ' + resp.status);
+            return;
+        }
+
+        const contenttype = resp.headers.get('content-type');
+        if(!contenttype.includes('text/html')){
+            console.log(`non html response, content type: ${contenttype}`);
+            return;
+        }
+
+        console.log(await resp.text());
+    } catch (error) {
+        console.log(`Error in CrawlPage fetch: ${error.message}`);
+    }
+
+}
+
 function getURLsFromHTML(htmlBody, baseURL) {
   const urls = [];
   const dom = new JSDOM(htmlBody);
@@ -37,4 +63,5 @@ function normalizeURL(urlString) {
 module.exports = {
   normalizeURL,
   getURLsFromHTML,
+  crawlPage
 };
