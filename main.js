@@ -1,6 +1,6 @@
 const { crawlPage } = require("./crawl");
 
-function main(){
+async function main(){
     if(process.argv.length < 3) {
         console.log('no website provided!');
         process.exit(1);
@@ -10,9 +10,11 @@ function main(){
         process.exit(1);
     }
     const baseURL = process.argv[2];
+    // const baseURL = 'https://cryptozombies.io/';
 
-    crawlPage(baseURL)
+    const result = await crawlPage(baseURL, baseURL, {});
     console.log(`starting crawl of ${baseURL}`);
+    console.log(`crawling result:`, result);
 
 }
 
