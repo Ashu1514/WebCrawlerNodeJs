@@ -1,0 +1,20 @@
+{
+  "name": "webcrawlernodejs",
+  "version": "1.0.0",
+  "description": "Web Crawler Tool using NodeJs",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "nodemon main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ashu1514/WebCrawlerNodeJs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22"
+  }
+}
