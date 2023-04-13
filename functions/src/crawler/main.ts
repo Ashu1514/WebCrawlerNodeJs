@@ -1,4 +1,4 @@
-import {crawlPage} from "./crawl.js";
+import { crawlPage } from "./crawl.js";
 
 /**
  * The main function to call

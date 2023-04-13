@@ -1,18 +1,19 @@
-import {JSDOM} from "jsdom";
-const MAX_DEEP_LEVEL = 10;
+import { JSDOM } from "jsdom";
+import { PagesMapping } from "../typings/crawler";
+const MAX_DEEP_LEVEL = 5;
 
 /**
  * The page crawling function
  * @param {string} baseURL base url of site
  * @param {string} currentURL current crawling page url
- * @param {object} pages pages mapping object
+ * @param {PagesMapping} pages pages mapping object
  * @param {number} level rucursion levels
  * @return {object} pages pages mapping object
  */
 export async function crawlPage(
   baseURL: string,
   currentURL: string,
-  pages: { [props: string]: number },
+  pages: PagesMapping,
   level = 0
 ) {
   if (level >= MAX_DEEP_LEVEL) {
@@ -63,7 +64,6 @@ export async function crawlPage(
   return pages;
 }
 
-
 /**
  * The page crawling function
  * @param {string} htmlBody html code of current page
@@ -75,7 +75,7 @@ export function getURLsFromHTML(htmlBody: string, baseURL: string) {
     baseURL = baseURL.slice(0, -1);
   }
   const urls: string[] = [];
-  const dom = new JSDOM(htmlBody, {url: baseURL});
+  const dom = new JSDOM(htmlBody, { url: baseURL });
   const linkEls = dom.window.document.querySelectorAll(
     "a[href]"
   ) as NodeListOf<HTMLAnchorElement>;
@@ -110,7 +110,7 @@ export function getURLsFromHTML(htmlBody: string, baseURL: string) {
  * @param {string} urlString url to normalize
  * @return {string} normalized url
  */
-export function normalizeURL(urlString:string) {
+export function normalizeURL(urlString: string) {
   const urlObj = new URL(urlString);
   const hostPath = `${urlObj.hostname}${urlObj.pathname}`;
   if (hostPath.length > 0 && hostPath.slice(-1) === "/") {
