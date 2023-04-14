@@ -5,6 +5,7 @@ lib/
 
 # TypeScript v1 declaration files
 # typings/
+secrets/
 
 # Node.js dependency directory
 node_modules/
