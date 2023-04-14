@@ -1,6 +1,6 @@
 import { JSDOM } from "jsdom";
 import { PagesMapping } from "../typings/crawler";
-const MAX_DEEP_LEVEL = 5;
+const MAX_DEEP_LEVEL = 10;
 
 /**
  * The page crawling function
@@ -14,14 +14,14 @@ export async function crawlPage(
   baseURL: string,
   currentURL: string,
   pages: PagesMapping,
-  level = 0
-) {
+  level = 0,
+): Promise<PagesMapping> {
   if (level >= MAX_DEEP_LEVEL) {
     return pages;
   }
   level++;
-  const baseURLObj = new URL(baseURL);
-  const currentURLObj = new URL(currentURL);
+  const baseURLObj: URL = new URL(baseURL);
+  const currentURLObj: URL = new URL(currentURL);
   if (baseURLObj.hostname !== currentURLObj.hostname) {
     return pages;
   }
@@ -36,7 +36,7 @@ export async function crawlPage(
 
   console.log(`activaly crawling at level ${level}: ${currentURL}`);
   try {
-    const resp = await fetch(currentURL);
+    const resp: Response = await fetch(currentURL);
 
     const contenttype = resp.headers.get("content-type")! as string;
 
@@ -52,7 +52,7 @@ export async function crawlPage(
 
     const htmlBody = await resp.text();
 
-    const nextURLs = getURLsFromHTML(htmlBody, baseURL);
+    const nextURLs: string[] = getURLsFromHTML(htmlBody, baseURL);
 
     for (const url of nextURLs) {
       pages = await crawlPage(baseURL, url, pages, level);
@@ -70,7 +70,7 @@ export async function crawlPage(
  * @param {string} baseURL base url of site
  * @return {Array<string>} urls on current page
  */
-export function getURLsFromHTML(htmlBody: string, baseURL: string) {
+export function getURLsFromHTML(htmlBody: string, baseURL: string): string[] {
   if (baseURL.slice(-1) === "/") {
     baseURL = baseURL.slice(0, -1);
   }
@@ -110,9 +110,9 @@ export function getURLsFromHTML(htmlBody: string, baseURL: string) {
  * @param {string} urlString url to normalize
  * @return {string} normalized url
  */
-export function normalizeURL(urlString: string) {
-  const urlObj = new URL(urlString);
-  const hostPath = `${urlObj.hostname}${urlObj.pathname}`;
+export function normalizeURL(urlString: string): string {
+  const urlObj: URL = new URL(urlString);
+  const hostPath = `${urlObj.protocol}//${urlObj.hostname}${urlObj.pathname}`;
   if (hostPath.length > 0 && hostPath.slice(-1) === "/") {
     return hostPath.slice(0, -1);
   }

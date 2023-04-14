@@ -1,9 +1,10 @@
 import * as express from "express";
+import * as toolbox from "../toolbox";
 import { crawlPage } from "./crawl";
-import * as cors from "cors";
+import { sortPages } from "./report";
+import { Crawler } from "../typings/crawler";
 
 const mCrawlerExpress = express();
-mCrawlerExpress.use(cors);
 
 /**
  * crawler express initialization function
@@ -12,7 +13,7 @@ mCrawlerExpress.use(cors);
  * @return {object} crawler express object
  */
 // function init(cors: any, firebaseAdmin: any) {
-//   mCrawlerExpress.use(cors);
+mCrawlerExpress.use(toolbox.cors);
 
 mCrawlerExpress.get(
   "/ping",
@@ -21,26 +22,21 @@ mCrawlerExpress.get(
   }
 );
 
-mCrawlerExpress.get(
+mCrawlerExpress.post(
   "/start",
   async (req: express.Request, res: express.Response) => {
-    console.log("crawling started");
-    //   const body = req.body as {baseUrl: string, currentUrl: string};
-    const body = {
-      baseUrl: "https://cryptozombies.io",
-      currentUrl: "https://cryptozombies.io",
-    };
+    console.log("crawling started...");
+    const body = req.body as Crawler;
     try {
-      console.log(`starting crawl of ${body.baseUrl}`);
-      const result = await crawlPage(body.baseUrl, body.currentUrl, {});
-      console.log("crawling result:", result);
-      res.status(200).send({ result });
+      console.log(`starting crawl of ${body.baseURL}`);
+      const result = await crawlPage(body.baseURL, body.starttingPageURL, {});
+      const sortedResult = sortPages(result);
+      console.log("crawling result:", sortedResult);
+      res.status(200).send({ sortedResult });
     } catch (error: any) {
       res.status(500).send({ message: error.message, error });
     }
   }
 );
 
-//   return mCrawlerExpress;
-// }
 export default mCrawlerExpress;
