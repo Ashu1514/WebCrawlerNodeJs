@@ -1,5 +1,6 @@
 import { JSDOM } from "jsdom";
 import { PagesMapping } from "../typings/crawler";
+import { Crawler } from "./crawler.model";
 const MAX_DEEP_LEVEL = 10;
 
 /**
@@ -7,6 +8,7 @@ const MAX_DEEP_LEVEL = 10;
  * @param {string} baseURL base url of site
  * @param {string} currentURL current crawling page url
  * @param {PagesMapping} pages pages mapping object
+ * @param {Crawler} CrawlerQuery Crawler class
  * @param {number} level rucursion levels
  * @return {object} pages pages mapping object
  */
@@ -14,9 +16,10 @@ export async function crawlPage(
   baseURL: string,
   currentURL: string,
   pages: PagesMapping,
+  CrawlerQuery: Crawler,
   level = 0,
 ): Promise<PagesMapping> {
-  if (level >= MAX_DEEP_LEVEL) {
+  if (level >= CrawlerQuery.maxLevel) {
     return pages;
   }
   level++;
@@ -35,13 +38,19 @@ export async function crawlPage(
   pages[normalizeCurrentURL] = 1;
 
   console.log(`activaly crawling at level ${level}: ${currentURL}`);
+
+  CrawlerQuery.addCrawlingQueryLog(
+    `activaly crawling at level ${level}: ${currentURL}`
+  );
   try {
     const resp: Response = await fetch(currentURL);
 
     const contenttype = resp.headers.get("content-type")! as string;
 
     if (!contenttype.includes("text/html")) {
-      console.log(`non html response, content type: ${contenttype}`);
+      CrawlerQuery.addCrawlingQueryLog(
+        `non html response, content type: ${contenttype}`
+      );
       return pages;
     }
 
@@ -55,7 +64,7 @@ export async function crawlPage(
     const nextURLs: string[] = getURLsFromHTML(htmlBody, baseURL);
 
     for (const url of nextURLs) {
-      pages = await crawlPage(baseURL, url, pages, level);
+      pages = await crawlPage(baseURL, url, pages, CrawlerQuery, level);
     }
   } catch (error: any) {
     console.log(`Error in CrawlPage fetch: ${error.message}`);
