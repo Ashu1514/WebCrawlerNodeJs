@@ -6,4 +6,4 @@ export const firebaseAdmin = admin.initializeApp({
   databaseURL: "https://webcrawlernode-default-rtdb.firebaseio.com",
 });
 
-export const cors = corsMiddleware;
+export const cors = corsMiddleware({ origin: true });

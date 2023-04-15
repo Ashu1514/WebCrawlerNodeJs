@@ -1,7 +1,7 @@
 import { JSDOM } from "jsdom";
 import { PagesMapping } from "../typings/crawler";
 import { Crawler } from "./crawler.model";
-const MAX_DEEP_LEVEL = 10;
+import axios from "axios";
 
 /**
  * The page crawling function
@@ -17,7 +17,7 @@ export async function crawlPage(
   currentURL: string,
   pages: PagesMapping,
   CrawlerQuery: Crawler,
-  level = 0,
+  level = 0
 ): Promise<PagesMapping> {
   if (level >= CrawlerQuery.maxLevel) {
     return pages;
@@ -43,9 +43,10 @@ export async function crawlPage(
     `activaly crawling at level ${level}: ${currentURL}`
   );
   try {
-    const resp: Response = await fetch(currentURL);
+    // const fetch = (await import("node-fetch")).default;
+    const resp = await axios.get(currentURL);
 
-    const contenttype = resp.headers.get("content-type")! as string;
+    const contenttype = resp.headers["content-type"];
 
     if (!contenttype.includes("text/html")) {
       CrawlerQuery.addCrawlingQueryLog(
@@ -54,12 +55,15 @@ export async function crawlPage(
       return pages;
     }
 
-    // if(resp.status > 399){
-    //     console.log('Error in fetch status code: ' + resp.status);
-    //     return pages;
-    // }
+    if (resp.status > 399) {
+      CrawlerQuery.addCrawlingQueryLog(
+        `skipping ${currentURL} cause its status code is ${resp.status}`
+      );
+      console.log("Error in fetch status code: " + resp.status);
+      return pages;
+    }
 
-    const htmlBody = await resp.text();
+    const htmlBody = resp.data;
 
     const nextURLs: string[] = getURLsFromHTML(htmlBody, baseURL);
 

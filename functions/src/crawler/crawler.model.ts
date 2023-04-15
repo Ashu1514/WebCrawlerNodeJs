@@ -8,11 +8,12 @@ export interface CrawlerBody {
   email?: string;
   taskId?: string;
 }
+
 /**
  * crawler class
  */
 export class Crawler implements CrawlerBody {
-  taskId?: string;
+  taskId: string;
   createdAt: number;
   /**
    * crawler class
@@ -29,6 +30,7 @@ export class Crawler implements CrawlerBody {
     public email: string = "",
     public maxLevel: number = 10
   ) {
+    this.taskId = "dummy";
     this.createdAt = Date.now();
   }
 
@@ -50,6 +52,7 @@ export class Crawler implements CrawlerBody {
     this.taskId = task.id;
     console.log("task id is: " + task.id);
   }
+
   /**
    * add Crawling Query Logs async function
    * @param {string} logString crawling query log text
@@ -58,10 +61,8 @@ export class Crawler implements CrawlerBody {
     console.log(logString);
     const db = firebaseAdmin.database();
     const ref = db.ref("crawling_query_logs/");
-    const taskID = this.taskId! as string;
+    const taskID = this.taskId;
     const taskRef = ref.child(taskID).push();
-    // const logId = taskRef.key! as string;
-    // const taskRef = taskRef.child(logId);
     await taskRef.set({
       log: logString,
       createdAt: Date.now(),

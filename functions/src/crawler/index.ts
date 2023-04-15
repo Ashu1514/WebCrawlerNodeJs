@@ -5,15 +5,7 @@ import { sortPages } from "./report";
 import { Crawler, CrawlerBody } from "./crawler.model";
 
 const mCrawlerExpress = express();
-
-/**
- * crawler express initialization function
- * @param {object} cors cors object
- * @param {object} firebaseAdmin firebase admin object
- * @return {object} crawler express object
- */
-// function init(cors: any, firebaseAdmin: any) {
-// mCrawlerExpress.use(toolbox.cors);
+mCrawlerExpress.use(toolbox.cors);
 
 mCrawlerExpress.get(
   "/ping",
