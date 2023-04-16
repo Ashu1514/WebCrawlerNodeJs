@@ -13,13 +13,12 @@ const Wrapper = styled.div`
   }
 `;
 
-const CommandNotFound = () => {
+const CommandNotFound = (props:any) => {
   return (
     <Wrapper>
-      <span className="error">Command not found!</span>
+      <span className="error">Error in field {props.fieldName}!</span>
       <span>
-        Try the <Command>help</Command> command to see a list of available
-        commands
+        Error: {props.error}
       </span>
     </Wrapper>
   );

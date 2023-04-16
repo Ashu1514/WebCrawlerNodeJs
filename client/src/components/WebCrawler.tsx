@@ -1,7 +1,8 @@
-import React, { Suspense } from "react";
+import React, { ReactElement, Suspense, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { HiGlobeAlt } from "react-icons/hi";
 import CrawlerHeading from "./CrawlerHeading";
+import QueryForm from "./QueryForm";
 
 const Logging = React.lazy(() => import("./commands/Logging"));
 const CommandNotFound = React.lazy(() => import("./commands/CommandNotFound"));
@@ -123,35 +124,38 @@ interface ButtonProps {
   shadow: string;
 }
 
-const Terminal = () => {
-  const renderTerminalResponse = () => {
-    return <Logging />;
+const WebCrawler = () => {
+  const [terminalOutput, setTerminalOutput] = useState<ReactElement>()
+  const renderTerminalResponse = (component?: ReactElement) => {
+    setTerminalOutput(component ??  <Logging />)
     // return <CommandNotFound />;
   };
 
   return (
-    <Column>
-      <Header>
-        <MacOsButtons>
-          <RoundedButton color="#FF5D5B" shadow="#CF544D" />
-          <RoundedButton color="#FFBB39" shadow="#CFA64E" />
-          <RoundedButton color="#00CD4E" shadow="#0EA642" />
-        </MacOsButtons>
-        <TerminalTitle>
-          Web Crawler
-          <HiGlobeAlt style={{ marginBottom: "0.05rem" }} size={16} />
-        </TerminalTitle>
-      </Header>
-      <Body>
-        <div>
-          <CrawlerHeading id={"PHOPrIv1prqZsgJbwHn"} />
-          <Suspense fallback={<></>}>
-            <OutputWrapper>{renderTerminalResponse()}</OutputWrapper>
-          </Suspense>
-        </div>
-      </Body>
-    </Column>
+      <Column>
+      <QueryForm printErrors={renderTerminalResponse}/>
+          <Header>
+            <MacOsButtons>
+              <RoundedButton color="#FF5D5B" shadow="#CF544D" />
+              <RoundedButton color="#FFBB39" shadow="#CFA64E" />
+              <RoundedButton color="#00CD4E" shadow="#0EA642" />
+            </MacOsButtons>
+            <TerminalTitle>
+              Web Crawler
+              <HiGlobeAlt style={{ marginBottom: "0.05rem" }} size={16} />
+            </TerminalTitle>
+          </Header>
+          <Body>
+            <div>
+              <CrawlerHeading id={"PHOPrIv1prqZsgJbwHn"} />
+              <Suspense fallback={<></>}>
+                <OutputWrapper>{terminalOutput}</OutputWrapper>
+              </Suspense>
+            </div>
+          </Body>
+      </Column>
+          
   );
 };
 
-export default Terminal;
+export default WebCrawler;

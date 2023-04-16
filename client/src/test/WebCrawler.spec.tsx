@@ -1,5 +1,5 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import Terminal from "../components/Terminal";
+import WebCrawler from "../components/WebCrawler";
 import user from "@testing-library/user-event";
 
 const commandInputs = {
@@ -7,9 +7,9 @@ const commandInputs = {
   unknownCommand: "aaaaa",
 };
 
-const setup = () => render(<Terminal/>);
+const setup = () => render(<WebCrawler/>);
 
-describe("Terminal output", () => {
+describe("WebCrawler output", () => {
   beforeEach(() => {
     // setup();
   });

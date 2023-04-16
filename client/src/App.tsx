@@ -1,32 +1,10 @@
 import "./App.css";
-import styled, { keyframes, css } from "styled-components";
-import Terminal from "./components/Terminal";
+import styled from "styled-components";
+import WebCrawler from "./components/WebCrawler";
 import { QueryClient, QueryClientProvider } from "react-query";
 
-const drunk = keyframes`
-
-0%{
-  filter: blur(0.5px);
-}
-25%{
-  filter: blur(1.5px);
-  
-}
-50%{
-  filter: blur(0.75px);
-  
-  }
-75%{
-  filter: blur(1.5px);
-  
-    }
-100%{
-  filter: blur(0.5px);
-}
-`;
-
 const Wrapper = styled.div`
-  background: #282c34;
+  background: #1e1e1e;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -45,12 +23,6 @@ const Wrapper = styled.div`
   @media (max-width: 480px) {
     font-size: 13px;
   }
-
-  ${(props) =>
-    props.theme === "drunk" &&
-    css`
-      animation: ${drunk} 10s linear infinite;
-    `};
 `;
 
 const queryClient = new QueryClient();
@@ -59,7 +31,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Wrapper >
-        <Terminal />
+        <WebCrawler />
       </Wrapper>
     </QueryClientProvider>
   );
