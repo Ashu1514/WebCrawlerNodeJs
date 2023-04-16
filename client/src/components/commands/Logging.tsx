@@ -1,7 +1,6 @@
 import { Command } from "../../styles/common";
 import { HiChevronRight } from "react-icons/hi";
 import styled from "styled-components";
-import Typewriter from  "typewriter-effect";
 
 const CommandLine = styled.div`
   display: flex;
