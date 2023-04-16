@@ -9,3 +9,5 @@ secrets/
 
 # Node.js dependency directory
 node_modules/
+
+client/build/
