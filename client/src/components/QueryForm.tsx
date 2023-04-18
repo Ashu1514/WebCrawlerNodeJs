@@ -36,7 +36,7 @@ const SubmitButton = styled.button`
   color: #50fa7b;
   cursor: pointer;
   font-family: inherit;
-  font-size: .875rem;
+  font-size: 0.875rem;
   font-weight: 600;
   border-radius: 7px;
   line-height: 1.25rem;
@@ -75,7 +75,7 @@ const QueryForm = (props: any) => {
 
   const validateFormData = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const data = {...formData};
+    const data = { ...formData };
     let isValid = true;
     const faildValidations: { name: string; error: string }[] = [];
     for (const field in data) {
@@ -154,24 +154,38 @@ const QueryForm = (props: any) => {
         }
       }
     }
-    console.log(faildValidations)
-    if(faildValidations.length){
-      
-      const errorsMessages =  Object.entries(faildValidations.reduce((prev: {[key:string]: string[]},curr: {name:string, error:string}) => {
-        if(!prev[curr.name]){
-          prev[curr.name] = [];
-        }
-        prev[curr.name].push(curr.error);
-        return prev;
-      }, {})).map(([field, errors]) => {
-        const errorItems: React.DetailedReactHTMLElement<React.HTMLAttributes<HTMLElement>, HTMLElement>[] =[];
-        errors.forEach(err => {
-          const listItem = React.createElement("li", {key: errorItems.length}, err);
-          errorItems.push(listItem)
-        })
+    console.log(faildValidations);
+    if (faildValidations.length) {
+      const errorsMessages = Object.entries(
+        faildValidations.reduce(
+          (
+            prev: { [key: string]: string[] },
+            curr: { name: string; error: string }
+          ) => {
+            if (!prev[curr.name]) {
+              prev[curr.name] = [];
+            }
+            prev[curr.name].push(curr.error);
+            return prev;
+          },
+          {}
+        )
+      ).map(([field, errors]) => {
+        const errorItems: React.DetailedReactHTMLElement<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        >[] = [];
+        errors.forEach((err) => {
+          const listItem = React.createElement(
+            "li",
+            { key: errorItems.length },
+            err
+          );
+          errorItems.push(listItem);
+        });
         const errorList = React.createElement("ol", {}, errorItems);
-        return <CommandNotFound fieldName={field} error={errorList}/>
-      })
+        return <CommandNotFound fieldName={field} error={errorList} />;
+      });
       props.printErrors(errorsMessages);
     } else {
       props.printErrors();
@@ -251,7 +265,9 @@ const QueryForm = (props: any) => {
           })
         }
       />
-      <SubmitButton type="button" onClick={validateFormData}>_submit_query();</SubmitButton>
+      <SubmitButton type="button" onClick={validateFormData}>
+        _submit_query();
+      </SubmitButton>
     </FormContainer>
   );
 };
