@@ -4,7 +4,7 @@ import WebCrawler from "./components/WebCrawler";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const Wrapper = styled.div`
-  background: #1e1e1e;
+  background: #021309;
   width: 100vw;
   height: 100vh;
   overflow: hidden;

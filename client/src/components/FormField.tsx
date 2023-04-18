@@ -17,8 +17,8 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  background-color: #011221;
-  border: 2px solid #1e2d3d;
+  background-color: #000000;
+  border: 1px solid #1e2d3d;
   border-radius: 7px;
   padding: 0.5rem;
   font-size: 13px;
@@ -43,7 +43,8 @@ const Input = styled.input`
   
   &:active, &:focus-within{
     outline-style: solid;
-  outline-color: #5f7b97;
+    outline-color: transparent;
+    box-shadow: inset 0 0 7px 0px #1a5a36;
   }
 
   &::placeholder {

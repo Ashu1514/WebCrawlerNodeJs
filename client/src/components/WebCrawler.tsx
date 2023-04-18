@@ -5,7 +5,7 @@ import React, {
   useState,
 } from "react";
 import styled, { keyframes, css } from "styled-components";
-import { HiGlobeAlt } from "react-icons/hi";
+import { HiGlobeAlt, HiChevronDown } from "react-icons/hi";
 import CrawlerHeading from "./CrawlerHeading";
 import QueryForm from "./QueryForm";
 import QueryCode from "./QueryCode";
@@ -81,6 +81,22 @@ const Header = styled.div`
   position: sticky;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  border-bottom: 1px solid #1e2d3d;
+`;
+const RightHeaderIcons = styled.div`
+display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+    justify-content: center;
+
+    svg{
+      padding: 0 0.1rem;
+      border-radius: 5px;
+      background: #0a2616;
+      &:hover{
+        background: #0f3821;
+      }
+    }
 `;
 
 const MacOsButtons = styled.div`
@@ -107,7 +123,7 @@ const TerminalTitleBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: start;
-  border-bottom: 1px solid #1e2d3d;
+  
   padding: 0 0.5rem;
 `;
 const TerminalTitle = styled.h1`
@@ -117,8 +133,11 @@ const TerminalTitle = styled.h1`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border: 1px solid #1e2d3d;
   border-bottom: 1px solid #fff;
   height: 100%;
+  background-color: #1a5a36;
+  padding: 0.5rem;
 `;
 
 const Body = styled.div`
@@ -130,21 +149,24 @@ const Body = styled.div`
   padding: 0 0.3rem 0.3rem;
   box-sizing: border-box;
   position: relative;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
-  scrollbar-color: #474e68;
+  transition: color 0.3s;
+
+  &:hover {
+    overflow-y: scroll;
+  }
 
   &::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
   }
   &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px grey;
-    border-radius: 5px;
+    border-radius: 0px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #6b728e;
-    border-radius: 15px;
+    background: #18422a;
+    border-radius: 0px;
     height: 2px;
   }
 `;
@@ -190,10 +212,14 @@ const WebCrawler = () => {
             </MacOsButtons> */}
             <TerminalTitleBar>
               <TerminalTitle>
-                Web Crawler
+                {`Terminal (WebCrawler`}
                 <HiGlobeAlt style={{ marginBottom: "0.05rem", marginLeft: "0.3rem" }} size={16} />
+                {")"}
               </TerminalTitle>
             </TerminalTitleBar>
+            <RightHeaderIcons>
+              <HiChevronDown color="#4d9f72" size={"19px"}/>
+            </RightHeaderIcons>
           </Header>
           <Body>
             <div>

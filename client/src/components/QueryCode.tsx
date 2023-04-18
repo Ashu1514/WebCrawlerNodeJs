@@ -26,6 +26,19 @@ const FormContainer = styled.form`
   align-content: center;
   height: 100%;
   margin-bottom: 1rem;
+  padding: 3rem 2rem;
+`;
+
+const SubmitButton = styled.button`
+  background-color: #052c16;
+  color: #50fa7b;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: .875rem;
+  font-weight: 600;
+  border-radius: 7px;
+  line-height: 1.25rem;
+  padding: 0.5rem 1rem;
 `;
 
 const QueryCode = (props: any) => {
@@ -58,7 +71,9 @@ const QueryCode = (props: any) => {
     },
   });
 
-  const validateFormData = (data: formDataObj) => {
+  const validateFormData = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const data = {...formData};
     let isValid = true;
     const faildValidations: { name: string; error: string }[] = [];
     for (const field in data) {
@@ -222,23 +237,7 @@ const QueryCode = (props: any) => {
           })
         }
       />
-      <Field
-        autoFocus={false}
-        isVariable={false}
-        id="submitHandler"
-        variableName="click_me_to_submit_query"
-        inputHandler={() => validateFormData(formData)}
-      />
-      {/* 
-      
-
-      <FormField>
-        <Label>
-          <span className="variable_name function">
-            {"click_me_to_submit_query();"}
-          </span>
-        </Label>
-      </FormField> */}
+      <SubmitButton type="button" onClick={validateFormData}>_submit_query();</SubmitButton>
     </FormContainer>
   );
 };

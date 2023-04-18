@@ -26,13 +26,14 @@ const FormContainer = styled.form`
   align-content: center;
   height: 100%;
   margin-bottom: 1rem;
-  max-width: 35%;
-  padding: 3rem 4rem;
+  max-width: 40%;
+  padding: 3rem 2rem;
+  border-right: 1px solid #103d24;
 `;
 
 const SubmitButton = styled.button`
-  background-color: #1e2d3d;
-  color: #FFEB3B;
+  background-color: #052c16;
+  color: #50fa7b;
   cursor: pointer;
   font-family: inherit;
   font-size: .875rem;
