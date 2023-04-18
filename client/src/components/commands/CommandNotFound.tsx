@@ -10,6 +10,9 @@ const Wrapper = styled.div`
     font-weight: bold;
     line-height: 2em;
   }
+  ol {
+    margin: 0;
+  }
 `;
 
 const CommandNotFound = (props:any) => {
