@@ -26,23 +26,9 @@ const FormContainer = styled.form`
   align-content: center;
   height: 100%;
   margin-bottom: 1rem;
-  max-width: 35%;
-  padding: 3rem 4rem;
 `;
 
-const SubmitButton = styled.button`
-  background-color: #1e2d3d;
-  color: #FFEB3B;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: .875rem;
-  font-weight: 600;
-  border-radius: 7px;
-  line-height: 1.25rem;
-  padding: 0.5rem 1rem;
-`;
-
-const QueryForm = (props: any) => {
+const QueryCode = (props: any) => {
   const [formData, setFormData] = useState<formDataObj>({
     baseURL: {
       name: "Base URL",
@@ -72,9 +58,7 @@ const QueryForm = (props: any) => {
     },
   });
 
-  const validateFormData = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const data = {...formData};
+  const validateFormData = (data: formDataObj) => {
     let isValid = true;
     const faildValidations: { name: string; error: string }[] = [];
     for (const field in data) {
@@ -238,9 +222,25 @@ const QueryForm = (props: any) => {
           })
         }
       />
-      <SubmitButton type="button" onClick={validateFormData}>_submit_query();</SubmitButton>
+      <Field
+        autoFocus={false}
+        isVariable={false}
+        id="submitHandler"
+        variableName="click_me_to_submit_query"
+        inputHandler={() => validateFormData(formData)}
+      />
+      {/* 
+      
+
+      <FormField>
+        <Label>
+          <span className="variable_name function">
+            {"click_me_to_submit_query();"}
+          </span>
+        </Label>
+      </FormField> */}
     </FormContainer>
   );
 };
 
-export default QueryForm;
+export default QueryCode;

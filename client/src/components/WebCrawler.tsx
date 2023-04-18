@@ -1,11 +1,16 @@
-import React, { ReactElement, Suspense, useState } from "react";
+import React, {
+  ReactElement,
+  Suspense,
+  useEffect,
+  useState,
+} from "react";
 import styled, { keyframes, css } from "styled-components";
 import { HiGlobeAlt } from "react-icons/hi";
 import CrawlerHeading from "./CrawlerHeading";
 import QueryForm from "./QueryForm";
+import QueryCode from "./QueryCode";
 
 const Logging = React.lazy(() => import("./commands/Logging"));
-const CommandNotFound = React.lazy(() => import("./commands/CommandNotFound"));
 
 const drunk = keyframes`
 
@@ -32,7 +37,8 @@ const drunk = keyframes`
 const Column = styled.span`
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 100%;
+  height: 100%;
 
   ${(props) =>
     props.theme === "drunk" &&
@@ -41,11 +47,36 @@ const Column = styled.span`
     `}
 `;
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: block;
+  height: 100%;
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 60%;
+`;
+
+const TerminalBox = styled.div`
+  display: block;
+  border-bottom: 1px solid #1e2d3d;
+  border-top: 1px solid #1e2d3d;
+  width: 100%;
+  height: 40%;
+`;
+
 const Header = styled.div`
   display: flex;
   width: 100%;
   height: 2rem;
-  background-color: #f0e9e5;
+  background-color: #041b0ed6;
+  // background-color: #f0e9e5;
   box-sizing: border-box;
   position: sticky;
   border-top-left-radius: 10px;
@@ -68,27 +99,35 @@ const RoundedButton = styled.div<ButtonProps>`
   border-radius: 50%;
 `;
 
+const TerminalTitleBar = styled.div`
+  font-size: 15px;
+  justify-self: center;
+  color: #3f3c3c;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  border-bottom: 1px solid #1e2d3d;
+  padding: 0 0.5rem;
+`;
 const TerminalTitle = styled.h1`
   font-size: 15px;
   justify-self: center;
-  margin-left: 3rem;
-  color: #3f3c3c;
-  position: absolute;
-  top: 0;
-  left: 40%;
-  width: 6.5rem;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid #fff;
+  height: 100%;
 `;
 
 const Body = styled.div`
-  height: 60vh;
+  height: 100%;
   background-color: #041b0ed6;
-  border: 1px solid #f0e9e5;
+  // border: 1px solid #f0e9e5;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  padding: 0 1rem 1rem 0;
+  padding: 0 0.3rem 0.3rem;
   box-sizing: border-box;
   position: relative;
   overflow-y: auto;
@@ -125,25 +164,36 @@ interface ButtonProps {
 }
 
 const WebCrawler = () => {
-  const [terminalOutput, setTerminalOutput] = useState<ReactElement>()
+  const [terminalOutput, setTerminalOutput] = useState<ReactElement>();
   const renderTerminalResponse = (component?: ReactElement) => {
-    setTerminalOutput(component ??  <Logging />)
-    // return <CommandNotFound />;
+    setTerminalOutput(component ?? <Logging />);
   };
 
+  useEffect(() => {
+    let span = document.getElementById("lastline")! as HTMLSpanElement;
+    span.scrollIntoView({behavior: "smooth", block:"end"});
+  }, [terminalOutput]);
+
   return (
-      <Column>
-      <QueryForm printErrors={renderTerminalResponse}/>
+    <Container>
+      <Row>
+        <QueryForm printErrors={renderTerminalResponse} />
+        <QueryCode printErrors={renderTerminalResponse} />
+      </Row>
+      <TerminalBox>
+        <Column>
           <Header>
-            <MacOsButtons>
+            {/* <MacOsButtons>
               <RoundedButton color="#FF5D5B" shadow="#CF544D" />
               <RoundedButton color="#FFBB39" shadow="#CFA64E" />
               <RoundedButton color="#00CD4E" shadow="#0EA642" />
-            </MacOsButtons>
-            <TerminalTitle>
-              Web Crawler
-              <HiGlobeAlt style={{ marginBottom: "0.05rem" }} size={16} />
-            </TerminalTitle>
+            </MacOsButtons> */}
+            <TerminalTitleBar>
+              <TerminalTitle>
+                Web Crawler
+                <HiGlobeAlt style={{ marginBottom: "0.05rem", marginLeft: "0.3rem" }} size={16} />
+              </TerminalTitle>
+            </TerminalTitleBar>
           </Header>
           <Body>
             <div>
@@ -151,10 +201,12 @@ const WebCrawler = () => {
               <Suspense fallback={<></>}>
                 <OutputWrapper>{terminalOutput}</OutputWrapper>
               </Suspense>
+              <span id="lastline"></span>
             </div>
           </Body>
-      </Column>
-          
+        </Column>
+      </TerminalBox>
+    </Container>
   );
 };
 

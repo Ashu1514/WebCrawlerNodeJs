@@ -31,11 +31,11 @@ const CrawlerHeading = ({ id }: Props) => {
       <span className="head">Welcome to Web Crawler <span style={{fontSize: "12px"}}>🌐 </span></span>
       <span className="id">v1.0.0</span>
     </LabelContainer>
-    <LabelContainer>
+    {/* <LabelContainer>
       <span className="head">web crawler</span>
       <span className="in">query registered @</span>
       <span className="id">{id}</span>
-    </LabelContainer>
+    </LabelContainer> */}
     </>
   );
 };

@@ -4,7 +4,6 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 2em;
 
   .error {
     color: #ff8b8b;
