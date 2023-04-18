@@ -54,7 +54,8 @@ const Container = styled.div`
   align-items: center;
   display: block;
   height: 100%;
-  
+  width: 100%;
+  font-size: .875rem;
 `;
 
 const Row = styled.div`
@@ -108,14 +109,6 @@ const MacOsButtons = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-left: 0.5rem;
-`;
-
-const RoundedButton = styled.div<ButtonProps>`
-  width: 12px;
-  height: 12px;
-  box-shadow: inset 1px 1px 15px 15px ${(props) => props.shadow};
-  background-color: ${(props) => props.color};
-  border-radius: 50%;
 `;
 
 const TerminalTitleBar = styled.div`
@@ -182,17 +175,19 @@ const OutputWrapper = styled.div`
   }
 `;
 
-interface ButtonProps {
-  color: string;
-  shadow: string;
-}
-
 const WebCrawler = () => {
   
-  const [terminalOutput, setTerminalOutput] = useState<ReactElement>();
+  const [terminalOutput, setTerminalOutput] = useState<ReactElement[]>([]);
   const [terminalOn, setTerminalOn] = useState<Boolean>(true);
   const renderTerminalResponse = (component?: ReactElement) => {
-    setTerminalOutput(component ?? <Logging />);
+    let history = [...terminalOutput];
+    if(component){
+      history.push(component);
+      history.push(<p>--------------</p>);
+    } else {
+      history = [<Logging />];
+    }
+    setTerminalOutput(history);
   };
 
   useEffect(() => {
@@ -237,7 +232,9 @@ const WebCrawler = () => {
             <div>
               <CrawlerHeading id={"PHOPrIv1prqZsgJbwHn"} />
               <Suspense fallback={<></>}>
-                <OutputWrapper>{terminalOutput}</OutputWrapper>
+                <OutputWrapper>{
+                  terminalOutput.map(output => output)
+                }</OutputWrapper>
               </Suspense>
               <span id="lastline"></span>
             </div>

@@ -26,7 +26,7 @@ const Input = styled.input`
   margin-bottom: 0.75rem;
   width: 100%;
   caret-color: #50fa7b;
-  color: #fff;
+  color: #ffc107;
   font-family: inherit;
   font-size: .875rem;
   -webkit-appearance: textfield;

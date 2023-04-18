@@ -27,6 +27,7 @@ const FormContainer = styled.form`
   height: 100%;
   margin-bottom: 1rem;
   max-width: 40%;
+  width: 100%;
   padding: 3rem 2rem;
   border-right: 1px solid #103d24;
 `;
@@ -76,80 +77,89 @@ const QueryForm = (props: any) => {
   const validateFormData = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const data = { ...formData };
+    console.log(data);
+    
     let isValid = true;
     const faildValidations: { name: string; error: string }[] = [];
     for (const field in data) {
+      let isFieldValid = true;
       const value = data[field].value;
       const numVal = data[field].value! as Number;
       for (const rule in data[field]) {
         switch (rule) {
           case "required":
-            isValid = isValid && value.toString().trim().length > 0;
-            if (!isValid) {
+            isFieldValid = isFieldValid && value.toString().trim().length > 0;
+            if (!isFieldValid) {
               faildValidations.push({
                 name: data[field].name,
                 error: "Input should be non-empty!",
               });
             }
+            isValid = isValid && isFieldValid;
             break;
           case "isUrl":
-            isValid =
-              isValid &&
+            isFieldValid =
+              isFieldValid &&
               value
                 .toString()
                 .trim()
                 .match(
                   /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
                 ) !== null;
-            if (!isValid) {
+            if (!isFieldValid) {
               faildValidations.push({
                 name: data[field].name,
                 error: "Input is not a valid URL!",
               });
             }
+            isValid = isValid && isFieldValid;
             break;
           case "isEmail":
-            isValid =
-              isValid &&
+            isFieldValid =
+              isFieldValid &&
               value
                 .toString()
                 .trim()
                 .match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) !== null;
-            if (!isValid) {
+            if (!isFieldValid) {
               faildValidations.push({
                 name: data[field].name,
                 error: "Input is not a valid Email!",
               });
             }
+            isValid = isValid && isFieldValid;
             break;
           case "isNumber":
-            isValid = isValid && !Number.isNaN(value);
-            if (!isValid) {
+            isFieldValid = isFieldValid && !Number.isNaN(value);
+            if (!isFieldValid) {
               faildValidations.push({
                 name: data[field].name,
                 error: "Input should be number!",
               });
             }
+            isValid = isValid && isFieldValid;
             break;
           case "min":
             let min = data[field].min! as Number;
-            isValid = isValid && !Number.isNaN(value) && numVal >= min;
-            if (!isValid) {
+            isFieldValid = isFieldValid && !Number.isNaN(value) && numVal >= min;
+            if (!isFieldValid) {
               faildValidations.push({
                 name: data[field].name,
                 error: `Input should be max than ${min}!`,
               });
             }
+            isValid = isValid && isFieldValid;
             break;
           case "max":
             const max = data[field].max! as Number;
-            isValid = isValid && !Number.isNaN(value) && numVal <= max;
-            if (!isValid) {
+            isFieldValid = isFieldValid && !Number.isNaN(value) && numVal <= max;
+            if (!isFieldValid) {
               faildValidations.push({
                 name: data[field].name,
                 error: `Input should be min than ${max}!`,
               });
             }
+            isValid = isValid && isFieldValid;
             break;
         }
       }
