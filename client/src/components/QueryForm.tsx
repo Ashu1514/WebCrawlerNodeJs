@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Field from "./FormField";
-import { useState } from "react";
+import React, { useState } from "react";
 import CommandNotFound from "./commands/CommandNotFound";
 // interface Props {
 //   id: string;
@@ -157,8 +157,20 @@ const QueryForm = (props: any) => {
     console.log(faildValidations)
     if(faildValidations.length){
       
-      const errorsMessages =  faildValidations.map(error => {
-        return <CommandNotFound fieldName={error.name} error={error.error}/>
+      const errorsMessages =  Object.entries(faildValidations.reduce((prev: {[key:string]: string[]},curr: {name:string, error:string}) => {
+        if(!prev[curr.name]){
+          prev[curr.name] = [];
+        }
+        prev[curr.name].push(curr.error);
+        return prev;
+      }, {})).map(([field, errors]) => {
+        const errorItems: React.DetailedReactHTMLElement<React.HTMLAttributes<HTMLElement>, HTMLElement>[] =[];
+        errors.forEach(err => {
+          const listItem = React.createElement("li", {key: errorItems.length}, err);
+          errorItems.push(listItem)
+        })
+        const errorList = React.createElement("ol", {}, errorItems);
+        return <CommandNotFound fieldName={field} error={errorList}/>
       })
       props.printErrors(errorsMessages);
     } else {

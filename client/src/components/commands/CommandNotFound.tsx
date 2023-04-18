@@ -16,9 +16,7 @@ const CommandNotFound = (props:any) => {
   return (
     <Wrapper>
       <span className="error">Error in field {props.fieldName}!</span>
-      <span>
-        Error: {props.error}
-      </span>
+      {props.error}
     </Wrapper>
   );
 };
