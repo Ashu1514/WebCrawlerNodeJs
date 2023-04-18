@@ -5,7 +5,7 @@ import React, {
   useState,
 } from "react";
 import styled, { keyframes, css } from "styled-components";
-import { HiGlobeAlt, HiChevronDown } from "react-icons/hi";
+import { HiGlobeAlt, HiChevronDown, HiChevronUp } from "react-icons/hi";
 import CrawlerHeading from "./CrawlerHeading";
 import QueryForm from "./QueryForm";
 import QueryCode from "./QueryCode";
@@ -54,6 +54,7 @@ const Container = styled.div`
   align-items: center;
   display: block;
   height: 100%;
+  
 `;
 
 const Row = styled.div`
@@ -61,6 +62,7 @@ const Row = styled.div`
   flex-direction: row;
   width: 100%;
   height: 60%;
+  transition: height 0.2s ease-out;
 `;
 
 const TerminalBox = styled.div`
@@ -69,6 +71,7 @@ const TerminalBox = styled.div`
   border-top: 1px solid #1e2d3d;
   width: 100%;
   height: 40%;
+  transition: height 0.2s ease-out;
 `;
 
 const Header = styled.div`
@@ -151,7 +154,6 @@ const Body = styled.div`
   position: relative;
   overflow-y: hidden;
   overflow-x: hidden;
-  transition: color 0.3s;
 
   &:hover {
     overflow-y: scroll;
@@ -186,7 +188,9 @@ interface ButtonProps {
 }
 
 const WebCrawler = () => {
+  
   const [terminalOutput, setTerminalOutput] = useState<ReactElement>();
+  const [terminalOnOff, setTerminalOnOff] = useState<Boolean>(true);
   const renderTerminalResponse = (component?: ReactElement) => {
     setTerminalOutput(component ?? <Logging />);
   };
@@ -196,13 +200,17 @@ const WebCrawler = () => {
     span.scrollIntoView({behavior: "smooth", block:"end"});
   }, [terminalOutput]);
 
+  const toggleTerminal = () => {
+    setTerminalOnOff(!terminalOnOff);
+  };
+
   return (
     <Container>
-      <Row>
+      <Row style={{height: terminalOnOff ? "60%" : "95%"}}>
         <QueryForm printErrors={renderTerminalResponse} />
         <QueryCode printErrors={renderTerminalResponse} />
       </Row>
-      <TerminalBox>
+      <TerminalBox style={{height: terminalOnOff ? "40%" : "5%"}}>
         <Column>
           <Header>
             {/* <MacOsButtons>
@@ -218,10 +226,14 @@ const WebCrawler = () => {
               </TerminalTitle>
             </TerminalTitleBar>
             <RightHeaderIcons>
-              <HiChevronDown color="#4d9f72" size={"19px"}/>
+              {terminalOnOff ? (
+                <HiChevronDown color="#4d9f72" size={"19px"} onClick={toggleTerminal}/>
+              ) : (
+                <HiChevronUp color="#4d9f72" size={"19px"} onClick={toggleTerminal}/>
+              )}
             </RightHeaderIcons>
           </Header>
-          <Body>
+          <Body >
             <div>
               <CrawlerHeading id={"PHOPrIv1prqZsgJbwHn"} />
               <Suspense fallback={<></>}>
