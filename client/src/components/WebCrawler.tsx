@@ -190,7 +190,7 @@ interface ButtonProps {
 const WebCrawler = () => {
   
   const [terminalOutput, setTerminalOutput] = useState<ReactElement>();
-  const [terminalOnOff, setTerminalOnOff] = useState<Boolean>(true);
+  const [terminalOn, setTerminalOn] = useState<Boolean>(true);
   const renderTerminalResponse = (component?: ReactElement) => {
     setTerminalOutput(component ?? <Logging />);
   };
@@ -201,16 +201,16 @@ const WebCrawler = () => {
   }, [terminalOutput]);
 
   const toggleTerminal = () => {
-    setTerminalOnOff(!terminalOnOff);
+    setTerminalOn(!terminalOn);
   };
 
   return (
     <Container>
-      <Row style={{height: terminalOnOff ? "60%" : "95%"}}>
+      <Row style={{height: terminalOn ? "60%" : "95%"}}>
         <QueryForm printErrors={renderTerminalResponse} />
         <QueryCode printErrors={renderTerminalResponse} />
       </Row>
-      <TerminalBox style={{height: terminalOnOff ? "40%" : "5%"}}>
+      <TerminalBox style={{height: terminalOn ? "40%" : "5%"}}>
         <Column>
           <Header>
             {/* <MacOsButtons>
@@ -226,7 +226,7 @@ const WebCrawler = () => {
               </TerminalTitle>
             </TerminalTitleBar>
             <RightHeaderIcons>
-              {terminalOnOff ? (
+              {terminalOn ? (
                 <HiChevronDown color="#4d9f72" size={"19px"} onClick={toggleTerminal}/>
               ) : (
                 <HiChevronUp color="#4d9f72" size={"19px"} onClick={toggleTerminal}/>
