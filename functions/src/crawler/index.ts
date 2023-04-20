@@ -2,7 +2,7 @@ import * as express from "express";
 import * as toolbox from "../toolbox";
 import { crawlPage } from "./crawl";
 import { sortPages } from "./report";
-import { Crawler, CrawlerBody } from "./crawler.model";
+import { Crawler, CrawlerBody, LogType } from "./crawler.model";
 
 const mCrawlerExpress = express();
 mCrawlerExpress.use(toolbox.cors);
@@ -15,9 +15,8 @@ mCrawlerExpress.get(
 );
 
 mCrawlerExpress.post(
-  "/start",
+  "/create",
   async (req: express.Request, res: express.Response) => {
-    console.log("crawling started...");
     const body = req.body as CrawlerBody;
     try {
       const CrawlerQuery = await new Crawler(
@@ -27,19 +26,52 @@ mCrawlerExpress.post(
         body.maxLevel
       );
       await CrawlerQuery.addCrawlingQuery();
-      CrawlerQuery.addCrawlingQueryLog(
-        `Crawler query registered at task id: ${CrawlerQuery.taskId}`
+      res.status(200).send(CrawlerQuery);
+    } catch (error: any) {
+      res.status(500).send({ message: error.message, error });
+    }
+  }
+);
+
+mCrawlerExpress.post(
+  "/start",
+  async (req: express.Request, res: express.Response) => {
+    try {
+      console.log("crawling started...");
+      const body = req.body as {taskId: string};
+      const docRef = await toolbox.firebaseAdmin
+        .firestore()
+        .collection("crawling_queries")
+        .doc(body.taskId).get();
+      const doc = docRef.data() as CrawlerBody;
+
+      const CrawlerQuery = new Crawler(
+        doc.baseURL,
+        doc.starttingPageURL,
+        doc.email,
+        doc.maxLevel,
+        doc.taskId
       );
-      CrawlerQuery.addCrawlingQueryLog(`starting crawl of ${body.baseURL}`);
+      console.log("CrawlerQuery", CrawlerQuery);
+      CrawlerQuery.addCrawlingQueryLog(
+        `starting crawl of ${CrawlerQuery.taskId} at base URL: ${doc.baseURL}`,
+        LogType.MESSAGE,
+        {
+          taskId: CrawlerQuery.taskId,
+          baseURL: doc.baseURL,
+        }
+      );
       const result = await crawlPage(
-        body.baseURL,
-        body.starttingPageURL,
+        doc.baseURL,
+        doc.starttingPageURL,
         {},
         CrawlerQuery
       );
       const sortedResult = sortPages(result);
-      CrawlerQuery.addCrawlingQueryLog("Crawling finished!");
-      res.status(200).send({ sortedResult });
+      CrawlerQuery.addCrawlingQueryLog("Crawling finished!", LogType.MESSAGE, {
+        result: sortedResult,
+      });
+      res.status(200).send({ result: sortedResult });
     } catch (error: any) {
       res.status(500).send({ message: error.message, error });
     }

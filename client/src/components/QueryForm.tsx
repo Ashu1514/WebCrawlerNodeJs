@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import CommandNotFound from "./commands/CommandNotFound";
 import Logging from "./commands/Logging";
 import { LogType } from "../types";
+import axios from "axios";
 // interface Props {
 //   id: string;
 // }
@@ -18,6 +19,12 @@ interface formDataObj {
     min?: number;
     max?: number;
   };
+}
+interface payload {
+  baseURL: string,
+  starttingPageURL: string,
+  email: string,
+  maxLevel: number
 }
 const FormContainer = styled.form`
   color: white;
@@ -79,15 +86,30 @@ const QueryForm = (props: any) => {
     },
   });
 
-  const submitFormHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const submitFormHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    props.printErrors(<Logging type={LogType.NORMAL} message="validating query inputs..."/>);
-    const isValid = validateFormData();
-    if(isValid){
-      props.printErrors(<Logging type={LogType.CHECK} message="All inputs are validated!"/>);
-      props.printErrors(<Logging type={LogType.NORMAL} message="Calling backend api..."/>);
-    } else {
-      props.printErrors(<Logging type={LogType.ERROR} message="Please fill form fields with valid inputs..."/>);
+    try {
+      
+      props.printErrors(<Logging key={Math.random()} type={LogType.NORMAL} message="validating query inputs..."/>);
+      const isValid = validateFormData();
+      if(isValid){
+        props.printErrors(<Logging key={Math.random()} type={LogType.CHECK} message="All inputs are validated!"/>);
+        props.printErrors(<Logging key={Math.random()} type={LogType.NORMAL} message="Connecting to backend service..."/>);
+        const payload: payload = {
+          baseURL: formData.baseURL.value as string,
+          starttingPageURL: formData.starttingPageURL.value as string,
+          email: formData.email.value as string,
+          maxLevel: formData.maxLevel.value as number
+        };
+        const response = await axios.post("https://us-central1-webcrawlernode.cloudfunctions.net/crawler/create", payload);
+        if(response?.data?.taskId){
+          props.setTaskId(response.data.taskId);
+        }
+      } else {
+        props.printErrors(<Logging key={Math.random()} type={LogType.WARNING} message="Please fill form fields with valid inputs..."/>);
+      }
+    } catch (error: any) {
+      props.printErrors(<Logging key={Math.random()} type={LogType.ERROR} message={error.message}/>);
     }
     
   }
@@ -204,7 +226,7 @@ const QueryForm = (props: any) => {
           errorItems.push(listItem);
         });
         const errorList = <OderedList key={field}>{errorItems.map(item => item)}</OderedList>;
-        return <CommandNotFound fieldName={field} error={errorList} />;
+        return <CommandNotFound key={Math.random()} fieldName={field} error={errorList} />;
       });
       props.printErrors([...errorsMessages]);
     }

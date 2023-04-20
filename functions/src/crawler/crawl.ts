@@ -1,6 +1,6 @@
 import { JSDOM } from "jsdom";
 import { PagesMapping } from "../typings/crawler";
-import { Crawler } from "./crawler.model";
+import { Crawler, LogType } from "./crawler.model";
 import axios from "axios";
 
 /**
@@ -32,15 +32,28 @@ export async function crawlPage(
   const normalizeCurrentURL = normalizeURL(currentURL) as string;
   if (pages[normalizeCurrentURL] && pages[normalizeCurrentURL] > 0) {
     pages[normalizeCurrentURL]++;
+    const count = pages[normalizeCurrentURL];
+    CrawlerQuery.addCrawlingQueryLog(
+      `${currentURL} accured ${count} times, at level ${level}`,
+      LogType.CRAWLING,
+      {
+        currentURL: normalizeCurrentURL,
+        currentCount: pages[normalizeCurrentURL],
+        level,
+      }
+    );
     return pages;
   }
 
   pages[normalizeCurrentURL] = 1;
 
-  console.log(`activaly crawling at level ${level}: ${currentURL}`);
-
   CrawlerQuery.addCrawlingQueryLog(
-    `activaly crawling at level ${level}: ${currentURL}`
+    `activaly crawling at level ${level}: ${currentURL}`,
+    LogType.LEVEL,
+    {
+      level,
+      currentURL,
+    }
   );
   try {
     // const fetch = (await import("node-fetch")).default;
@@ -50,14 +63,24 @@ export async function crawlPage(
 
     if (!contenttype.includes("text/html")) {
       CrawlerQuery.addCrawlingQueryLog(
-        `non html response, content type: ${contenttype}`
+        `non html response, content type: ${contenttype}`,
+        LogType.MESSAGE,
+        {
+          currentURL,
+          contenttype,
+        }
       );
       return pages;
     }
 
     if (resp.status > 399) {
       CrawlerQuery.addCrawlingQueryLog(
-        `skipping ${currentURL} cause its status code is ${resp.status}`
+        `skipping ${currentURL} cause its status code is ${resp.status}`,
+        LogType.MESSAGE,
+        {
+          currentURL,
+          statusCode: resp.status,
+        }
       );
       console.log("Error in fetch status code: " + resp.status);
       return pages;

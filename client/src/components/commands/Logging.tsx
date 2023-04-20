@@ -27,7 +27,7 @@ const Logging = ({message, type}: Props) => {
     <CommandLine key={Math.random()}>
         {type === LogType.NORMAL ? (
           <TbChevronRight size={16} fontWeight={1000} color="#50fa7b" />
-        ): type === LogType.WARING ? (
+        ): type === LogType.WARNING ? (
           <VscWarning size={16} color="#f1fa8c"/>
         ): type === LogType.ERROR ? (
           <VscError size={16} color="#ff8b8b"/>

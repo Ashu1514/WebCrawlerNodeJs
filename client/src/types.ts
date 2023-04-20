@@ -1,1 +1,1 @@
-export enum LogType{ERROR, WARING, NORMAL, CHECK};
+export enum LogType{ERROR, WARNING, NORMAL, CHECK};

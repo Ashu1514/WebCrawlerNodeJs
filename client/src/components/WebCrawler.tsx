@@ -4,6 +4,8 @@ import { HiGlobeAlt, HiChevronDown, HiChevronUp } from "react-icons/hi";
 import CrawlerHeading from "./CrawlerHeading";
 import QueryForm from "./QueryForm";
 import QueryCode from "./QueryCode";
+import axios from "axios";
+import { LogType } from "../types";
 
 const Logging = React.lazy(() => import("./commands/Logging"));
 
@@ -63,8 +65,8 @@ const Row = styled.div`
 
 const TerminalBox = styled.div`
   display: block;
-  border-bottom: 1px solid #1e2d3d;
-  border-top: 1px solid #1e2d3d;
+  border-bottom: 1px solid #0f3d24;
+  border-top: 1px solid #0f3d24;
   width: 100%;
   height: 40%;
   transition: height 0.2s ease-out;
@@ -78,9 +80,7 @@ const Header = styled.div`
   // background-color: #f0e9e5;
   box-sizing: border-box;
   position: sticky;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom: 1px solid #1e2d3d;
+  border-bottom: 1px solid #0f3d24;
 `;
 const RightHeaderIcons = styled.div`
   display: flex;
@@ -116,7 +116,7 @@ const TerminalTitle = styled.h1`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid #1e2d3d;
+  border: 1px solid #0f3d24;
   border-bottom: 1px solid #fff;
   height: 100%;
   background-color: #1a5a36;
@@ -165,6 +165,7 @@ const OutputWrapper = styled.div`
 const WebCrawler = () => {
   const [terminalOutput, setTerminalOutput] = useState<ReactElement[]>([]);
   const [terminalOn, setTerminalOn] = useState<Boolean>(true);
+  const [taskId, setTaskId] = useState<string>("");
   const renderTerminalResponse = (component: ReactElement) => {
     setTerminalOutput((prevHistory) => [...prevHistory, component]);
   };
@@ -178,13 +179,40 @@ const WebCrawler = () => {
     setTerminalOn(!terminalOn);
   };
 
+  useEffect(() => {
+    if (taskId.trim().length) {
+      startCrawling(taskId);
+    }
+  }, [taskId]);
+
+  const startCrawling = async (id: string) => {
+    try {
+      renderTerminalResponse(
+        <Logging
+          key={Math.random()}
+          type={LogType.CHECK}
+          message={`Web Crawler query registered @ ${id}`}
+        />
+      );
+      await axios.post(
+        "https://us-central1-webcrawlernode.cloudfunctions.net/crawler/start",
+        { taskId: id }
+      );
+    } catch (error: any) {
+      renderTerminalResponse(
+        <Logging
+          key={Math.random()}
+          type={LogType.ERROR}
+          message={`Error while crawling: ${error.message}`}
+        />
+      );
+    }
+  };
+
   return (
     <Container>
       <Row style={{ height: terminalOn ? "60%" : "95%" }}>
-        <QueryForm
-          printErrors={renderTerminalResponse}
-          setTerminalOutput={setTerminalOutput}
-        />
+        <QueryForm printErrors={renderTerminalResponse} setTaskId={setTaskId} />
         <QueryCode printErrors={renderTerminalResponse} />
       </Row>
       <TerminalBox style={{ height: terminalOn ? "40%" : "5%" }}>

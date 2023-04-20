@@ -18,7 +18,7 @@ const Label = styled.label`
 
 const Input = styled.input`
   background-color: #000000;
-  border: 1px solid #1e2d3d;
+  border: 1px solid #0f3d24;
   border-radius: 7px;
   padding: 0.5rem;
   font-size: 13px;

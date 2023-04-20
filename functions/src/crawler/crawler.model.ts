@@ -9,6 +9,14 @@ export interface CrawlerBody {
   taskId?: string;
 }
 
+export enum LogType {
+  QUERY_CREATED,
+  CRAWLING,
+  LEVEL,
+  MESSAGE,
+  ERROR,
+}
+
 /**
  * crawler class
  */
@@ -21,6 +29,7 @@ export class Crawler implements CrawlerBody {
    * @param {string} starttingPageURL url of starting page
    * @param {string} email firebase admin object
    * @param {number} maxLevel firebase admin object
+   * @param {string} id temp carwling query's task id
    * @param {Date} createdAt firebase admin object
    * @param {string} taskId carwling query's task id
    */
@@ -28,9 +37,10 @@ export class Crawler implements CrawlerBody {
     public baseURL: string,
     public starttingPageURL: string,
     public email: string = "",
-    public maxLevel: number = 10
+    public maxLevel: number = 10,
+    id?: string
   ) {
-    this.taskId = "dummy";
+    this.taskId = id ?? "dummy";
     this.createdAt = Date.now();
   }
 
@@ -45,19 +55,23 @@ export class Crawler implements CrawlerBody {
       email: this.email,
       maxLevel: this.maxLevel,
       createdAt: this.createdAt,
+      taskId: this.taskId,
     };
     const firestoreDB = firebaseAdmin.firestore();
     const dbRef = firestoreDB.collection("crawling_queries");
     const task = await dbRef.add(crawlingQuery);
     this.taskId = task.id;
+    await dbRef.doc(this.taskId).update({ taskId: this.taskId });
     console.log("task id is: " + task.id);
   }
 
   /**
    * add Crawling Query Logs async function
    * @param {string} logString crawling query log text
+   * @param {LogType} type crawling query log type
+   * @param {object} data crawling query aditional data
    */
-  async addCrawlingQueryLog(logString: string) {
+  async addCrawlingQueryLog(logString: string, type: LogType, data: object) {
     console.log(logString);
     const db = firebaseAdmin.database();
     const ref = db.ref("crawling_query_logs/");
@@ -65,6 +79,8 @@ export class Crawler implements CrawlerBody {
     const taskRef = ref.child(taskID).push();
     await taskRef.set({
       log: logString,
+      type,
+      data,
       createdAt: Date.now(),
     });
   }

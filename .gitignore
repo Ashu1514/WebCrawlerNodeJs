@@ -10,4 +10,7 @@ secrets/
 # Node.js dependency directory
 node_modules/
 
+.env
+*.env
+
 client/build/
