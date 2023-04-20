@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Field from "./FormField";
 import React, { useState } from "react";
 import CommandNotFound from "./commands/CommandNotFound";
+import Logging from "./commands/Logging";
+import { LogType } from "../types";
 // interface Props {
 //   id: string;
 // }
@@ -44,6 +46,9 @@ const SubmitButton = styled.button`
   padding: 0.5rem 1rem;
 `;
 
+const ListItem = styled.li ``;
+const OderedList = styled.ol ``;
+
 const QueryForm = (props: any) => {
   const [formData, setFormData] = useState<formDataObj>({
     baseURL: {
@@ -74,8 +79,20 @@ const QueryForm = (props: any) => {
     },
   });
 
-  const validateFormData = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const submitFormHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    props.printErrors(<Logging type={LogType.NORMAL} message="validating query inputs..."/>);
+    const isValid = validateFormData();
+    if(isValid){
+      props.printErrors(<Logging type={LogType.CHECK} message="All inputs are validated!"/>);
+      props.printErrors(<Logging type={LogType.NORMAL} message="Calling backend api..."/>);
+    } else {
+      props.printErrors(<Logging type={LogType.ERROR} message="Please fill form fields with valid inputs..."/>);
+    }
+    
+  }
+
+  const validateFormData = () => {
     const data = { ...formData };
     console.log(data);
     
@@ -104,7 +121,7 @@ const QueryForm = (props: any) => {
                 .toString()
                 .trim()
                 .match(
-                  /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+                  /^(http(s)?:\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/
                 ) !== null;
             if (!isFieldValid) {
               faildValidations.push({
@@ -181,25 +198,17 @@ const QueryForm = (props: any) => {
           {}
         )
       ).map(([field, errors]) => {
-        const errorItems: React.DetailedReactHTMLElement<
-          React.HTMLAttributes<HTMLElement>,
-          HTMLElement
-        >[] = [];
-        errors.forEach((err) => {
-          const listItem = React.createElement(
-            "li",
-            { key: errorItems.length },
-            err
-          );
+        const errorItems: JSX.Element[] = [];
+        errors.forEach((err, i) => {
+          const listItem = <ListItem key={i}>{err}</ListItem>;
           errorItems.push(listItem);
         });
-        const errorList = React.createElement("ol", {}, errorItems);
+        const errorList = <OderedList key={field}>{errorItems.map(item => item)}</OderedList>;
         return <CommandNotFound fieldName={field} error={errorList} />;
       });
-      props.printErrors(errorsMessages);
-    } else {
-      props.printErrors();
+      props.printErrors([...errorsMessages]);
     }
+    return isValid;
   };
 
   return (
@@ -275,7 +284,7 @@ const QueryForm = (props: any) => {
           })
         }
       />
-      <SubmitButton type="button" onClick={validateFormData}>
+      <SubmitButton type="button" onClick={submitFormHandler}>
         _submit_query();
       </SubmitButton>
     </FormContainer>

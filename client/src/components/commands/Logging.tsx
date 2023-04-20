@@ -1,35 +1,43 @@
 import { Command } from "../../styles/common";
-import { HiChevronRight } from "react-icons/hi";
+import { TbChevronRight } from "react-icons/tb";
+import { BsCheck } from "react-icons/bs";
+import { VscWarning, VscError } from "react-icons/vsc";
 import styled from "styled-components";
+import { LogType } from "../../types";
 
 const CommandLine = styled.div`
   display: flex;
-`;
-const CommandLineArrow = styled.div`
-  margin-right: 0.3em;
+  align-items: center;
+
+  svg{
+    margin-right: 0.3rem;
+  }
 `;
 const Line = styled.p`
   margin: 0;
 `;
 
-const Logging = () => {
+interface Props {
+  message: string, 
+  type: LogType
+}
+
+const Logging = ({message, type}: Props) => {
   return (
-    <>
-      <CommandLine>
-        <CommandLineArrow><HiChevronRight size={20} color="#50fa7b" /></CommandLineArrow>
-        <Line>
-          Hi, I'm Ashutosh Londhe!
-        </Line>
-      </CommandLine>
-      <CommandLine>
-        <CommandLineArrow><HiChevronRight size={20} color="#50fa7b" /></CommandLineArrow>
-        <Line>
-          I'm taking my major in <Command>Software Engeneering</Command> and
-          studying/working very hard on my software development skills in order to
-          become a better developer.
-        </Line>
-      </CommandLine>
-    </>
+    <CommandLine key={Math.random()}>
+        {type === LogType.NORMAL ? (
+          <TbChevronRight size={16} fontWeight={1000} color="#50fa7b" />
+        ): type === LogType.WARING ? (
+          <VscWarning size={16} color="#f1fa8c"/>
+        ): type === LogType.ERROR ? (
+          <VscError size={16} color="#ff8b8b"/>
+        ): type === LogType.CHECK ? (
+          <BsCheck size={16} color="#50fa7b"/>
+        ): null}
+      <Line>
+        {message}
+      </Line>
+    </CommandLine>
   );
 };
 

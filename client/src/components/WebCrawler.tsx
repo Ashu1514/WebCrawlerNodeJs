@@ -1,9 +1,4 @@
-import React, {
-  ReactElement,
-  Suspense,
-  useEffect,
-  useState,
-} from "react";
+import React, { ReactElement, Suspense, useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { HiGlobeAlt, HiChevronDown, HiChevronUp } from "react-icons/hi";
 import CrawlerHeading from "./CrawlerHeading";
@@ -55,7 +50,7 @@ const Container = styled.div`
   display: block;
   height: 100%;
   width: 100%;
-  font-size: .875rem;
+  font-size: 0.875rem;
 `;
 
 const Row = styled.div`
@@ -88,27 +83,19 @@ const Header = styled.div`
   border-bottom: 1px solid #1e2d3d;
 `;
 const RightHeaderIcons = styled.div`
-display: flex;
-    align-items: center;
-    margin-right: 0.5rem;
-    justify-content: center;
-
-    svg{
-      padding: 0 0.1rem;
-      border-radius: 5px;
-      background: #0a2616;
-      &:hover{
-        background: #0f3821;
-      }
-    }
-`;
-
-const MacOsButtons = styled.div`
   display: flex;
-  width: 3rem;
-  justify-content: space-between;
   align-items: center;
-  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  justify-content: center;
+
+  svg {
+    padding: 0 0.1rem;
+    border-radius: 5px;
+    background: #0a2616;
+    &:hover {
+      background: #0f3821;
+    }
+  }
 `;
 
 const TerminalTitleBar = styled.div`
@@ -119,7 +106,7 @@ const TerminalTitleBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: start;
-  
+
   padding: 0 0.5rem;
 `;
 const TerminalTitle = styled.h1`
@@ -176,23 +163,15 @@ const OutputWrapper = styled.div`
 `;
 
 const WebCrawler = () => {
-  
   const [terminalOutput, setTerminalOutput] = useState<ReactElement[]>([]);
   const [terminalOn, setTerminalOn] = useState<Boolean>(true);
-  const renderTerminalResponse = (component?: ReactElement) => {
-    let history = [...terminalOutput];
-    if(component){
-      history.push(component);
-      history.push(<p>--------------</p>);
-    } else {
-      history = [<Logging />];
-    }
-    setTerminalOutput(history);
+  const renderTerminalResponse = (component: ReactElement) => {
+    setTerminalOutput((prevHistory) => [...prevHistory, component]);
   };
 
   useEffect(() => {
     let span = document.getElementById("lastline")! as HTMLSpanElement;
-    span.scrollIntoView({behavior: "smooth", block:"end"});
+    span.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [terminalOutput]);
 
   const toggleTerminal = () => {
@@ -201,40 +180,49 @@ const WebCrawler = () => {
 
   return (
     <Container>
-      <Row style={{height: terminalOn ? "60%" : "95%"}}>
-        <QueryForm printErrors={renderTerminalResponse} />
+      <Row style={{ height: terminalOn ? "60%" : "95%" }}>
+        <QueryForm
+          printErrors={renderTerminalResponse}
+          setTerminalOutput={setTerminalOutput}
+        />
         <QueryCode printErrors={renderTerminalResponse} />
       </Row>
-      <TerminalBox style={{height: terminalOn ? "40%" : "5%"}}>
+      <TerminalBox style={{ height: terminalOn ? "40%" : "5%" }}>
         <Column>
           <Header>
-            {/* <MacOsButtons>
-              <RoundedButton color="#FF5D5B" shadow="#CF544D" />
-              <RoundedButton color="#FFBB39" shadow="#CFA64E" />
-              <RoundedButton color="#00CD4E" shadow="#0EA642" />
-            </MacOsButtons> */}
             <TerminalTitleBar>
               <TerminalTitle>
                 {`Terminal (WebCrawler`}
-                <HiGlobeAlt style={{ marginBottom: "0.05rem", marginLeft: "0.3rem" }} size={16} />
+                <HiGlobeAlt
+                  style={{ marginBottom: "0.05rem", marginLeft: "0.3rem" }}
+                  size={16}
+                />
                 {")"}
               </TerminalTitle>
             </TerminalTitleBar>
             <RightHeaderIcons>
               {terminalOn ? (
-                <HiChevronDown color="#4d9f72" size={"19px"} onClick={toggleTerminal}/>
+                <HiChevronDown
+                  color="#4d9f72"
+                  size={"19px"}
+                  onClick={toggleTerminal}
+                />
               ) : (
-                <HiChevronUp color="#4d9f72" size={"19px"} onClick={toggleTerminal}/>
+                <HiChevronUp
+                  color="#4d9f72"
+                  size={"19px"}
+                  onClick={toggleTerminal}
+                />
               )}
             </RightHeaderIcons>
           </Header>
-          <Body >
+          <Body>
             <div>
               <CrawlerHeading id={"PHOPrIv1prqZsgJbwHn"} />
               <Suspense fallback={<></>}>
-                <OutputWrapper>{
-                  terminalOutput.map(output => output)
-                }</OutputWrapper>
+                <OutputWrapper>
+                  {terminalOutput.map((output) => output)}
+                </OutputWrapper>
               </Suspense>
               <span id="lastline"></span>
             </div>

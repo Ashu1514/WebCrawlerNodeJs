@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {VscError} from "react-icons/vsc"
 
 const Wrapper = styled.div`
   display: flex;
@@ -7,7 +8,14 @@ const Wrapper = styled.div`
   .error {
     color: #ff8b8b;
     font-weight: bold;
-    line-height: 2em;
+    line-height: 1em;
+    display:flex;
+    align-items:center;
+    margin-left: 0.2rem;
+
+    svg{
+      margin-right: 0.3rem;
+    }
   }
   ol {
     margin: 0;
@@ -16,8 +24,8 @@ const Wrapper = styled.div`
 
 const CommandNotFound = (props:any) => {
   return (
-    <Wrapper>
-      <span className="error">Error in field {props.fieldName}!</span>
+    <Wrapper key={Math.random()}>
+      <span className="error"><VscError/> Error in field {props.fieldName}!</span>
       {props.error}
     </Wrapper>
   );
