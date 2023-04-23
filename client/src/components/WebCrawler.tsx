@@ -2,6 +2,7 @@ import React, { ReactElement, Suspense, useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { HiGlobeAlt, HiChevronDown, HiChevronUp } from "react-icons/hi";
 import { RiScan2Line } from "react-icons/ri";
+import { MdDeleteOutline } from "react-icons/md";
 import CrawlerHeading from "./CrawlerHeading";
 import QueryForm from "./QueryForm";
 import QueryCode from "./QueryCode";
@@ -198,6 +199,7 @@ const WebCrawler = () => {
   const [terminalOn, setTerminalOn] = useState<boolean>(true);
   const [taskId, setTaskId] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [taskCompleted, setTaskCompleted] = useState<boolean>(false);
   const renderTerminalResponse = (component: ReactElement) => {
     setTerminalOutput((prevHistory) => [...prevHistory, component]);
   };
@@ -227,11 +229,11 @@ const WebCrawler = () => {
           message={`Web Crawler query registered @ ${id}`}
         />
       );
+      getLiveLogs(id);
       await axios.post(
         "https://us-central1-webcrawlernode.cloudfunctions.net/crawler/start",
         { taskId: id }
       );
-      getLiveLogs(id);
     } catch (error: any) {
       renderTerminalResponse(
         <Logging
@@ -273,10 +275,17 @@ const WebCrawler = () => {
           console.log("unsub and res", data.data.result);
           setLoading(false);
           unsub();
+          setTaskCompleted(true);
         }
       });
     });
   };
+
+  const clearTerminal = () => {
+    setTaskCompleted(false);
+    setTerminalOutput([]);
+    renderTerminalResponse(<span></span>);
+  }
 
   return (
     <Container>
@@ -286,6 +295,8 @@ const WebCrawler = () => {
           loading={loading}
           printErrors={renderTerminalResponse}
           setTaskId={setTaskId}
+          isTaskCompleted={taskCompleted}
+          clearTerminal={clearTerminal}
         />
         <QueryCode printErrors={renderTerminalResponse} />
       </Row>
@@ -303,6 +314,11 @@ const WebCrawler = () => {
               </TerminalTitle>
             </TerminalTitleBar>
             <RightHeaderIcons>
+                <MdDeleteOutline
+                  color="#4d9f72"
+                  size={"19px"}
+                  onClick={clearTerminal}
+                />
               {terminalOn ? (
                 <HiChevronDown
                   color="#4d9f72"

@@ -89,6 +89,9 @@ const QueryForm = (props: any) => {
   const submitFormHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
+      if(props.isTaskCompleted){
+        props.clearTerminal();
+      }
       props.setLoading(true);
       props.printErrors(<Logging key={Math.random()} type={LogType.HAPPNING} message="validating query inputs..."/>);
       const isValid = validateFormData();
@@ -205,7 +208,6 @@ const QueryForm = (props: any) => {
         }
       }
     }
-    console.log(faildValidations);
     if (faildValidations.length) {
       const errorsMessages = Object.entries(
         faildValidations.reduce(
