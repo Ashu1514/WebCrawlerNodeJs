@@ -1,13 +1,29 @@
 import React, { ReactElement, Suspense, useEffect, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { HiGlobeAlt, HiChevronDown, HiChevronUp } from "react-icons/hi";
+import { RiScan2Line } from "react-icons/ri";
 import CrawlerHeading from "./CrawlerHeading";
 import QueryForm from "./QueryForm";
 import QueryCode from "./QueryCode";
 import axios from "axios";
-import { LogType } from "../types";
+import { LogDataType, LogType } from "../types";
+import { firestore } from "../firebase";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 
 const Logging = React.lazy(() => import("./commands/Logging"));
+
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+
+`;
 
 const drunk = keyframes`
 
@@ -151,6 +167,10 @@ const Body = styled.div`
     border-radius: 0px;
     height: 2px;
   }
+
+  .rotate {
+    animation: ${rotate} 0.5s linear infinite;
+  }
 `;
 
 const OutputWrapper = styled.div`
@@ -162,10 +182,22 @@ const OutputWrapper = styled.div`
   }
 `;
 
+const Loader = styled.div`
+display: flex;
+color: #50fa7b;
+font-size=16px;
+align-items: center;
+
+span{
+  margin-left: 0.2rem;
+}
+`;
+
 const WebCrawler = () => {
   const [terminalOutput, setTerminalOutput] = useState<ReactElement[]>([]);
-  const [terminalOn, setTerminalOn] = useState<Boolean>(true);
+  const [terminalOn, setTerminalOn] = useState<boolean>(true);
   const [taskId, setTaskId] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const renderTerminalResponse = (component: ReactElement) => {
     setTerminalOutput((prevHistory) => [...prevHistory, component]);
   };
@@ -187,6 +219,7 @@ const WebCrawler = () => {
 
   const startCrawling = async (id: string) => {
     try {
+      setLoading(true);
       renderTerminalResponse(
         <Logging
           key={Math.random()}
@@ -198,6 +231,7 @@ const WebCrawler = () => {
         "https://us-central1-webcrawlernode.cloudfunctions.net/crawler/start",
         { taskId: id }
       );
+      getLiveLogs(id);
     } catch (error: any) {
       renderTerminalResponse(
         <Logging
@@ -206,16 +240,56 @@ const WebCrawler = () => {
           message={`Error while crawling: ${error.message}`}
         />
       );
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const getLiveLogs = (id: string) => {
+    const col = collection(firestore, "crawling_queries/" + id + "/logs/");
+    const queryLogsRef = query(col, orderBy("createdAt", "asc"));
+    const unsub = onSnapshot(queryLogsRef, (docs) => {
+      let terminalLogs = document.querySelectorAll(
+        ".terminalLogs"
+      )! as NodeListOf<HTMLDivElement>;
+      let logIds: any[] = [];
+      terminalLogs.forEach((el) => {
+        logIds.push(el?.dataset?.key);
+      });
+      docs.forEach((doc) => {
+        const data = doc.data();
+        if (data.type !== LogDataType.CRAWLING && !logIds.includes(doc.id)) {
+          renderTerminalResponse(
+            <Logging
+              dataKey={doc.id}
+              key={doc.id}
+              type={data.data.result ? LogType.CHECK : LogType.HAPPNING}
+              message={data.log}
+            />
+          );
+        }
+        if (data.data.result) {
+          console.log("unsub and res", data.data.result);
+          setLoading(false);
+          unsub();
+        }
+      });
+    });
   };
 
   return (
     <Container>
-      <Row style={{ height: terminalOn ? "60%" : "95%" }}>
-        <QueryForm printErrors={renderTerminalResponse} setTaskId={setTaskId} />
+      <Row style={{ height: terminalOn ? "60%" : "95.5%" }}>
+        <QueryForm
+          setLoading={setLoading}
+          loading={loading}
+          printErrors={renderTerminalResponse}
+          setTaskId={setTaskId}
+        />
         <QueryCode printErrors={renderTerminalResponse} />
       </Row>
-      <TerminalBox style={{ height: terminalOn ? "40%" : "5%" }}>
+      <TerminalBox style={{ height: terminalOn ? "40%" : "4.5%" }}>
         <Column>
           <Header>
             <TerminalTitleBar>
@@ -252,7 +326,22 @@ const WebCrawler = () => {
                   {terminalOutput.map((output) => output)}
                 </OutputWrapper>
               </Suspense>
-              <span id="lastline"></span>
+              <span
+                id="lastline"
+              >
+                {loading ? (
+                  <Loader>
+                    <RiScan2Line
+                      size={18}
+                      fontWeight={1000}
+                      color="#50fa7b"
+                      className="rotate"
+                    />
+                    <span>{"loading..."}</span>
+                  </Loader>
+                ) :
+                null}
+              </span>
             </div>
           </Body>
         </Column>

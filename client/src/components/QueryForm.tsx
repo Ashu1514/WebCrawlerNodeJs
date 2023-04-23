@@ -89,12 +89,12 @@ const QueryForm = (props: any) => {
   const submitFormHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      
-      props.printErrors(<Logging key={Math.random()} type={LogType.NORMAL} message="validating query inputs..."/>);
+      props.setLoading(true);
+      props.printErrors(<Logging key={Math.random()} type={LogType.HAPPNING} message="validating query inputs..."/>);
       const isValid = validateFormData();
       if(isValid){
         props.printErrors(<Logging key={Math.random()} type={LogType.CHECK} message="All inputs are validated!"/>);
-        props.printErrors(<Logging key={Math.random()} type={LogType.NORMAL} message="Connecting to backend service..."/>);
+        props.printErrors(<Logging key={Math.random()} type={LogType.CONNECTION} message="Connecting to backend service..."/>);
         const payload: payload = {
           baseURL: formData.baseURL.value as string,
           starttingPageURL: formData.starttingPageURL.value as string,
@@ -110,6 +110,8 @@ const QueryForm = (props: any) => {
       }
     } catch (error: any) {
       props.printErrors(<Logging key={Math.random()} type={LogType.ERROR} message={error.message}/>);
+    } finally {
+      props.setLoading(false);
     }
     
   }
@@ -306,7 +308,7 @@ const QueryForm = (props: any) => {
           })
         }
       />
-      <SubmitButton type="button" onClick={submitFormHandler}>
+      <SubmitButton disabled={props.loading} type="button" onClick={submitFormHandler}>
         _submit_query();
       </SubmitButton>
     </FormContainer>

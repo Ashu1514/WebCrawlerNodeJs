@@ -1,1 +1,16 @@
-export enum LogType{ERROR, WARNING, NORMAL, CHECK};
+export enum LogType {
+  ERROR,
+  WARNING,
+  NORMAL,
+  CHECK,
+  CONNECTION,
+  HAPPNING
+}
+
+export enum LogDataType {
+  QUERY_CREATED,
+  CRAWLING,
+  LEVEL,
+  MESSAGE,
+  ERROR,
+}

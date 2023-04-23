@@ -11,7 +11,6 @@ export const crawler = functions
   .https.onRequest(crawlerExpress);
 
 export const crawlerQueriesCleanUp = functions.pubsub
-
   .schedule("every 2 hours")
   .timeZone(SCHEDULER_REGION)
   .onRun(() => {

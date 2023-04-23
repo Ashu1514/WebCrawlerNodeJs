@@ -1,7 +1,7 @@
 import * as express from "express";
 import * as toolbox from "../toolbox";
 import { crawlPage } from "./crawl";
-import { sortPages } from "./report";
+// import { sortPages } from "./report";
 import { Crawler, CrawlerBody, LogType } from "./crawler.model";
 
 const mCrawlerExpress = express();
@@ -67,12 +67,14 @@ mCrawlerExpress.post(
         {},
         CrawlerQuery
       );
-      const sortedResult = sortPages(result);
+      // const sortedResult = sortPages(result);
+      // console.log({ result, sortedResult });
       CrawlerQuery.addCrawlingQueryLog("Crawling finished!", LogType.MESSAGE, {
-        result: sortedResult,
+        result,
       });
-      res.status(200).send({ result: sortedResult });
+      res.status(200).send({ result });
     } catch (error: any) {
+      console.log({ error });
       res.status(500).send({ message: error.message, error });
     }
   }

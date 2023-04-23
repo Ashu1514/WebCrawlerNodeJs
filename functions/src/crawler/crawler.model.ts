@@ -71,13 +71,40 @@ export class Crawler implements CrawlerBody {
    * @param {LogType} type crawling query log type
    * @param {object} data crawling query aditional data
    */
-  async addCrawlingQueryLog(logString: string, type: LogType, data: object) {
+  // async addCrawlingQueryLog(logString: string, type: LogType, data: object) {
+  //   console.log(logString);
+  //   const logId = String(Math.random()).replace(".", "");
+  //   const db = firebaseAdmin.database();
+  //   const ref = db.ref("crawling_query_logs/");
+  //   const taskID = this.taskId;
+  //   const taskRef = ref
+  //     .child(taskID)
+  //     .child("logs")
+  //     .child(logId);
+  //   await taskRef.set({
+  //     log: logString,
+  //     type,
+  //     data,
+  //     createdAt: Date.now(),
+  //   });
+  // }
+
+  /**
+   * add Crawling Query Logs async function
+   * @param {string} logString crawling query log text
+   * @param {LogType} type crawling query log type
+   * @param {any} data crawling query aditional data
+   */
+  async addCrawlingQueryLog(logString: string, type: LogType, data: any) {
     console.log(logString);
-    const db = firebaseAdmin.database();
-    const ref = db.ref("crawling_query_logs/");
     const taskID = this.taskId;
-    const taskRef = ref.child(taskID).push();
-    await taskRef.set({
+    const firestoreDB = firebaseAdmin.firestore();
+    const dbRef = firestoreDB
+      .collection("crawling_queries")
+      .doc(taskID)
+      .collection("logs");
+    console.log({ data });
+    await dbRef.add({
       log: logString,
       type,
       data,
