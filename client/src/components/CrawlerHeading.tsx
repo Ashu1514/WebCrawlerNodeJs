@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-interface Props {
-  id: string;
-}
-
 const LabelContainer = styled.div`
   display: flex;
   color: aliceblue;
@@ -24,18 +20,13 @@ const LabelContainer = styled.div`
   }
 `;
 
-const CrawlerHeading = ({ id }: Props) => {
+const CrawlerHeading = () => {
   return (
     <>
     <LabelContainer>
       <span className="head">Welcome to Web Crawler <span style={{fontSize: "12px"}}>🌐 </span></span>
       <span className="id">v1.0.0</span>
     </LabelContainer>
-    {/* <LabelContainer>
-      <span className="head">web crawler</span>
-      <span className="in">query registered @</span>
-      <span className="id">{id}</span>
-    </LabelContainer> */}
     </>
   );
 };

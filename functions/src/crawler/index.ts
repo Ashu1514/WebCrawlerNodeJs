@@ -3,6 +3,7 @@ import * as toolbox from "../toolbox";
 import { crawlPage } from "./crawl";
 // import { sortPages } from "./report";
 import { Crawler, CrawlerBody, LogType } from "./crawler.model";
+import { sortPages } from "./report";
 
 const mCrawlerExpress = express();
 mCrawlerExpress.use(toolbox.cors);
@@ -67,12 +68,12 @@ mCrawlerExpress.post(
         {},
         CrawlerQuery
       );
-      // const sortedResult = sortPages(result);
-      // console.log({ result, sortedResult });
+      const sortedResult = sortPages(result);
+      console.log({ result, sortedResult });
       CrawlerQuery.addCrawlingQueryLog("Crawling finished!", LogType.MESSAGE, {
-        result,
+        result: sortedResult,
       });
-      res.status(200).send({ result });
+      res.status(200).send({ sortedResult });
     } catch (error: any) {
       console.log({ error });
       res.status(500).send({ message: error.message, error });

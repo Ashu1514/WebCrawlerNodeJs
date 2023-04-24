@@ -97,18 +97,30 @@ export class Crawler implements CrawlerBody {
    */
   async addCrawlingQueryLog(logString: string, type: LogType, data: any) {
     console.log(logString);
+    const db = firebaseAdmin.database();
+    const ref = db.ref("crawling_query_logs/");
     const taskID = this.taskId;
-    const firestoreDB = firebaseAdmin.firestore();
-    const dbRef = firestoreDB
-      .collection("crawling_queries")
-      .doc(taskID)
-      .collection("logs");
-    console.log({ data });
-    await dbRef.add({
+    const taskRef = ref.child(taskID).push();
+    await taskRef.set({
       log: logString,
       type,
       data,
       createdAt: Date.now(),
     });
+
+    // console.log(logString);
+    // const taskID = this.taskId;
+    // const firestoreDB = firebaseAdmin.firestore();
+    // const dbRef = firestoreDB
+    //   .collection("crawling_queries")
+    //   .doc(taskID)
+    //   .collection("logs");
+    // console.log({ data });
+    // await dbRef.add({
+    //   log: logString,
+    //   type,
+    //   data,
+    //   createdAt: Date.now(),
+    // });
   }
 }

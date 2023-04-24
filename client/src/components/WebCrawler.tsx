@@ -8,8 +8,10 @@ import QueryForm from "./QueryForm";
 import QueryCode from "./QueryCode";
 import axios from "axios";
 import { LogDataType, LogType } from "../types";
-import { firestore } from "../firebase";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { firestore, database } from "../firebase";
+import { onValue, ref, onChildAdded, query, off } from "firebase/database";
+import CrawlingResult from "./CrawlingResult";
+// import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 
 const Logging = React.lazy(() => import("./commands/Logging"));
 
@@ -109,6 +111,7 @@ const RightHeaderIcons = styled.div`
     padding: 0 0.1rem;
     border-radius: 5px;
     background: #0a2616;
+    margin-right: 0.2rem
     &:hover {
       background: #0f3821;
     }
@@ -157,7 +160,7 @@ const Body = styled.div`
   }
 
   &::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
   }
   &::-webkit-scrollbar-track {
     border-radius: 0px;
@@ -194,19 +197,50 @@ span{
 }
 `;
 
+
+type recordTuple = [string, number];
+
 const WebCrawler = () => {
   const [terminalOutput, setTerminalOutput] = useState<ReactElement[]>([]);
   const [terminalOn, setTerminalOn] = useState<boolean>(true);
   const [taskId, setTaskId] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [taskCompleted, setTaskCompleted] = useState<boolean>(false);
-  const renderTerminalResponse = (component: ReactElement) => {
-    setTerminalOutput((prevHistory) => [...prevHistory, component]);
+  const [tableData, setTableData] = useState<Array<recordTuple>>([]);
+
+  const addDataToTable = (url: string, count: number) => {
+    const data = [...tableData];
+    const record = data.find(el => el[0] === url);
+    if(record){
+        record[1] = count;
+    } else {
+        data.push([url, count]);
+    }
+    setTableData((prev) => {
+      let newData = [...prev];
+      data.forEach(el => {
+        let recordIndex = newData.findIndex(pl => el[0] === pl[0]);
+        if(recordIndex >= 0){
+          newData[recordIndex] = el;
+        } else {
+          newData.push(el)
+        }
+      });
+      return newData.sort((a, b) => b[1] - a[1]);
+    });
+  }
+
+  const renderTerminalResponse = (component: ReactElement | undefined) => {
+    if (component) {
+      setTerminalOutput((prevHistory) => [...prevHistory, component]);
+    } else {
+      setTerminalOutput([]);
+    }
   };
 
   useEffect(() => {
     let span = document.getElementById("lastline")! as HTMLSpanElement;
-    span.scrollIntoView({ behavior: "smooth", block: "end" });
+    span.scrollIntoView({ behavior: "auto", block: "end" });
   }, [terminalOutput]);
 
   const toggleTerminal = () => {
@@ -214,7 +248,7 @@ const WebCrawler = () => {
   };
 
   useEffect(() => {
-    if (taskId.trim().length) {
+    if (taskId.trim().length && !taskCompleted) {
       startCrawling(taskId);
     }
   }, [taskId]);
@@ -249,43 +283,44 @@ const WebCrawler = () => {
   };
 
   const getLiveLogs = (id: string) => {
-    const col = collection(firestore, "crawling_queries/" + id + "/logs/");
-    const queryLogsRef = query(col, orderBy("createdAt", "asc"));
-    const unsub = onSnapshot(queryLogsRef, (docs) => {
-      let terminalLogs = document.querySelectorAll(
-        ".terminalLogs"
-      )! as NodeListOf<HTMLDivElement>;
-      let logIds: any[] = [];
-      terminalLogs.forEach((el) => {
-        logIds.push(el?.dataset?.key);
-      });
-      docs.forEach((doc) => {
-        const data = doc.data();
-        if (data.type !== LogDataType.CRAWLING && !logIds.includes(doc.id)) {
+    const starCountRef = ref(database, "/crawling_query_logs/" + id + "/");
+    const unsub = onChildAdded(
+      starCountRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        if (data.type !== LogDataType.CRAWLING) {
           renderTerminalResponse(
             <Logging
-              dataKey={doc.id}
-              key={doc.id}
+              dataKey={snapshot.key!}
+              key={snapshot.key}
               type={data.data.result ? LogType.CHECK : LogType.HAPPNING}
-              message={data.log}
+              message={snapshot.key + ": " + data.log}
             />
           );
+        } else{
+          addDataToTable(data.data.currentURL, data.data.currentCount);
         }
         if (data.data.result) {
           console.log("unsub and res", data.data.result);
-          setLoading(false);
+          setTableData(data.data.result);
           unsub();
+          setLoading(false);
           setTaskCompleted(true);
         }
-      });
-    });
+      },
+      (err) => {
+        renderTerminalResponse(
+          <Logging type={LogType.ERROR} message={err.message} />
+        );
+      }
+    );
   };
 
   const clearTerminal = () => {
     setTaskCompleted(false);
-    setTerminalOutput([]);
-    renderTerminalResponse(<span></span>);
-  }
+    setTableData([]);
+    renderTerminalResponse(undefined);
+  };
 
   return (
     <Container>
@@ -298,7 +333,9 @@ const WebCrawler = () => {
           isTaskCompleted={taskCompleted}
           clearTerminal={clearTerminal}
         />
-        <QueryCode printErrors={renderTerminalResponse} />
+        <CrawlingResult 
+          data={tableData}
+        />
       </Row>
       <TerminalBox style={{ height: terminalOn ? "40%" : "4.5%" }}>
         <Column>
@@ -314,11 +351,11 @@ const WebCrawler = () => {
               </TerminalTitle>
             </TerminalTitleBar>
             <RightHeaderIcons>
-                <MdDeleteOutline
-                  color="#4d9f72"
-                  size={"19px"}
-                  onClick={clearTerminal}
-                />
+              <MdDeleteOutline
+                color="#4d9f72"
+                size={"19px"}
+                onClick={clearTerminal}
+              />
               {terminalOn ? (
                 <HiChevronDown
                   color="#4d9f72"
@@ -336,15 +373,13 @@ const WebCrawler = () => {
           </Header>
           <Body>
             <div>
-              <CrawlerHeading id={"PHOPrIv1prqZsgJbwHn"} />
+              <CrawlerHeading />
               <Suspense fallback={<></>}>
-                <OutputWrapper>
+                <OutputWrapper id="terminalOutputWrapper">
                   {terminalOutput.map((output) => output)}
                 </OutputWrapper>
               </Suspense>
-              <span
-                id="lastline"
-              >
+              <span id="lastline">
                 {loading ? (
                   <Loader>
                     <RiScan2Line
@@ -355,8 +390,7 @@ const WebCrawler = () => {
                     />
                     <span>{"loading..."}</span>
                   </Loader>
-                ) :
-                null}
+                ) : null}
               </span>
             </div>
           </Body>
