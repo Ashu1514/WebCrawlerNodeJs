@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const Container = styled.div`
   color: white;
@@ -7,6 +7,8 @@ const Container = styled.div`
   max-width: 60%;
   width: 100%;
   padding: 3rem 2rem;
+  padding-top: 0rem;
+  margin-top: 3rem;
   overflow-y: scroll;
 `;
 
@@ -23,10 +25,11 @@ const flash = keyframes`
 `;
 
 const Table = styled.table`
+  width: 100%;
 `;
 
 const TableRow = styled.tr`
-    animation: ${flash} 0.5s ease-out;
+  animation: ${flash} 0.5s ease-out;
 `;
 
 const TableHead = styled.thead`
@@ -38,6 +41,9 @@ const TableHead = styled.thead`
 
 const TableHeader = styled.th`
   padding: 0.2rem 0.5rem;
+  position: sticky;
+  top: 0;
+  background: #124427;
 `;
 
 const TableData = styled.td`
@@ -57,8 +63,7 @@ const TableBody = styled.tbody`
 
 type recordTuple = [string, number];
 
-const CrawlingResult = ({data} : {data: Array<recordTuple>}) => {
-    
+const CrawlingResult = ({ data }: { data: Array<recordTuple> }) => {
   return (
     <Container>
       <Table>
@@ -76,21 +81,22 @@ const CrawlingResult = ({data} : {data: Array<recordTuple>}) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data && data.map(([url, occur], i) => {
-            return (
-              <TableRow key={url + i}>
-                <TableData>
-                  <p className="text-center">{i + 1}.</p>
-                </TableData>
-                <TableData>
-                  <p>{url}</p>
-                </TableData>
-                <TableData>
-                  <p className="text-center">{occur}</p>
-                </TableData>
-              </TableRow>
-            );
-          })}
+          {data &&
+            data.map(([url, occur], i) => {
+              return (
+                <TableRow key={url + i}>
+                  <TableData>
+                    <p className="text-center">{i + 1}.</p>
+                  </TableData>
+                  <TableData>
+                    <p>{url}</p>
+                  </TableData>
+                  <TableData>
+                    <p className="text-center">{occur}</p>
+                  </TableData>
+                </TableRow>
+              );
+            })}
         </TableBody>
         {/* <TableRow>
           <TableData>1</TableData>

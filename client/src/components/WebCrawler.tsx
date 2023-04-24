@@ -108,10 +108,10 @@ const RightHeaderIcons = styled.div`
   justify-content: center;
 
   svg {
+    margin-right: 0.5rem;
     padding: 0 0.1rem;
     border-radius: 5px;
     background: #0a2616;
-    margin-right: 0.2rem
     &:hover {
       background: #0f3821;
     }
