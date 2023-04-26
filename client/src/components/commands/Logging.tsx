@@ -58,7 +58,8 @@ const Logging = ({ message, type, dataKey }: Props) => {
       ) : type === LogType.ERROR ? (
         <VscError size={16} color="#ff8b8b" />
       ) : type === LogType.CHECK ? (
-        <SiAngellist size={16} color="#50fa7b" />
+        <span style={{marginRight: "0.3rem", fontSize:"12px"}}>👍</span>
+        // <SiAngellist size={16} color="#50fa7b" />
       ) : type === LogType.CONNECTION ? (
         <AiOutlineLink size={16} color="#50fa7b" />
       ) : type === LogType.HAPPNING ? (

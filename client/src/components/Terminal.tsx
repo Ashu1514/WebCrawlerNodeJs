@@ -29,7 +29,7 @@ const rotate = keyframes`
 
 `;
 
-const Column = styled.span`
+const Console = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -50,7 +50,6 @@ const Header = styled.div`
   width: 100%;
   height: 2rem;
   background-color: #041b0ed6;
-  // background-color: #f0e9e5;
   box-sizing: border-box;
   position: sticky;
   border-bottom: 1px solid #0f3d24;
@@ -100,10 +99,8 @@ const TerminalTitle = styled.h1`
 const Body = styled.div`
   height: 100%;
   background-color: #041b0ed6;
-  // border: 1px solid #f0e9e5;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  padding: 0 0.3rem 0.3rem;
   box-sizing: border-box;
   position: relative;
   overflow-y: hidden;
@@ -200,8 +197,8 @@ const Terminal = forwardRef(
     };
 
     return (
-      <TerminalBox style={{ height: terminalOn ? "40%" : "4.5%" }}>
-        <Column>
+      <TerminalBox style={{ height: terminalOn ? "40%" : "4%" }}>
+        <Console>
           <Header>
             <TerminalTitleBar>
               <TerminalTitle>
@@ -257,7 +254,7 @@ const Terminal = forwardRef(
               </span>
             </div>
           </Body>
-        </Column>
+        </Console>
       </TerminalBox>
     );
   }

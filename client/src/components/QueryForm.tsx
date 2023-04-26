@@ -116,7 +116,6 @@ const QueryForm = (props: any) => {
       } finally {
       props.setLoading(false);
     }
-    
   }
 
   const validateFormData = () => {

@@ -5,13 +5,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 const Wrapper = styled.div`
   background: #021309;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  height: 100%;
   font-family: "Ubuntu Mono", sans-serif;
   font-size: 17px;
   line-height: 1.3rem;

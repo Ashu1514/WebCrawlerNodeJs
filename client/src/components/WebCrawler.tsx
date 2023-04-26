@@ -19,9 +19,8 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  display: block;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   font-size: 0.875rem;
 `;
 
@@ -29,7 +28,7 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 60%;
+  height: 100%;
   transition: height 0.2s ease-out;
 `;
 
@@ -42,13 +41,30 @@ interface TerminalProps {
 }
 
 const WebCrawler = () => {
-  const [terminalOutput, setTerminalOutput] = useState<ReactElement[]>([]);
-  const [taskId, setTaskId] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [taskCompleted, setTaskCompleted] = useState<boolean>(false);
-  const [tableData, setTableData] = useState<Array<recordTuple>>([]);
+ const [taskId, setTaskId] = useState<string>("");
+const [loading, setLoading] = useState<boolean>(false);
+const [taskCompleted, setTaskCompleted] = useState<boolean>(false);
+const [tableData, setTableData] = useState<Array<recordTuple>>([]);
 
   const TerminalRef = useRef<TerminalProps>(null);
+
+  useEffect(() => {
+    resetAllStates();
+  }, []);
+
+  useEffect(() => {
+    if (taskId.trim().length && !taskCompleted) {
+      startCrawling(taskId);
+    }
+  }, [taskId]);
+
+  const resetAllStates = () => {
+    setTaskId("");
+    setLoading(false);
+    setTaskCompleted(false);
+    setTableData([]);
+    printOnTerminal();
+  }
 
   const addDataToTable = (url: string, count: number) => {
     const data = [...tableData];
@@ -72,26 +88,9 @@ const WebCrawler = () => {
     });
   };
 
-
-  useEffect(() => {
-    let span = document.getElementById("lastline")! as HTMLSpanElement;
-    span.scrollIntoView({ behavior: "auto", block: "end" });
-  }, [terminalOutput]);
-
-
-  useEffect(() => {
-    if (taskId.trim().length && !taskCompleted) {
-      startCrawling(taskId);
-    }
-  }, [taskId]);
-
   const printOnTerminal = (message?: string, type?: LogType, key?: string, component?: ReactElement) => {
     if(TerminalRef.current){
-      if(component){
-        TerminalRef.current.printOnTerminal(undefined, undefined, undefined, component);
-      } else{
-        TerminalRef.current.printOnTerminal(message, type, key);
-      }
+      TerminalRef.current.printOnTerminal(message, type, key, component);
     }
   } 
 
@@ -160,7 +159,7 @@ const WebCrawler = () => {
 
   return (
     <Container>
-      <Row style={{ height:"60%" }}>
+      <Row>
         <QueryForm
           setLoading={setLoading}
           loading={loading}
