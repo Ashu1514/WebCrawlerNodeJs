@@ -22,10 +22,11 @@ const rotate = keyframes`
 
 const CommandLine = styled.div`
   display: flex;
-  align-items: center;
+  align-items: start;
 
   svg {
     margin-right: 0.3rem;
+    margin-top: 0.2rem;
   }
 
   .rotateAnime {
@@ -34,6 +35,7 @@ const CommandLine = styled.div`
 `;
 const Line = styled.p`
   margin: 0;
+  width: 99%;
 `;
 
 interface Props {

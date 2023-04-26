@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Field from "./FormField";
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import CommandNotFound from "./commands/CommandNotFound";
 import Logging from "./commands/Logging";
 import { LogType } from "../types";
@@ -93,11 +93,11 @@ const QueryForm = (props: any) => {
         props.clearTerminal();
       }
       props.setLoading(true);
-      props.printErrors(<Logging key={Math.random()} type={LogType.HAPPNING} message="validating query inputs..."/>);
+      props.printErrors("validating query inputs...", LogType.HAPPNING, Math.random().toString());
       const isValid = validateFormData();
       if(isValid){
-        props.printErrors(<Logging key={Math.random()} type={LogType.CHECK} message="All inputs are validated!"/>);
-        props.printErrors(<Logging key={Math.random()} type={LogType.CONNECTION} message="Connecting to backend service..."/>);
+        props.printErrors("All inputs are validated!", LogType.CHECK, Math.random().toString());
+        props.printErrors("Connecting to backend service...", LogType.CONNECTION, Math.random().toString());
         const payload: payload = {
           baseURL: formData.baseURL.value as string,
           starttingPageURL: formData.starttingPageURL.value as string,
@@ -109,11 +109,11 @@ const QueryForm = (props: any) => {
           props.setTaskId(response.data.taskId);
         }
       } else {
-        props.printErrors(<Logging key={Math.random()} type={LogType.WARNING} message="Please fill form fields with valid inputs..."/>);
+        props.printErrors("Please fill form fields with valid inputs...", LogType.WARNING, Math.random().toString());
       }
     } catch (error: any) {
-      props.printErrors(<Logging key={Math.random()} type={LogType.ERROR} message={error.message}/>);
-    } finally {
+      props.printErrors(error.message, LogType.ERROR, Math.random().toString());
+      } finally {
       props.setLoading(false);
     }
     
@@ -121,8 +121,6 @@ const QueryForm = (props: any) => {
 
   const validateFormData = () => {
     const data = { ...formData };
-    console.log(data);
-    
     let isValid = true;
     const faildValidations: { name: string; error: string }[] = [];
     for (const field in data) {
@@ -209,7 +207,7 @@ const QueryForm = (props: any) => {
       }
     }
     if (faildValidations.length) {
-      const errorsMessages = Object.entries(
+      const errorsMessages: ReactElement[] = Object.entries(
         faildValidations.reduce(
           (
             prev: { [key: string]: string[] },
@@ -232,7 +230,7 @@ const QueryForm = (props: any) => {
         const errorList = <OderedList key={field}>{errorItems.map(item => item)}</OderedList>;
         return <CommandNotFound key={Math.random()} fieldName={field} error={errorList} />;
       });
-      props.printErrors([...errorsMessages]);
+      props.printErrors(undefined,undefined,undefined,errorsMessages);
     }
     return isValid;
   };
