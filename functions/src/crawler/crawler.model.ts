@@ -56,38 +56,31 @@ export class Crawler implements CrawlerBody {
       maxLevel: this.maxLevel,
       createdAt: this.createdAt,
       taskId: this.taskId,
+      updatedAt: this.createdAt,
     };
     const firestoreDB = firebaseAdmin.firestore();
     const dbRef = firestoreDB.collection("crawling_queries");
-    const task = await dbRef.add(crawlingQuery);
-    this.taskId = task.id;
-    await dbRef.doc(this.taskId).update({ taskId: this.taskId });
-    console.log("task id is: " + task.id);
+    const existedQuery = await dbRef
+      .where("baseURL", "==", this.baseURL)
+      .where("starttingPageURL", "==", this.starttingPageURL)
+      .where("email", "==", this.email)
+      .where("maxLevel", "==", this.maxLevel)
+      .limit(1)
+      .get();
+    if (existedQuery.docs[0]) {
+      this.taskId = existedQuery.docs[0].id;
+      const db = firebaseAdmin.database();
+      const ref = db.ref("crawling_query_logs/");
+      const taskRef = ref.child(this.taskId);
+      await taskRef.remove();
+      await existedQuery.docs[0].ref.update({ updatedAt: Date.now() });
+    } else {
+      const task = await dbRef.add(crawlingQuery);
+      this.taskId = task.id;
+      await task.update({ taskId: this.taskId });
+    }
+    console.log("task id is: " + this.taskId);
   }
-
-  /**
-   * add Crawling Query Logs async function
-   * @param {string} logString crawling query log text
-   * @param {LogType} type crawling query log type
-   * @param {object} data crawling query aditional data
-   */
-  // async addCrawlingQueryLog(logString: string, type: LogType, data: object) {
-  //   console.log(logString);
-  //   const logId = String(Math.random()).replace(".", "");
-  //   const db = firebaseAdmin.database();
-  //   const ref = db.ref("crawling_query_logs/");
-  //   const taskID = this.taskId;
-  //   const taskRef = ref
-  //     .child(taskID)
-  //     .child("logs")
-  //     .child(logId);
-  //   await taskRef.set({
-  //     log: logString,
-  //     type,
-  //     data,
-  //     createdAt: Date.now(),
-  //   });
-  // }
 
   /**
    * add Crawling Query Logs async function
@@ -107,20 +100,5 @@ export class Crawler implements CrawlerBody {
       data,
       createdAt: Date.now(),
     });
-
-    // console.log(logString);
-    // const taskID = this.taskId;
-    // const firestoreDB = firebaseAdmin.firestore();
-    // const dbRef = firestoreDB
-    //   .collection("crawling_queries")
-    //   .doc(taskID)
-    //   .collection("logs");
-    // console.log({ data });
-    // await dbRef.add({
-    //   log: logString,
-    //   type,
-    //   data,
-    //   createdAt: Date.now(),
-    // });
   }
 }

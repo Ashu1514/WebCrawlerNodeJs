@@ -10,7 +10,7 @@ export const routineCleanUp = async () => {
   const db = firebaseAdmin.database();
   const ref = db.ref("crawling_query_logs/");
   const unwantendEntries = await firestoreRef
-    // .where("email", "==", "")
+    .where("email", "==", "")
     .where("createdAt", "<", currentTime.getTime())
     .get();
   unwantendEntries.forEach((task) => {

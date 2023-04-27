@@ -15,7 +15,7 @@ const ContainerHeader = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 10%;
+  height: 8%;
   border-bottom: 1px solid #103d24;
 `;
 
@@ -39,27 +39,26 @@ const Tab = styled.div`
 const Wrapper = styled.div`
   margin-bottom: 1rem;
   padding: 0rem 2rem;
-  height: 90%;
-
+  height: 92%;
   overflow-y: hidden;
-    overflow-x: hidden;
-  
-    &:hover {
-      overflow-y: scroll;
-    }
-  
-    &::-webkit-scrollbar {
-      width: 1%;
-    }
-    &::-webkit-scrollbar-track {
-      border-radius: 0px;
-    }
-  
-    &::-webkit-scrollbar-thumb {
-      background: #18422a;
-      border-radius: 0px;
-      height: 2px;
-    }
+  overflow-x: hidden;
+
+  &:hover {
+    overflow-y: scroll;
+  }
+
+  &::-webkit-scrollbar {
+    width: 1%;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 0px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #18422a;
+    border-radius: 0px;
+    height: 2px;
+  }
 `;
 
 const flash = keyframes`
@@ -121,11 +120,7 @@ const TableBody = styled.tbody`
 const Instrcutions = styled.div`
   max-width: 35rem;
   margin: auto;
-  font-size: 0.9rem;
-
-  p {
-    margin: 0.4rem 0;
-  }
+  font-size: 1rem;
 
   .website_name {
     color: #4ffa7b;
@@ -164,8 +159,8 @@ const CrawlingResult = ({ data, tab }: Props) => {
   const [selectedTab, setSelectedTab] = useState<number>(2);
 
   useEffect(() => {
-    setSelectedTab(tab)
-  }, [tab])
+    setSelectedTab(tab);
+  }, [tab]);
 
   return (
     <Container>
@@ -181,7 +176,47 @@ const CrawlingResult = ({ data, tab }: Props) => {
         ))}
       </ContainerHeader>
       <Wrapper>
-        {selectedTab === TabType.INSTRUCTIONS ? (
+        {selectedTab === TabType.INTRODUCTION ? (
+          <Instrcutions>
+            <p>
+              Welcome to{" "}
+              {<span className="website_name">Super Web Crawler</span>}, the
+              ultimate web crawling solution for developers, marketers, and
+              researchers. Our cutting-edge web crawler tool allows you to
+              extract data from any website quickly and easily, giving you
+              valuable insights and competitive advantages.
+            </p>
+
+            <p>
+              With {<span className="website_name">Super Web Crawler</span>},
+              you can crawl any website and extract all the URLs that match your
+              specified domain name and depth level. Our tool is capable of
+              handling dynamic web pages, allowing you to extract data from
+              websites that use JavaScript and AJAX technologies.
+            </p>
+
+            <p>
+              In addition to our powerful web crawler tool, we also provide
+              expert tips and best practices on how to optimize your web
+              crawling process, troubleshoot common issues, and download and
+              process the data that you've extracted.
+            </p>
+
+            <p>
+              Our website is user-friendly and easy to navigate, with a simple
+              interface that makes it easy for you to enter the necessary
+              information and start the crawling process. Whether you're a
+              seasoned web crawler or a beginner, our tool is designed to meet
+              your needs and help you achieve your goals.
+            </p>
+
+            <p>
+              Try {<span className="website_name">Super Web Crawler</span>}{" "}
+              today and see for yourself why it's the best web crawling solution
+              on the network.
+            </p>
+          </Instrcutions>
+        ) : selectedTab === TabType.INSTRUCTIONS ? (
           <Instrcutions>
             <p>
               Our {<span className="website_name">Super Web Crawler</span>} tool

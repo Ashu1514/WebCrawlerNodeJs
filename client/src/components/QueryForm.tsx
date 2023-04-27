@@ -105,7 +105,7 @@ const QueryForm = (props: any) => {
           email: formData.email.value as string,
           maxLevel: formData.maxLevel.value as number
         };
-        const response = await axios.post("https://us-central1-webcrawlernode.cloudfunctions.net/crawler/create", payload);
+        const response = await axios.post("http://127.0.0.1:5001/webcrawlernode/us-central1/crawler/create", payload);
         if(response?.data?.taskId){
           props.setTaskId(response.data.taskId);
         }

@@ -55,7 +55,7 @@ const WebCrawler = () => {
   }, []);
 
   useEffect(() => {
-    if (taskId.trim().length && !taskCompleted) {
+    if (taskId.trim().length) {
       startCrawling(taskId);
     }
   }, [taskId]);
@@ -151,6 +151,7 @@ const WebCrawler = () => {
           console.log("unsub and res", data.data.result);
           setTableData(data.data.result);
           unsub();
+          setTaskId("");
           setLoading(false);
           setTaskCompleted(true);
         }
@@ -186,11 +187,11 @@ const WebCrawler = () => {
           data={tableData}
         />
         <QueryForm
-          setLoading={setLoading}
           loading={loading}
-          printErrors={printOnTerminal}
-          setTaskId={setTaskId}
           isTaskCompleted={taskCompleted}
+          setLoading={setLoading}
+          setTaskId={setTaskId}
+          printErrors={printOnTerminal}
           clearTerminal={clearTerminal}
           setCrawlingStarted={setCrawlingStarted}
         />
@@ -198,9 +199,9 @@ const WebCrawler = () => {
       <Terminal
         ref={TerminalRef}
         loading={loading}
-        setTaskCompleted={setTaskCompleted}
         terminalOn={terminalOn}
         toggleTerminal={toggleTerminal}
+        setTaskCompleted={setTaskCompleted}
       />
     </Container>
   );
