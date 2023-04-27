@@ -37,6 +37,7 @@ type recordTuple = [string, number];
 
 interface TerminalProps {
   printOnTerminal: (message? : string,  type?: LogType, key?: string, component?: React.ReactNode) => void;
+  terminalOn: boolean;
   // other properties and methods of the Terminal component
 }
 
@@ -45,6 +46,7 @@ const WebCrawler = () => {
 const [loading, setLoading] = useState<boolean>(false);
 const [taskCompleted, setTaskCompleted] = useState<boolean>(false);
 const [tableData, setTableData] = useState<Array<recordTuple>>([]);
+const [terminalOn, setTerminalOn] = useState<boolean>(true);
 
   const TerminalRef = useRef<TerminalProps>(null);
 
@@ -157,9 +159,15 @@ const [tableData, setTableData] = useState<Array<recordTuple>>([]);
     printOnTerminal();
   };
 
+  const toggleTerminal = () => {
+    setTerminalOn(!terminalOn);
+  }
+
   return (
     <Container>
-      <Row>
+      <Row style={{
+        height: terminalOn ? "60%" : "96%"
+      }}>
         <QueryForm
           setLoading={setLoading}
           loading={loading}
@@ -175,6 +183,8 @@ const [tableData, setTableData] = useState<Array<recordTuple>>([]);
         loading={loading}
         setTaskCompleted={setTaskCompleted}
         setTableData={setTableData}
+        terminalOn={terminalOn}
+        toggleTerminal={toggleTerminal}
       />
     </Container>
   );

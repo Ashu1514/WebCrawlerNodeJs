@@ -5,11 +5,29 @@ const Container = styled.div`
   color: white;
   margin-bottom: 1rem;
   max-width: 60%;
-  width: 100%;
+  width: 99%;
   padding: 3rem 2rem;
   padding-top: 0rem;
   margin-top: 3rem;
-  overflow-y: scroll;
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  &:hover {
+    overflow-y: scroll;
+  }
+
+  &::-webkit-scrollbar {
+    width: 1%;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 0px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #18422a;
+    border-radius: 0px;
+    height: 2px;
+  }
 `;
 
 const flash = keyframes`

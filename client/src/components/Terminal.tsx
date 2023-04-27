@@ -129,7 +129,7 @@ const Body = styled.div`
 `;
 
 const OutputWrapper = styled.div`
-  color: aliceblue;
+  color: #fff;
   padding-left: 0em;
 
   @media (max-width: 800px) {
@@ -150,14 +150,15 @@ const Loader = styled.div`
 
 interface Props {
   loading: boolean;
+  terminalOn: boolean;
   setTaskCompleted: Function;
   setTableData: Function;
+  toggleTerminal:Function
 }
 
 const Terminal = forwardRef(
-  ({ loading, setTaskCompleted, setTableData }: Props, ref) => {
+  ({ loading, setTaskCompleted, setTableData, terminalOn, toggleTerminal }: Props, ref) => {
     const [terminalOutput, setTerminalOutput] = useState<ReactElement[]>([]);
-    const [terminalOn, setTerminalOn] = useState<boolean>(true);
 
     const renderTerminalResponse = (component: ReactElement | undefined) => {
       if (component) {
@@ -168,27 +169,28 @@ const Terminal = forwardRef(
     };
 
     useImperativeHandle(ref, () => ({
-      printOnTerminal: (message?: string, type?: LogType, key?: string, component?: ReactElement) => {
-        if(!message && !type && !component){
-            renderTerminalResponse(undefined);
-        } else if(component) {
-            renderTerminalResponse(component);
-        }else{
-            renderTerminalResponse(
-              <Logging dataKey={key} key={key} type={type!} message={message} />
-            );
+      printOnTerminal: (
+        message?: string,
+        type?: LogType,
+        key?: string,
+        component?: ReactElement
+      ) => {
+        if (!message && !type && !component) {
+          renderTerminalResponse(undefined);
+        } else if (component) {
+          renderTerminalResponse(component);
+        } else {
+          renderTerminalResponse(
+            <Logging dataKey={key} key={key} type={type!} message={message} />
+          );
         }
-      },
+      }
     }));
 
     useEffect(() => {
       let span = document.getElementById("lastline")! as HTMLSpanElement;
       span.scrollIntoView({ behavior: "auto", block: "end" });
     }, [terminalOutput]);
-
-    const toggleTerminal = () => {
-      setTerminalOn(!terminalOn);
-    };
 
     const clearTerminal = () => {
       setTaskCompleted(false);
@@ -220,39 +222,37 @@ const Terminal = forwardRef(
                 <HiChevronDown
                   color="#4d9f72"
                   size={"19px"}
-                  onClick={toggleTerminal}
+                  onClick={() => toggleTerminal()}
                 />
               ) : (
                 <HiChevronUp
                   color="#4d9f72"
                   size={"19px"}
-                  onClick={toggleTerminal}
+                  onClick={() => toggleTerminal()}
                 />
               )}
             </RightHeaderIcons>
           </Header>
           <Body>
-            <div>
-              <CrawlerHeading />
-              <Suspense fallback={<></>}>
-                <OutputWrapper id="terminalOutputWrapper">
-                  {terminalOutput.map((output) => output)}
-                </OutputWrapper>
-              </Suspense>
-              <span id="lastline">
-                {loading ? (
-                  <Loader>
-                    <RiScan2Line
-                      size={18}
-                      fontWeight={1000}
-                      color="#50fa7b"
-                      className="rotate"
-                    />
-                    <span>{"loading..."}</span>
-                  </Loader>
-                ) : null}
-              </span>
-            </div>
+            <CrawlerHeading />
+            <Suspense fallback={<></>}>
+              <OutputWrapper id="terminalOutputWrapper">
+                {terminalOutput.map((output) => output)}
+              </OutputWrapper>
+            </Suspense>
+            <span id="lastline">
+              {loading ? (
+                <Loader>
+                  <RiScan2Line
+                    size={18}
+                    fontWeight={1000}
+                    color="#50fa7b"
+                    className="rotate"
+                  />
+                  <span>{"loading..."}</span>
+                </Loader>
+              ) : null}
+            </span>
           </Body>
         </Console>
       </TerminalBox>
