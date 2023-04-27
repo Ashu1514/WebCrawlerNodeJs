@@ -574,3 +574,414 @@ Issues? Report them at https://github.com/firebase/firebase-tools/issues and att
 [debug] [2023-04-27T10:22:19.751Z] [worker-us-central1-crawler-0a712d02-6d89-4b26-b804-fc13132c04fc]: FINISHING {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[worker-us-central1-crawler-0a712d02-6d89-4b26-b804-fc13132c04fc]: FINISHING"}}
 [debug] [2023-04-27T10:22:19.760Z] [worker-us-central1-crawler-0a712d02-6d89-4b26-b804-fc13132c04fc]: exited {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[worker-us-central1-crawler-0a712d02-6d89-4b26-b804-fc13132c04fc]: exited"}}
 [debug] [2023-04-27T10:22:19.760Z] [worker-us-central1-crawler-0a712d02-6d89-4b26-b804-fc13132c04fc]: FINISHED {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[worker-us-central1-crawler-0a712d02-6d89-4b26-b804-fc13132c04fc]: FINISHED"}}
+[debug] [2023-04-27T10:27:51.668Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/src/crawler/crawler.model.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/src/crawler/crawler.model.ts changed, reloading triggers"}}
+[debug] [2023-04-27T10:27:52.672Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2023-04-27T10:27:53.160Z] > [functions] package.json contents: {
+  "name": "webcrawlernodejs",
+  "version": "1.0.0",
+  "description": "Web Crawler Tool using NodeJs",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ashu1514/WebCrawlerNodeJs.git"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "author": "Ashutosh Londhe",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "dependencies": {
+    "axios": "^1.3.5",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.5.0",
+    "firebase-functions": "^4.3.0",
+    "jsdom": "^21.1.1",
+    "node-fetch": "^3.3.1",
+    "socket.io": "^4.6.1",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.1",
+    "@types/node-fetch": "^2.6.3",
+    "@types/ws": "^8.5.4",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^3.0.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2023-04-27T10:27:53.160Z] Building nodejs source
+[debug] [2023-04-27T10:27:53.160Z] Failed to find version of module node: reached end of search path /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "16" doesn't match your global version "19". Using node@19 from host. 
+[debug] [2023-04-27T10:27:53.161Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-04-27T10:27:53.162Z] Found firebase-functions binary at '/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/.bin/firebase-functions'
+[debug] [2023-04-27T10:27:53.296Z] Serving at port 8648
+
+[debug] [2023-04-27T10:27:53.766Z] Got response from /__/functions.yaml {"endpoints":{"crawler":{"platform":"gcfv1","availableMemoryMb":1024,"timeoutSeconds":300,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"crawler"},"crawlerQueriesCleanUp":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"scheduleTrigger":{"schedule":"every 2 hours","retryConfig":{"retryCount":null,"maxDoublings":null,"maxRetryDuration":null,"maxBackoffDuration":null,"minBackoffDuration":null},"timeZone":"Asia/Kolkata"},"labels":{},"entryPoint":"crawlerQueriesCleanUp"}},"specVersion":"v1alpha1","requiredAPIs":[{"api":"cloudscheduler.googleapis.com","reason":"Needed for scheduled functions."}]}
+[debug] [2023-04-27T10:27:53.768Z] shutdown requested via /__/quitquitquit
+
+[info] ✔  functions: Loaded functions definitions from source: crawler, crawlerQueriesCleanUp. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: crawler, crawlerQueriesCleanUp."}}
+[debug] [2023-04-27T10:28:01.176Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/toolbox.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/toolbox.js.map changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.177Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/toolbox.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/toolbox.js changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.177Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/typings/crawler.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/typings/crawler.js.map changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.178Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/typings/crawler.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/typings/crawler.js changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.178Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/crawler.model.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/crawler.model.js.map changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.178Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/crawler.model.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/crawler.model.js changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.178Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/crawl.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/crawl.js.map changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.178Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/crawl.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/crawl.js changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.178Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/report.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/report.js.map changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.178Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/report.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/report.js changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.275Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/index.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/index.js.map changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.275Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/index.js changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.275Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/schedulers/crawler.cleanup.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/schedulers/crawler.cleanup.js.map changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.275Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/schedulers/crawler.cleanup.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/schedulers/crawler.cleanup.js changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.275Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/index.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/index.js.map changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.275Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/index.js changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.276Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/socket/index.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/socket/index.js.map changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:01.276Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/socket/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/socket/index.js changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:02.278Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2023-04-27T10:28:03.033Z] > [functions] package.json contents: {
+  "name": "webcrawlernodejs",
+  "version": "1.0.0",
+  "description": "Web Crawler Tool using NodeJs",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ashu1514/WebCrawlerNodeJs.git"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "author": "Ashutosh Londhe",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "dependencies": {
+    "axios": "^1.3.5",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.5.0",
+    "firebase-functions": "^4.3.0",
+    "jsdom": "^21.1.1",
+    "node-fetch": "^3.3.1",
+    "socket.io": "^4.6.1",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.1",
+    "@types/node-fetch": "^2.6.3",
+    "@types/ws": "^8.5.4",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^3.0.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2023-04-27T10:28:03.033Z] Building nodejs source
+[debug] [2023-04-27T10:28:03.033Z] Failed to find version of module node: reached end of search path /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "16" doesn't match your global version "19". Using node@19 from host. 
+[debug] [2023-04-27T10:28:03.034Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-04-27T10:28:03.034Z] Found firebase-functions binary at '/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/.bin/firebase-functions'
+[debug] [2023-04-27T10:28:03.156Z] Serving at port 8164
+
+[debug] [2023-04-27T10:28:03.579Z] Got response from /__/functions.yaml {"endpoints":{"crawler":{"platform":"gcfv1","availableMemoryMb":1024,"timeoutSeconds":300,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"crawler"},"crawlerQueriesCleanUp":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"scheduleTrigger":{"schedule":"every 2 hours","retryConfig":{"retryCount":null,"maxDoublings":null,"maxRetryDuration":null,"maxBackoffDuration":null,"minBackoffDuration":null},"timeZone":"Asia/Kolkata"},"labels":{},"entryPoint":"crawlerQueriesCleanUp"}},"specVersion":"v1alpha1","requiredAPIs":[{"api":"cloudscheduler.googleapis.com","reason":"Needed for scheduled functions."}]}
+[debug] [2023-04-27T10:28:03.582Z] shutdown requested via /__/quitquitquit
+
+[info] ✔  functions: Loaded functions definitions from source: crawler, crawlerQueriesCleanUp. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: crawler, crawlerQueriesCleanUp."}}
+[debug] [2023-04-27T10:28:46.721Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/src/crawler/index.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/src/crawler/index.ts changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:47.064Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/index.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/index.js.map changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:47.064Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/index.js changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:47.064Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/index.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/index.js.map changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:47.065Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/index.js changed, reloading triggers"}}
+[debug] [2023-04-27T10:28:48.067Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2023-04-27T10:28:48.577Z] > [functions] package.json contents: {
+  "name": "webcrawlernodejs",
+  "version": "1.0.0",
+  "description": "Web Crawler Tool using NodeJs",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ashu1514/WebCrawlerNodeJs.git"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "author": "Ashutosh Londhe",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "dependencies": {
+    "axios": "^1.3.5",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.5.0",
+    "firebase-functions": "^4.3.0",
+    "jsdom": "^21.1.1",
+    "node-fetch": "^3.3.1",
+    "socket.io": "^4.6.1",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.1",
+    "@types/node-fetch": "^2.6.3",
+    "@types/ws": "^8.5.4",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^3.0.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2023-04-27T10:28:48.577Z] Building nodejs source
+[debug] [2023-04-27T10:28:48.577Z] Failed to find version of module node: reached end of search path /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "16" doesn't match your global version "19". Using node@19 from host. 
+[debug] [2023-04-27T10:28:48.578Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-04-27T10:28:48.578Z] Found firebase-functions binary at '/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/.bin/firebase-functions'
+[debug] [2023-04-27T10:28:48.699Z] Serving at port 8164
+
+[debug] [2023-04-27T10:28:49.162Z] Got response from /__/functions.yaml {"endpoints":{"crawler":{"platform":"gcfv1","availableMemoryMb":1024,"timeoutSeconds":300,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"crawler"},"crawlerQueriesCleanUp":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"scheduleTrigger":{"schedule":"every 2 hours","retryConfig":{"retryCount":null,"maxDoublings":null,"maxRetryDuration":null,"maxBackoffDuration":null,"minBackoffDuration":null},"timeZone":"Asia/Kolkata"},"labels":{},"entryPoint":"crawlerQueriesCleanUp"}},"specVersion":"v1alpha1","requiredAPIs":[{"api":"cloudscheduler.googleapis.com","reason":"Needed for scheduled functions."}]}
+[debug] [2023-04-27T10:28:49.166Z] shutdown requested via /__/quitquitquit
+
+[info] ✔  functions: Loaded functions definitions from source: crawler, crawlerQueriesCleanUp. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: crawler, crawlerQueriesCleanUp."}}
+[debug] [2023-04-27T10:29:53.905Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/src/crawler/index.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/src/crawler/index.ts changed, reloading triggers"}}
+[debug] [2023-04-27T10:29:53.906Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/index.js.map changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/index.js.map changed, reloading triggers"}}
+[debug] [2023-04-27T10:29:53.906Z] File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/lib/crawler/index.js changed, reloading triggers"}}
+[debug] [2023-04-27T10:29:54.909Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2023-04-27T10:29:56.584Z] > [functions] package.json contents: {
+  "name": "webcrawlernodejs",
+  "version": "1.0.0",
+  "description": "Web Crawler Tool using NodeJs",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ashu1514/WebCrawlerNodeJs.git"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "author": "Ashutosh Londhe",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "dependencies": {
+    "axios": "^1.3.5",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.5.0",
+    "firebase-functions": "^4.3.0",
+    "jsdom": "^21.1.1",
+    "node-fetch": "^3.3.1",
+    "socket.io": "^4.6.1",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.1",
+    "@types/node-fetch": "^2.6.3",
+    "@types/ws": "^8.5.4",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^3.0.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2023-04-27T10:29:56.584Z] Building nodejs source
+[debug] [2023-04-27T10:29:56.584Z] Failed to find version of module node: reached end of search path /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "16" doesn't match your global version "19". Using node@19 from host. 
+[debug] [2023-04-27T10:29:56.585Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-04-27T10:29:56.586Z] Found firebase-functions binary at '/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/.bin/firebase-functions'
+[debug] [2023-04-27T10:29:56.706Z] Serving at port 8290
+
+[debug] [2023-04-27T10:29:57.228Z] Got response from /__/functions.yaml {"endpoints":{"crawler":{"platform":"gcfv1","availableMemoryMb":1024,"timeoutSeconds":300,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"crawler"},"crawlerQueriesCleanUp":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"scheduleTrigger":{"schedule":"every 2 hours","retryConfig":{"retryCount":null,"maxDoublings":null,"maxRetryDuration":null,"maxBackoffDuration":null,"minBackoffDuration":null},"timeZone":"Asia/Kolkata"},"labels":{},"entryPoint":"crawlerQueriesCleanUp"}},"specVersion":"v1alpha1","requiredAPIs":[{"api":"cloudscheduler.googleapis.com","reason":"Needed for scheduled functions."}]}
+[debug] [2023-04-27T10:29:57.230Z] shutdown requested via /__/quitquitquit
+
+[info] ✔  functions: Loaded functions definitions from source: crawler, crawlerQueriesCleanUp. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: crawler, crawlerQueriesCleanUp."}}
+[debug] [2023-04-27T10:30:24.861Z] [work-queue] {"queuedWork":["/webcrawlernode/us-central1/crawler/create-2023-04-27T10:30:24.861Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2023-04-27T10:30:24.863Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/webcrawlernode/us-central1/crawler/create-2023-04-27T10:30:24.861Z"],"workRunningCount":1}
+[debug] [2023-04-27T10:30:24.863Z] Accepted request OPTIONS /webcrawlernode/us-central1/crawler/create --> us-central1-crawler
+[debug] [2023-04-27T10:30:24.874Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2023-04-27T10:30:24.875Z] [functions] Got req.url=/webcrawlernode/us-central1/crawler/create, mapping to path=/create {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/webcrawlernode/us-central1/crawler/create, mapping to path=/create"}}
+[debug] [2023-04-27T10:30:24.875Z] [worker-pool] Cleaned up workers for us-central1-crawler: 1 --> 0 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Cleaned up workers for us-central1-crawler: 1 --> 0"}}
+[debug] [2023-04-27T10:30:24.880Z] [worker-pool] addWorker(us-central1-crawler) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-crawler)"}}
+[debug] [2023-04-27T10:30:24.881Z] [worker-pool] Adding worker with key us-central1-crawler, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-crawler, total=1"}}
+[debug] [2023-04-27T10:30:25.634Z] [runtime-status] [6323] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.6.0","resolution":"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.6.0\",\"resolution\":\"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2023-04-27T10:30:25.634Z] [runtime-status] [6323] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.3.0","resolution":"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.3.0\",\"resolution\":\"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-04-27T10:30:25.635Z] [runtime-status] [6323] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2023-04-27T10:30:25.635Z] [runtime-status] [6323] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.3.0","resolution":"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.3.0\",\"resolution\":\"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-04-27T10:30:25.751Z] [runtime-status] [6323] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] Checked functions.config() {\"config\":{}}"}}
+[debug] [2023-04-27T10:30:25.752Z] [runtime-status] [6323] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"4.3.0","resolution":"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-functions/lib/v1/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"4.3.0\",\"resolution\":\"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-functions/lib/v1/index.js\"}}"}}
+[debug] [2023-04-27T10:30:25.754Z] [runtime-status] [6323] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.3.0","resolution":"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.3.0\",\"resolution\":\"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-04-27T10:30:25.754Z] [runtime-status] [6323] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.6.0","resolution":"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.6.0\",\"resolution\":\"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2023-04-27T10:30:25.756Z] [runtime-status] [6323] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.3.0","resolution":"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.3.0\",\"resolution\":\"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-04-27T10:30:25.756Z] [runtime-status] [6323] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"11.6.0","resolution":"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"11.6.0\",\"resolution\":\"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[debug] [2023-04-27T10:30:25.820Z] [runtime-status] [6323] initializeApp(DEFAULT) {"credential":{"implicit":false,"projectId":"webcrawlernode","privateKey":"-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC35+GuNZUKEyvK\nQcHSK/cKyVsNuKqpbxEokU4QCn59jRo4MTN7iYRkhJLWZA5ghTlOOgPXcr2ZcQSh\nx29a3yi82LHso/7lsMw11B2VAIvV3W0YeoaIH7lJATGHLHdooTYbTY537B0CtS/x\n3jkdoRdt3nr2hiBxTSmsqfsKENsBhwB3h5jnw6+4PQmXgXxClxWurVCa/nHOOhEU\nAkOub8wwIBDJYBmyPaprFLFt05J1mXStjSaHxEyeV4JFxaXydP/qDwsnMqKnOJeg\nh0Kq6bKL5XOVktJNbRfm3sS2EhVrB6PJXh0OnCBeZGlKxSOTsmEJvKxhmIvh3hLo\n/2fUyHajAgMBAAECggEAGLwU0/f79C9w59KhTXHBV8+OMhHAzmoUTjcA31JyAdPt\nD1q6uGZeCqD0GOa7Mkso0ncmFh+mFZGoVFP9C6VRFtk0UQYbnewCA0lksyowJJMT\n/cNY/cz6gDGrZilaZBWur8xmGYYFvtv8t1SyrOQCQTI3qpmOmn6M2N7B13A97H3v\n1Tk0hhPW1FYbzb6fH236zsddHVnvPOYMn1p1np4qEjat16T2Tt3Xqhh8l6rmOM3u\nOPuP31I4L+8et90oXR/3jVnm7MQ7zjlPzs0MIHKrYUf3lVJG7XfSKytN3Fhswylw\nAU5+Whh9JzH+uZfqs5CMWZReKEb6R894OiKdezLJqQKBgQDosP/MXakTQTUDT1OA\nGhYDUcgW9tc4aOCPxEcNoMKDBGMsD74346dzL9bYmcWRi947u7FrqBHHCPdUP8va\n0SXaemodvDU/F0ZSEjfz53B9+3qoQpOX72O52cCHRmbi69t8NOXqJppRnxWWaTug\nPMBrQKHhC1V7OQTE7PdUX2m7awKBgQDKU9pVCJreNp2bUhXiE3lamZclYKBuy+C2\n5hH+GYhhkhBVIHq/d/JtMfjzjthoZurAKD9o8l6O33DrLmSMk+OQzI3nHFYr41NY\n4XqRxBqS0yXkvjamQVIABk7uBzUEl3nIJuPfEic1NLIUqTQ77F1Ki0QDltIdbh3U\no7sQodd3qQKBgCQiQEa7EKNVz+aord3JrztqurieMkOnPZ/1qdb67Nmtl7zi4PYK\n2xjvB9zw3BZC8wqxldaS7dfLk6S4l25uZgNsWQgvDtGySpA6FghBG13k7GIunH7O\nhNz6bIRVMWrxl07NZBqdTf94xcBqrQCwDm1ZRwoMWYTeENiHt8yZWHDrAoGAGNu8\nk33/KRYkvxSSw7gIzOzZ+SmqDHLYJSCXTVTtwK8lepAHBMdD7c6Z+7KtPAaJCRro\nz4gXvg4N3ZdRm0QATaYUOTTuEW5Yqy7o1Ef3y9pNaZFFPaAA5yffQrd3+Bx0Rfch\nQCMG1i6nQoqXdFVSEPqTXK2HGz6QQ7PqI9z+kCECgYEAhH8qdeFRsotSSy5B400X\nSGTP1oqffDpskWT7PJz1IgMzjdTLPRvAC4dEclMecr6gOsFPOv+mdDi7OogqklDc\nvmruJ4gIubMqYK1uLhry7A2BEUABqpO40q+qGQNsB2m3VwvRygxOwlhWTSYk6JWK\nFyswGaMD2rCN+foLJ10eCGA=\n-----END PRIVATE KEY-----\n","clientEmail":"firebase-adminsdk-ij0zr@webcrawlernode.iam.gserviceaccount.com","httpClient":{"retry":{"maxRetries":4,"statusCodes":[503],"ioErrorCodes":["ECONNRESET","ETIMEDOUT"],"backOffFactor":0.5,"maxDelayInMillis":60000}}},"databaseURL":"https://webcrawlernode-default-rtdb.firebaseio.com"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] initializeApp(DEFAULT) {\"credential\":{\"implicit\":false,\"projectId\":\"webcrawlernode\",\"privateKey\":\"-----BEGIN PRIVATE KEY-----\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC35+GuNZUKEyvK\\nQcHSK/cKyVsNuKqpbxEokU4QCn59jRo4MTN7iYRkhJLWZA5ghTlOOgPXcr2ZcQSh\\nx29a3yi82LHso/7lsMw11B2VAIvV3W0YeoaIH7lJATGHLHdooTYbTY537B0CtS/x\\n3jkdoRdt3nr2hiBxTSmsqfsKENsBhwB3h5jnw6+4PQmXgXxClxWurVCa/nHOOhEU\\nAkOub8wwIBDJYBmyPaprFLFt05J1mXStjSaHxEyeV4JFxaXydP/qDwsnMqKnOJeg\\nh0Kq6bKL5XOVktJNbRfm3sS2EhVrB6PJXh0OnCBeZGlKxSOTsmEJvKxhmIvh3hLo\\n/2fUyHajAgMBAAECggEAGLwU0/f79C9w59KhTXHBV8+OMhHAzmoUTjcA31JyAdPt\\nD1q6uGZeCqD0GOa7Mkso0ncmFh+mFZGoVFP9C6VRFtk0UQYbnewCA0lksyowJJMT\\n/cNY/cz6gDGrZilaZBWur8xmGYYFvtv8t1SyrOQCQTI3qpmOmn6M2N7B13A97H3v\\n1Tk0hhPW1FYbzb6fH236zsddHVnvPOYMn1p1np4qEjat16T2Tt3Xqhh8l6rmOM3u\\nOPuP31I4L+8et90oXR/3jVnm7MQ7zjlPzs0MIHKrYUf3lVJG7XfSKytN3Fhswylw\\nAU5+Whh9JzH+uZfqs5CMWZReKEb6R894OiKdezLJqQKBgQDosP/MXakTQTUDT1OA\\nGhYDUcgW9tc4aOCPxEcNoMKDBGMsD74346dzL9bYmcWRi947u7FrqBHHCPdUP8va\\n0SXaemodvDU/F0ZSEjfz53B9+3qoQpOX72O52cCHRmbi69t8NOXqJppRnxWWaTug\\nPMBrQKHhC1V7OQTE7PdUX2m7awKBgQDKU9pVCJreNp2bUhXiE3lamZclYKBuy+C2\\n5hH+GYhhkhBVIHq/d/JtMfjzjthoZurAKD9o8l6O33DrLmSMk+OQzI3nHFYr41NY\\n4XqRxBqS0yXkvjamQVIABk7uBzUEl3nIJuPfEic1NLIUqTQ77F1Ki0QDltIdbh3U\\no7sQodd3qQKBgCQiQEa7EKNVz+aord3JrztqurieMkOnPZ/1qdb67Nmtl7zi4PYK\\n2xjvB9zw3BZC8wqxldaS7dfLk6S4l25uZgNsWQgvDtGySpA6FghBG13k7GIunH7O\\nhNz6bIRVMWrxl07NZBqdTf94xcBqrQCwDm1ZRwoMWYTeENiHt8yZWHDrAoGAGNu8\\nk33/KRYkvxSSw7gIzOzZ+SmqDHLYJSCXTVTtwK8lepAHBMdD7c6Z+7KtPAaJCRro\\nz4gXvg4N3ZdRm0QATaYUOTTuEW5Yqy7o1Ef3y9pNaZFFPaAA5yffQrd3+Bx0Rfch\\nQCMG1i6nQoqXdFVSEPqTXK2HGz6QQ7PqI9z+kCECgYEAhH8qdeFRsotSSy5B400X\\nSGTP1oqffDpskWT7PJz1IgMzjdTLPRvAC4dEclMecr6gOsFPOv+mdDi7OogqklDc\\nvmruJ4gIubMqYK1uLhry7A2BEUABqpO40q+qGQNsB2m3VwvRygxOwlhWTSYk6JWK\\nFyswGaMD2rCN+foLJ10eCGA=\\n-----END PRIVATE KEY-----\\n\",\"clientEmail\":\"firebase-adminsdk-ij0zr@webcrawlernode.iam.gserviceaccount.com\",\"httpClient\":{\"retry\":{\"maxRetries\":4,\"statusCodes\":[503],\"ioErrorCodes\":[\"ECONNRESET\",\"ETIMEDOUT\"],\"backOffFactor\":0.5,\"maxDelayInMillis\":60000}}},\"databaseURL\":\"https://webcrawlernode-default-rtdb.firebaseio.com\"}"}}
+[debug] [2023-04-27T10:30:26.082Z] [runtime-status] [6323] Functions runtime initialized. {"cwd":"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions","node_version":"19.8.1"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] Functions runtime initialized. {\"cwd\":\"/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions\",\"node_version\":\"19.8.1\"}"}}
+[debug] [2023-04-27T10:30:26.082Z] [runtime-status] [6323] Listening to port: /var/folders/yp/w8b6ylg118d01q92y3f4w0w80000gn/T/fire_emu_4de72e14b7cda2df.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[runtime-status] [6323] Listening to port: /var/folders/yp/w8b6ylg118d01q92y3f4w0w80000gn/T/fire_emu_4de72e14b7cda2df.sock"}}
+[debug] [2023-04-27T10:30:26.102Z] [worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: IDLE"}}
+[debug] [2023-04-27T10:30:26.102Z] [worker-pool] submitRequest(triggerId=us-central1-crawler) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-crawler)"}}
+[info] i  functions: Beginning execution of "us-central1-crawler" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"Beginning execution of \"us-central1-crawler\""}}
+[debug] [2023-04-27T10:30:26.103Z] [worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: BUSY"}}
+[info] i  functions: Finished "us-central1-crawler" in 1.90425ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"Finished \"us-central1-crawler\" in 1.90425ms"}}
+[debug] [2023-04-27T10:30:26.105Z] [worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: IDLE"}}
+[debug] [2023-04-27T10:30:26.105Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2023-04-27T10:30:26.105Z] [work-queue] {"queuedWork":["/webcrawlernode/us-central1/crawler/create-2023-04-27T10:30:26.105Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2023-04-27T10:30:26.105Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/webcrawlernode/us-central1/crawler/create-2023-04-27T10:30:26.105Z"],"workRunningCount":1}
+[debug] [2023-04-27T10:30:26.105Z] Accepted request POST /webcrawlernode/us-central1/crawler/create --> us-central1-crawler
+[debug] [2023-04-27T10:30:26.106Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2023-04-27T10:30:26.106Z] [functions] Got req.url=/webcrawlernode/us-central1/crawler/create, mapping to path=/create {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/webcrawlernode/us-central1/crawler/create, mapping to path=/create"}}
+[debug] [2023-04-27T10:30:26.106Z] [worker-pool] submitRequest(triggerId=us-central1-crawler) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-crawler)"}}
+[info] i  functions: Beginning execution of "us-central1-crawler" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"Beginning execution of \"us-central1-crawler\""}}
+[debug] [2023-04-27T10:30:26.107Z] [worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: BUSY"}}
+[info] >  task id is: Vz8wnDGdY89dRRVJ1M2q {"user":"task id is: Vz8wnDGdY89dRRVJ1M2q","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m task id is: Vz8wnDGdY89dRRVJ1M2q"}}
+[info] i  functions: Finished "us-central1-crawler" in 1740.19775ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"Finished \"us-central1-crawler\" in 1740.19775ms"}}
+[debug] [2023-04-27T10:30:27.847Z] [worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: IDLE"}}
+[debug] [2023-04-27T10:30:27.848Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2023-04-27T10:30:27.871Z] [work-queue] {"queuedWork":["/webcrawlernode/us-central1/crawler/start-2023-04-27T10:30:27.871Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2023-04-27T10:30:27.872Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/webcrawlernode/us-central1/crawler/start-2023-04-27T10:30:27.871Z"],"workRunningCount":1}
+[debug] [2023-04-27T10:30:27.872Z] Accepted request OPTIONS /webcrawlernode/us-central1/crawler/start --> us-central1-crawler
+[debug] [2023-04-27T10:30:27.873Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2023-04-27T10:30:27.873Z] [functions] Got req.url=/webcrawlernode/us-central1/crawler/start, mapping to path=/start {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/webcrawlernode/us-central1/crawler/start, mapping to path=/start"}}
+[debug] [2023-04-27T10:30:27.873Z] [worker-pool] submitRequest(triggerId=us-central1-crawler) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-crawler)"}}
+[info] i  functions: Beginning execution of "us-central1-crawler" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"Beginning execution of \"us-central1-crawler\""}}
+[debug] [2023-04-27T10:30:27.874Z] [worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: BUSY"}}
+[info] i  functions: Finished "us-central1-crawler" in 3.378792ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"Finished \"us-central1-crawler\" in 3.378792ms"}}
+[debug] [2023-04-27T10:30:27.878Z] [worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: IDLE"}}
+[debug] [2023-04-27T10:30:27.878Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2023-04-27T10:30:27.884Z] [work-queue] {"queuedWork":["/webcrawlernode/us-central1/crawler/start-2023-04-27T10:30:27.884Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2023-04-27T10:30:27.884Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/webcrawlernode/us-central1/crawler/start-2023-04-27T10:30:27.884Z"],"workRunningCount":1}
+[debug] [2023-04-27T10:30:27.884Z] Accepted request POST /webcrawlernode/us-central1/crawler/start --> us-central1-crawler
+[debug] [2023-04-27T10:30:27.887Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2023-04-27T10:30:27.887Z] [functions] Got req.url=/webcrawlernode/us-central1/crawler/start, mapping to path=/start {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/webcrawlernode/us-central1/crawler/start, mapping to path=/start"}}
+[debug] [2023-04-27T10:30:27.887Z] [worker-pool] submitRequest(triggerId=us-central1-crawler) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-crawler)"}}
+[info] i  functions: Beginning execution of "us-central1-crawler" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"Beginning execution of \"us-central1-crawler\""}}
+[debug] [2023-04-27T10:30:27.888Z] [worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: BUSY"}}
+[info] >  crawling started... {"user":"crawling started...","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m crawling started..."}}
+[info] >  starting crawl of Vz8wnDGdY89dRRVJ1M2q at base URL: https://cryptozombies.io/ {"user":"starting crawl of Vz8wnDGdY89dRRVJ1M2q at base URL: https://cryptozombies.io/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m starting crawl of Vz8wnDGdY89dRRVJ1M2q at base URL: https://cryptozombies.io/"}}
+[info] >  activaly crawling at level 1: https://cryptozombies.io/ {"user":"activaly crawling at level 1: https://cryptozombies.io/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 1: https://cryptozombies.io/"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog {"user":"activaly crawling at level 2: https://cryptozombies.io/blog","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog"}}
+[warn] ⚠  External network resource requested!
+   - URL: "https://cryptozombies.io/blog/"
+ - Be careful, this may be a production service. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"External network resource requested!\n   - URL: \"https://cryptozombies.io/blog/\"\n - Be careful, this may be a production service."}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/course {"user":"activaly crawling at level 2: https://cryptozombies.io/course","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/course"}}
+[warn] ⚠  External network resource requested!
+   - URL: "https://cryptozombies.io/course/"
+ - Be careful, this may be a production service. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"External network resource requested!\n   - URL: \"https://cryptozombies.io/course/\"\n - Be careful, this may be a production service."}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/en {"user":"activaly crawling at level 2: https://cryptozombies.io/en","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/en"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/fr {"user":"activaly crawling at level 2: https://cryptozombies.io/fr","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/fr"}}
+[warn] ⚠  External network resource requested!
+   - URL: "https://cryptozombies.io/fr/"
+ - Be careful, this may be a production service. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"External network resource requested!\n   - URL: \"https://cryptozombies.io/fr/\"\n - Be careful, this may be a production service."}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/en/course/ {"user":"activaly crawling at level 2: https://cryptozombies.io/en/course/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/en/course/"}}
+[info] >  https://cryptozombies.io/ accured 2 times, at level 2 {"user":"https://cryptozombies.io/ accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/ accured 2 times, at level 2"}}
+[info] >  https://cryptozombies.io/blog accured 2 times, at level 2 {"user":"https://cryptozombies.io/blog accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog accured 2 times, at level 2"}}
+[info] >  https://cryptozombies.io/course accured 2 times, at level 2 {"user":"https://cryptozombies.io/course accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/course accured 2 times, at level 2"}}
+[info] >  https://cryptozombies.io/en accured 2 times, at level 2 {"user":"https://cryptozombies.io/en accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/en accured 2 times, at level 2"}}
+[info] >  https://cryptozombies.io/fr accured 2 times, at level 2 {"user":"https://cryptozombies.io/fr accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/fr accured 2 times, at level 2"}}
+[info] >  https://cryptozombies.io/course accured 3 times, at level 2 {"user":"https://cryptozombies.io/course accured 3 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/course accured 3 times, at level 2"}}
+[info] >  https://cryptozombies.io/course accured 4 times, at level 2 {"user":"https://cryptozombies.io/course accured 4 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/course accured 4 times, at level 2"}}
+[info] >  https://cryptozombies.io/course accured 5 times, at level 2 {"user":"https://cryptozombies.io/course accured 5 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/course accured 5 times, at level 2"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/tags/alchemy/ {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/tags/alchemy/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/tags/alchemy/"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/tags/nft/ {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/tags/nft/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/tags/nft/"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/tags/live-event/ {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/tags/live-event/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/tags/live-event/"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-10-24-alchemy-live-event-highlights {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-10-24-alchemy-live-event-highlights","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-10-24-alchemy-live-event-highlights"}}
+[info] >  https://cryptozombies.io/blog/en/2022-10-24-alchemy-live-event-highlights accured 2 times, at level 2 {"user":"https://cryptozombies.io/blog/en/2022-10-24-alchemy-live-event-highlights accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog/en/2022-10-24-alchemy-live-event-highlights accured 2 times, at level 2"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/tags/radix/ {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/tags/radix/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/tags/radix/"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/tags/scrypto/ {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/tags/scrypto/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/tags/scrypto/"}}
+[info] >  https://cryptozombies.io/blog/tags/live-event/ accured 2 times, at level 2 {"user":"https://cryptozombies.io/blog/tags/live-event/ accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog/tags/live-event/ accured 2 times, at level 2"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-10-13-radix-live-event-highlights {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-10-13-radix-live-event-highlights","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-10-13-radix-live-event-highlights"}}
+[info] >  https://cryptozombies.io/blog/en/2022-10-13-radix-live-event-highlights accured 2 times, at level 2 {"user":"https://cryptozombies.io/blog/en/2022-10-13-radix-live-event-highlights accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog/en/2022-10-13-radix-live-event-highlights accured 2 times, at level 2"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/tags/solidity/ {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/tags/solidity/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/tags/solidity/"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/tags/metaverse/ {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/tags/metaverse/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/tags/metaverse/"}}
+[info] >  https://cryptozombies.io/blog/tags/live-event/ accured 3 times, at level 2 {"user":"https://cryptozombies.io/blog/tags/live-event/ accured 3 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog/tags/live-event/ accured 3 times, at level 2"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-09-14-interactive-solidity-workshop {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-09-14-interactive-solidity-workshop","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-09-14-interactive-solidity-workshop"}}
+[info] >  https://cryptozombies.io/blog/en/2022-09-14-interactive-solidity-workshop accured 2 times, at level 2 {"user":"https://cryptozombies.io/blog/en/2022-09-14-interactive-solidity-workshop accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog/en/2022-09-14-interactive-solidity-workshop accured 2 times, at level 2"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/tags/blockchain/ {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/tags/blockchain/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/tags/blockchain/"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/tags/games/ {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/tags/games/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/tags/games/"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-09-09-teach-blockchain-to-non-nerd {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-09-09-teach-blockchain-to-non-nerd","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-09-09-teach-blockchain-to-non-nerd"}}
+[info] >  https://cryptozombies.io/blog/en/2022-09-09-teach-blockchain-to-non-nerd accured 2 times, at level 2 {"user":"https://cryptozombies.io/blog/en/2022-09-09-teach-blockchain-to-non-nerd accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog/en/2022-09-09-teach-blockchain-to-non-nerd accured 2 times, at level 2"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/tags/announcement/ {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/tags/announcement/","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/tags/announcement/"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-08-31-cryptozombies-to-join-forces-with-happen-space {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-08-31-cryptozombies-to-join-forces-with-happen-space","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-08-31-cryptozombies-to-join-forces-with-happen-space"}}
+[info] >  https://cryptozombies.io/blog/en/2022-08-31-cryptozombies-to-join-forces-with-happen-space accured 2 times, at level 2 {"user":"https://cryptozombies.io/blog/en/2022-08-31-cryptozombies-to-join-forces-with-happen-space accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog/en/2022-08-31-cryptozombies-to-join-forces-with-happen-space accured 2 times, at level 2"}}
+[info] >  https://cryptozombies.io/blog/tags/solidity/ accured 2 times, at level 2 {"user":"https://cryptozombies.io/blog/tags/solidity/ accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog/tags/solidity/ accured 2 times, at level 2"}}
+[info] >  https://cryptozombies.io/blog/tags/metaverse/ accured 2 times, at level 2 {"user":"https://cryptozombies.io/blog/tags/metaverse/ accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog/tags/metaverse/ accured 2 times, at level 2"}}
+[info] >  https://cryptozombies.io/blog/tags/live-event/ accured 4 times, at level 2 {"user":"https://cryptozombies.io/blog/tags/live-event/ accured 4 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog/tags/live-event/ accured 4 times, at level 2"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-08-29-sept-solidity-workshop-ed-zynda {"user":"activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-08-29-sept-solidity-workshop-ed-zynda","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/blog/en/2022-08-29-sept-solidity-workshop-ed-zynda"}}
+[info] >  https://cryptozombies.io/blog/en/2022-08-29-sept-solidity-workshop-ed-zynda accured 2 times, at level 2 {"user":"https://cryptozombies.io/blog/en/2022-08-29-sept-solidity-workshop-ed-zynda accured 2 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog/en/2022-08-29-sept-solidity-workshop-ed-zynda accured 2 times, at level 2"}}
+[info] >  https://cryptozombies.io/blog accured 3 times, at level 2 {"user":"https://cryptozombies.io/blog accured 3 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog accured 3 times, at level 2"}}
+[info] >  https://cryptozombies.io/ accured 3 times, at level 2 {"user":"https://cryptozombies.io/ accured 3 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/ accured 3 times, at level 2"}}
+[info] >  https://cryptozombies.io/blog accured 4 times, at level 2 {"user":"https://cryptozombies.io/blog accured 4 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/blog accured 4 times, at level 2"}}
+[info] >  https://cryptozombies.io/course accured 6 times, at level 2 {"user":"https://cryptozombies.io/course accured 6 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/course accured 6 times, at level 2"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/what-is-blockchain-lander {"user":"activaly crawling at level 2: https://cryptozombies.io/what-is-blockchain-lander","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/what-is-blockchain-lander"}}
+[warn] ⚠  External network resource requested!
+   - URL: "https://cryptozombies.io/what-is-blockchain-lander/"
+ - Be careful, this may be a production service. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"External network resource requested!\n   - URL: \"https://cryptozombies.io/what-is-blockchain-lander/\"\n - Be careful, this may be a production service."}}
+[info] >  https://cryptozombies.io/#newsletter-input accured 4 times, at level 2 {"user":"https://cryptozombies.io/#newsletter-input accured 4 times, at level 2","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m https://cryptozombies.io/#newsletter-input accured 4 times, at level 2"}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/privacy-policy {"user":"activaly crawling at level 2: https://cryptozombies.io/privacy-policy","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/privacy-policy"}}
+[warn] ⚠  External network resource requested!
+   - URL: "https://cryptozombies.io/privacy-policy/"
+ - Be careful, this may be a production service. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"External network resource requested!\n   - URL: \"https://cryptozombies.io/privacy-policy/\"\n - Be careful, this may be a production service."}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/cookies {"user":"activaly crawling at level 2: https://cryptozombies.io/cookies","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/cookies"}}
+[warn] ⚠  External network resource requested!
+   - URL: "https://cryptozombies.io/cookies/"
+ - Be careful, this may be a production service. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"External network resource requested!\n   - URL: \"https://cryptozombies.io/cookies/\"\n - Be careful, this may be a production service."}}
+[info] >  activaly crawling at level 2: https://cryptozombies.io/terms {"user":"activaly crawling at level 2: https://cryptozombies.io/terms","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m activaly crawling at level 2: https://cryptozombies.io/terms"}}
+[warn] ⚠  External network resource requested!
+   - URL: "https://cryptozombies.io/terms/"
+ - Be careful, this may be a production service. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"External network resource requested!\n   - URL: \"https://cryptozombies.io/terms/\"\n - Be careful, this may be a production service."}}
+[info] >  Crawling finished! {"user":"Crawling finished!","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"\u001b[90m> \u001b[39m Crawling finished!"}}
+[info] i  functions: Finished "us-central1-crawler" in 7230.591ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"Finished \"us-central1-crawler\" in 7230.591ms"}}
+[debug] [2023-04-27T10:30:35.119Z] [worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-crawler"},"extension":{},"message":"[worker-us-central1-crawler-c893936e-0e4b-46b8-8d97-471676cbc101]: IDLE"}}
+[debug] [2023-04-27T10:30:35.119Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}

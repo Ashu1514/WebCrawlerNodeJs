@@ -1,4 +1,5 @@
 import { firebaseAdmin } from "../toolbox";
+import { PagesMapping } from "../typings/crawler";
 
 export interface CrawlerBody {
   baseURL: string;
@@ -80,6 +81,17 @@ export class Crawler implements CrawlerBody {
       await task.update({ taskId: this.taskId });
     }
     console.log("task id is: " + this.taskId);
+  }
+
+  /**
+   * add Crawling Query Logs async function
+   * @param {PagesMapping} result result mapping object
+   * @return {string} task id
+   */
+  async updateQueryResult(result: PagesMapping) {
+    const firestoreDB = firebaseAdmin.firestore();
+    const taskRef = firestoreDB.collection("crawling_queries").doc(this.taskId);
+    await taskRef.update({ result });
   }
 
   /**

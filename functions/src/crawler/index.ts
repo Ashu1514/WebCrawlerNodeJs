@@ -53,7 +53,6 @@ mCrawlerExpress.post(
         doc.maxLevel,
         doc.taskId
       );
-      console.log("CrawlerQuery", CrawlerQuery);
       CrawlerQuery.addCrawlingQueryLog(
         `starting crawl of ${CrawlerQuery.taskId} at base URL: ${doc.baseURL}`,
         LogType.MESSAGE,
@@ -68,8 +67,8 @@ mCrawlerExpress.post(
         {},
         CrawlerQuery
       );
+      await CrawlerQuery.updateQueryResult(result);
       const sortedResult = sortPages(result);
-      console.log({ result, sortedResult });
       CrawlerQuery.addCrawlingQueryLog("Crawling finished!", LogType.MESSAGE, {
         result: sortedResult,
       });
