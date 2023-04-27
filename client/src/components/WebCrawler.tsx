@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import QueryForm from "./QueryForm";
 import axios from "axios";
-import { LogDataType, LogType, TabType } from "../types";
+import { LogDataType, LogType } from "../types";
 import { database } from "../firebase";
 import { ref, onChildAdded } from "firebase/database";
 import CrawlingResult from "./CrawlingResult";
