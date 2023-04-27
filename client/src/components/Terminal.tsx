@@ -152,13 +152,11 @@ interface Props {
   loading: boolean;
   terminalOn: boolean;
   setTaskCompleted: Function;
-  setTableData: Function;
   toggleTerminal:Function;
-  setCrawlingStarted: Function;
 }
 
 const Terminal = forwardRef(
-  ({ loading, setTaskCompleted, setTableData, terminalOn, toggleTerminal, setCrawlingStarted }: Props, ref) => {
+  ({ loading, setTaskCompleted, terminalOn, toggleTerminal }: Props, ref) => {
     const [terminalOutput, setTerminalOutput] = useState<ReactElement[]>([]);
 
     const renderTerminalResponse = (component: ReactElement | undefined) => {
@@ -195,9 +193,7 @@ const Terminal = forwardRef(
 
     const clearTerminal = () => {
       setTaskCompleted(false);
-      setTableData([]);
       renderTerminalResponse(undefined);
-      setCrawlingStarted(false);
     };
 
     return (

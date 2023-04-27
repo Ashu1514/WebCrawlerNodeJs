@@ -14,3 +14,9 @@ export enum LogDataType {
   MESSAGE,
   ERROR,
 }
+
+export enum TabType {
+  INTRODUCTION,
+  INSTRUCTIONS,
+  RESULTS
+}

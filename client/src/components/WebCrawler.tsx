@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import QueryForm from "./QueryForm";
 import axios from "axios";
-import { LogDataType, LogType } from "../types";
+import { LogDataType, LogType, TabType } from "../types";
 import { database } from "../firebase";
 import { ref, onChildAdded } from "firebase/database";
 import CrawlingResult from "./CrawlingResult";
@@ -163,7 +163,6 @@ const WebCrawler = () => {
 
   const clearTerminal = () => {
     setTaskCompleted(false);
-    setTableData([]);
     printOnTerminal();
     setCrawlingStarted(false);
   };
@@ -180,6 +179,12 @@ const WebCrawler = () => {
           height: terminalOn ? "60%" : "90%",
         }}
       >
+        <CrawlingResult
+          tab={
+            crawlingStarted ? TabType.RESULTS : TabType.INSTRUCTIONS
+          }
+          data={tableData}
+        />
         <QueryForm
           setLoading={setLoading}
           loading={loading}
@@ -189,16 +194,13 @@ const WebCrawler = () => {
           clearTerminal={clearTerminal}
           setCrawlingStarted={setCrawlingStarted}
         />
-        <CrawlingResult crawlingStarted={crawlingStarted} data={tableData} />
       </Row>
       <Terminal
         ref={TerminalRef}
         loading={loading}
         setTaskCompleted={setTaskCompleted}
-        setTableData={setTableData}
         terminalOn={terminalOn}
         toggleTerminal={toggleTerminal}
-        setCrawlingStarted={setCrawlingStarted}
       />
     </Container>
   );
