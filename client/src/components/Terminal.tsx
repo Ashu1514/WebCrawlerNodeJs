@@ -79,8 +79,6 @@ const TerminalTitleBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: start;
-
-  padding: 0 0.5rem;
 `;
 const TerminalTitle = styled.h1`
   font-size: 15px;
