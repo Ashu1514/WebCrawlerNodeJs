@@ -66,6 +66,7 @@ export class Crawler implements CrawlerBody {
       .where("starttingPageURL", "==", this.starttingPageURL)
       .where("email", "==", this.email)
       .where("maxLevel", "==", this.maxLevel)
+      .orderBy("createdAt", "desc")
       .limit(1)
       .get();
     if (existedQuery.docs[0]) {

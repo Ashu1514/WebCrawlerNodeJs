@@ -1,0 +1,171 @@
+[debug] [2023-04-27T10:43:13.878Z] ----------------------------------------------------------------------
+[debug] [2023-04-27T10:43:13.884Z] Command:       /opt/homebrew/Cellar/node/19.8.1/bin/node /opt/homebrew/bin/firebase deploy
+[debug] [2023-04-27T10:43:13.884Z] CLI Version:   11.29.1
+[debug] [2023-04-27T10:43:13.884Z] Platform:      darwin
+[debug] [2023-04-27T10:43:13.884Z] Node Version:  v19.8.1
+[debug] [2023-04-27T10:43:13.884Z] Time:          Thu Apr 27 2023 16:13:13 GMT+0530 (India Standard Time)
+[debug] [2023-04-27T10:43:13.884Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-04-27T10:43:13.919Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-04-27T10:43:13.919Z] > authorizing via signed-in user (ash25031998@gmail.com)
+[debug] [2023-04-27T10:43:13.919Z] [iam] checking project webcrawlernode for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-04-27T10:43:13.920Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/webcrawlernode:testIamPermissions [none]
+[debug] [2023-04-27T10:43:13.920Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/webcrawlernode:testIamPermissions x-goog-quota-user=projects/webcrawlernode
+[debug] [2023-04-27T10:43:13.920Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/webcrawlernode:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-04-27T10:43:15.512Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/webcrawlernode:testIamPermissions 200
+[debug] [2023-04-27T10:43:15.513Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/webcrawlernode:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-04-27T10:43:15.514Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/webcrawlernode/serviceAccounts/webcrawlernode@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2023-04-27T10:43:15.514Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/webcrawlernode/serviceAccounts/webcrawlernode@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2023-04-27T10:43:17.038Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/webcrawlernode/serviceAccounts/webcrawlernode@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2023-04-27T10:43:17.038Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/webcrawlernode/serviceAccounts/webcrawlernode@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2023-04-27T10:43:17.040Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode [none]
+[debug] [2023-04-27T10:43:17.655Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode 200
+[debug] [2023-04-27T10:43:17.656Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode {"projectId":"webcrawlernode","projectNumber":"655217965672","displayName":"WebCrawlerNode","name":"projects/webcrawlernode","resources":{"hostingSite":"webcrawlernode","realtimeDatabaseInstance":"webcrawlernode-default-rtdb"},"state":"ACTIVE","etag":"1_9f5df150-7ff7-4b30-9f80-7295c939eb63"}
+[info] 
+[info] === Deploying to 'webcrawlernode'...
+[info] 
+[info] i  deploying functions, hosting 
+[debug] [2023-04-27T10:43:17.662Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode [none]
+[debug] [2023-04-27T10:43:18.052Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode 200
+[debug] [2023-04-27T10:43:18.052Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode {"projectId":"webcrawlernode","projectNumber":"655217965672","displayName":"WebCrawlerNode","name":"projects/webcrawlernode","resources":{"hostingSite":"webcrawlernode","realtimeDatabaseInstance":"webcrawlernode-default-rtdb"},"state":"ACTIVE","etag":"1_9f5df150-7ff7-4b30-9f80-7295c939eb63"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2023-04-27T10:43:18.053Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/cloudfunctions.googleapis.com [none]
+[debug] [2023-04-27T10:43:18.053Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/webcrawlernode
+[debug] [2023-04-27T10:43:18.054Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/runtimeconfig.googleapis.com [none]
+[debug] [2023-04-27T10:43:18.054Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/webcrawlernode
+[debug] [2023-04-27T10:43:18.054Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/cloudbuild.googleapis.com [none]
+[debug] [2023-04-27T10:43:18.054Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/cloudbuild.googleapis.com x-goog-quota-user=projects/webcrawlernode
+[debug] [2023-04-27T10:43:18.055Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/artifactregistry.googleapis.com [none]
+[debug] [2023-04-27T10:43:18.055Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/artifactregistry.googleapis.com x-goog-quota-user=projects/webcrawlernode
+[debug] [2023-04-27T10:43:19.955Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/cloudfunctions.googleapis.com 200
+[debug] [2023-04-27T10:43:19.955Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2023-04-27T10:43:19.967Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/runtimeconfig.googleapis.com 200
+[debug] [2023-04-27T10:43:19.968Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2023-04-27T10:43:19.972Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/cloudbuild.googleapis.com 200
+[debug] [2023-04-27T10:43:19.972Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/cloudbuild.googleapis.com [omitted]
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2023-04-27T10:43:19.987Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/artifactregistry.googleapis.com 200
+[debug] [2023-04-27T10:43:19.987Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/artifactregistry.googleapis.com [omitted]
+[info] ✔  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2023-04-27T10:43:19.988Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode/adminSdkConfig [none]
+[debug] [2023-04-27T10:43:20.442Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode/adminSdkConfig 200
+[debug] [2023-04-27T10:43:20.443Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode/adminSdkConfig {"projectId":"webcrawlernode","databaseURL":"https://webcrawlernode-default-rtdb.firebaseio.com","storageBucket":"webcrawlernode.appspot.com"}
+[debug] [2023-04-27T10:43:20.444Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/webcrawlernode/configs [none]
+[debug] [2023-04-27T10:43:20.949Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/webcrawlernode/configs 200
+[debug] [2023-04-27T10:43:20.950Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/webcrawlernode/configs {}
+[debug] [2023-04-27T10:43:20.953Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2023-04-27T10:43:21.483Z] > [functions] package.json contents: {
+  "name": "webcrawlernodejs",
+  "version": "1.0.0",
+  "description": "Web Crawler Tool using NodeJs",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ashu1514/WebCrawlerNodeJs.git"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "author": "Ashutosh Londhe",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "dependencies": {
+    "axios": "^1.3.5",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.5.0",
+    "firebase-functions": "^4.3.0",
+    "jsdom": "^21.1.1",
+    "node-fetch": "^3.3.1",
+    "socket.io": "^4.6.1",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.1",
+    "@types/node-fetch": "^2.6.3",
+    "@types/ws": "^8.5.4",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^3.0.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2023-04-27T10:43:21.483Z] Building nodejs source
+[debug] [2023-04-27T10:43:21.484Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-04-27T10:43:21.489Z] Found firebase-functions binary at '/Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions/node_modules/.bin/firebase-functions'
+[debug] [2023-04-27T10:43:21.614Z] Serving at port 8064
+
+[debug] [2023-04-27T10:43:22.113Z] Got response from /__/functions.yaml {"endpoints":{"crawler":{"platform":"gcfv1","availableMemoryMb":1024,"timeoutSeconds":300,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"crawler"},"crawlerQueriesCleanUp":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"scheduleTrigger":{"schedule":"every 2 hours","retryConfig":{"retryCount":null,"maxDoublings":null,"maxRetryDuration":null,"maxBackoffDuration":null,"minBackoffDuration":null},"timeZone":"Asia/Kolkata"},"labels":{},"entryPoint":"crawlerQueriesCleanUp"}},"specVersion":"v1alpha1","requiredAPIs":[{"api":"cloudscheduler.googleapis.com","reason":"Needed for scheduled functions."}]}
+[debug] [2023-04-27T10:43:22.117Z] shutdown requested via /__/quitquitquit
+
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged /Users/ashu/Desktop/portfolio_projects/WebCrawlerNodeJs/functions (116.94 KB) for uploading 
+[debug] [2023-04-27T10:43:22.159Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/webcrawlernode/locations/-/functions [none]
+[debug] [2023-04-27T10:43:22.905Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/webcrawlernode/locations/-/functions 200
+[debug] [2023-04-27T10:43:22.906Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/webcrawlernode/locations/-/functions {"functions":[{"name":"projects/webcrawlernode/locations/us-central1/functions/crawler","httpsTrigger":{"url":"https://us-central1-webcrawlernode.cloudfunctions.net/crawler","securityLevel":"SECURE_ALWAYS"},"status":"ACTIVE","entryPoint":"crawler","timeout":"300s","availableMemoryMb":1024,"serviceAccountEmail":"webcrawlernode@appspot.gserviceaccount.com","updateTime":"2023-04-27T10:35:40.053Z","versionId":"24","labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"4cfb83289990c86d3469dbcdb2ef2d68f6f04092"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-65020699939.us-central1.cloudfunctions.appspot.com/5dbab278-ff67-4c9f-a787-59ebf3ac12f9.zip","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"webcrawlernode\",\"databaseURL\":\"https://webcrawlernode-default-rtdb.firebaseio.com\",\"storageBucket\":\"webcrawlernode.appspot.com\"}","GCLOUD_PROJECT":"webcrawlernode","EVENTARC_CLOUD_EVENT_SOURCE":"projects/webcrawlernode/locations/us-central1/functions/crawler"},"runtime":"nodejs16","ingressSettings":"ALLOW_ALL","buildId":"ca8a6083-5703-490a-a12c-1f64f69754f7","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"buildName":"projects/655217965672/locations/us-central1/builds/ca8a6083-5703-490a-a12c-1f64f69754f7","dockerRegistry":"ARTIFACT_REGISTRY"},{"name":"projects/webcrawlernode/locations/us-central1/functions/crawlerQueriesCleanUp","eventTrigger":{"eventType":"google.pubsub.topic.publish","resource":"projects/webcrawlernode/topics/firebase-schedule-crawlerQueriesCleanUp-us-central1","service":"pubsub.googleapis.com","failurePolicy":{}},"status":"ACTIVE","entryPoint":"crawlerQueriesCleanUp","timeout":"60s","availableMemoryMb":256,"serviceAccountEmail":"webcrawlernode@appspot.gserviceaccount.com","updateTime":"2023-04-27T10:35:38.687Z","versionId":"24","labels":{"deployment-tool":"cli-firebase","deployment-scheduled":"true","firebase-functions-hash":"4cfb83289990c86d3469dbcdb2ef2d68f6f04092"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-65020699939.us-central1.cloudfunctions.appspot.com/5dbab278-ff67-4c9f-a787-59ebf3ac12f9.zip","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"webcrawlernode\",\"databaseURL\":\"https://webcrawlernode-default-rtdb.firebaseio.com\",\"storageBucket\":\"webcrawlernode.appspot.com\"}","GCLOUD_PROJECT":"webcrawlernode","EVENTARC_CLOUD_EVENT_SOURCE":"projects/webcrawlernode/locations/us-central1/functions/crawlerQueriesCleanUp"},"runtime":"nodejs16","maxInstances":3000,"ingressSettings":"ALLOW_ALL","buildId":"c1fa6003-bce1-47f1-97a3-111fa4c04158","buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""},"buildName":"projects/655217965672/locations/us-central1/builds/c1fa6003-bce1-47f1-97a3-111fa4c04158","dockerRegistry":"ARTIFACT_REGISTRY"}]}
+[debug] [2023-04-27T10:43:22.908Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/webcrawlernode/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2023-04-27T10:43:24.613Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/webcrawlernode/locations/-/functions 200
+[debug] [2023-04-27T10:43:24.613Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/webcrawlernode/locations/-/functions {}
+[info] i  functions: ensuring required API cloudscheduler.googleapis.com is enabled... 
+[debug] [2023-04-27T10:43:24.622Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/cloudscheduler.googleapis.com [none]
+[debug] [2023-04-27T10:43:24.622Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/cloudscheduler.googleapis.com x-goog-quota-user=projects/webcrawlernode
+[debug] [2023-04-27T10:43:25.048Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/cloudscheduler.googleapis.com 200
+[debug] [2023-04-27T10:43:25.048Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/webcrawlernode/services/cloudscheduler.googleapis.com [omitted]
+[info] ✔  functions: required API cloudscheduler.googleapis.com is enabled 
+[debug] [2023-04-27T10:43:25.052Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode [none]
+[debug] [2023-04-27T10:43:25.535Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode 200
+[debug] [2023-04-27T10:43:25.536Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode {"projectId":"webcrawlernode","projectNumber":"655217965672","displayName":"WebCrawlerNode","name":"projects/webcrawlernode","resources":{"hostingSite":"webcrawlernode","realtimeDatabaseInstance":"webcrawlernode-default-rtdb"},"state":"ACTIVE","etag":"1_9f5df150-7ff7-4b30-9f80-7295c939eb63"}
+[debug] [2023-04-27T10:43:25.536Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode [none]
+[debug] [2023-04-27T10:43:26.145Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode 200
+[debug] [2023-04-27T10:43:26.146Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/webcrawlernode {"projectId":"webcrawlernode","projectNumber":"655217965672","displayName":"WebCrawlerNode","name":"projects/webcrawlernode","resources":{"hostingSite":"webcrawlernode","realtimeDatabaseInstance":"webcrawlernode-default-rtdb"},"state":"ACTIVE","etag":"1_9f5df150-7ff7-4b30-9f80-7295c939eb63"}
+[debug] [2023-04-27T10:43:26.154Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/webcrawlernode/versions [none]
+[debug] [2023-04-27T10:43:26.154Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/webcrawlernode/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2023-04-27T10:43:27.888Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/webcrawlernode/versions 200
+[debug] [2023-04-27T10:43:27.888Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/webcrawlernode/versions {"name":"projects/655217965672/sites/webcrawlernode/versions/a677aa7081b58984","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2023-04-27T10:43:27.888Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v1/projects/webcrawlernode/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2023-04-27T10:43:27.888Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/webcrawlernode/locations/us-central1/functions:generateUploadUrl {}
+[debug] [2023-04-27T10:43:28.689Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v1/projects/webcrawlernode/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2023-04-27T10:43:28.690Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/webcrawlernode/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/uploads-65020699939.us-central1.cloudfunctions.appspot.com/a1d29542-7dbb-4e90-9b28-53466a9d1b30.zip?GoogleAccessId=service-655217965672@gcf-admin-robot.iam.gserviceaccount.com&Expires=1682594008&Signature=WPmqZzGhVPllM3N69yk7EKU1QxMrOjAcbsxf6Xo%2F%2FHWPWpQUOlrpVaNxtUcc5IxDsTrAl6%2BNfNpHGplYIJIxPDyR2kaIOYxXRnuYc1DNkJImvPZB8rUB%2BuSswBrj3opDY8cJcSpJSytrIJAdoFHDw8Cd2uNOcc1tQrm5ADtp5C1SqoqBoqBPfh0E224PB8fvkGQEwjsQZqITM6Sy8QpkWi42QTijFfi4HCl6rYciexYj8JEN6OY1dpR5gvnYheow32yWXFAZEvAJp0QreEiUVhGU1E9MCjl4xo%2BMCig6jPktILx4cobGpZsrVzYqQKZ16rtwccYgkNiTeUjKei44fA%3D%3D"}
+[debug] [2023-04-27T10:43:28.692Z] >>> [apiv2][query] PUT https://storage.googleapis.com/uploads-65020699939.us-central1.cloudfunctions.appspot.com/a1d29542-7dbb-4e90-9b28-53466a9d1b30.zip GoogleAccessId=service-655217965672%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1682594008&Signature=WPmqZzGhVPllM3N69yk7EKU1QxMrOjAcbsxf6Xo%2F%2FHWPWpQUOlrpVaNxtUcc5IxDsTrAl6%2BNfNpHGplYIJIxPDyR2kaIOYxXRnuYc1DNkJImvPZB8rUB%2BuSswBrj3opDY8cJcSpJSytrIJAdoFHDw8Cd2uNOcc1tQrm5ADtp5C1SqoqBoqBPfh0E224PB8fvkGQEwjsQZqITM6Sy8QpkWi42QTijFfi4HCl6rYciexYj8JEN6OY1dpR5gvnYheow32yWXFAZEvAJp0QreEiUVhGU1E9MCjl4xo%2BMCig6jPktILx4cobGpZsrVzYqQKZ16rtwccYgkNiTeUjKei44fA%3D%3D
+[debug] [2023-04-27T10:43:28.692Z] >>> [apiv2][body] PUT https://storage.googleapis.com/uploads-65020699939.us-central1.cloudfunctions.appspot.com/a1d29542-7dbb-4e90-9b28-53466a9d1b30.zip [stream]
+[debug] [2023-04-27T10:43:29.211Z] <<< [apiv2][status] PUT https://storage.googleapis.com/uploads-65020699939.us-central1.cloudfunctions.appspot.com/a1d29542-7dbb-4e90-9b28-53466a9d1b30.zip 200
+[debug] [2023-04-27T10:43:29.211Z] <<< [apiv2][body] PUT https://storage.googleapis.com/uploads-65020699939.us-central1.cloudfunctions.appspot.com/a1d29542-7dbb-4e90-9b28-53466a9d1b30.zip [omitted]
+[info] ✔  functions: functions folder uploaded successfully 
+[info] i  hosting[webcrawlernode]: beginning deploy... 
+[info] i  hosting[webcrawlernode]: found 18 files in client/build 
+[debug] [2023-04-27T10:43:29.217Z] [hosting] uploading with 200 concurrency
+[debug] [2023-04-27T10:43:29.223Z] [hosting] hash cache [Y2xpZW50L2J1aWxk] stored for 18 files
+[debug] [2023-04-27T10:43:29.223Z] [hosting][hash queue][FINAL] {"max":1,"min":0,"avg":0,"active":0,"complete":18,"success":18,"errored":0,"retried":0,"total":18,"elapsed":3}
+[debug] [2023-04-27T10:43:29.223Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/655217965672/sites/webcrawlernode/versions/a677aa7081b58984:populateFiles [none]
+[debug] [2023-04-27T10:43:29.223Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/655217965672/sites/webcrawlernode/versions/a677aa7081b58984:populateFiles {"files":{"/asset-manifest.json":"7d7c723a466539763982bce32b4170a35503b55bf12c22d36e44ea7cca0140af","/favicon.ico":"3c3180aeb7cdbf37856aab4b12f3df5d89559369cf356b7e6de1f6df07a74316","/index.html":"df8881ab7d9527434f863470e23a583236751e9a848bbad3e1a8b3fa62c5e928","/logo192.png":"caff018b7f1e8fd481eb1c50d75b0ef236bcd5078b1d15c8bb348453fee30293","/logo512.png":"191fc21360b4ccfb1cda11a1efb97f489ed22672ca83f4064316802bbfdd750e","/manifest.json":"341d52628782f8ac9290bbfc43298afccb47b7cbfcee146ae30cf0f46bc30900","/robots.txt":"391d14b3c2f8c9143a27a28c7399585142228d4d1bdbe2c87ac946de411fa9a2","/static/css/main.a9eca448.css":"afe1aeb4da29d48901c11bb2abb53ea8c528fa4cc478a6683f6b22dec99e25ec","/static/css/main.a9eca448.css.map":"ae11a091bef35d4130d8ae554cb3dc824e8d6f23a897c4e73c7d948bd7c46e02","/static/js/437.97fdd802.chunk.js":"e102f09c62553fe2cbb5f865bf99c48c41e14a86513ad56e17786a1e5b298cab","/static/js/437.97fdd802.chunk.js.map":"ca10d8dc553f843e366ab2eb2909003beb996fd785147294309b702d9f1cd2eb","/static/js/787.2616d46f.chunk.js":"38e1b88cddff5b3b1d8a1f4cf6b74b249f141f8feb1632f55913d7706f96252c","/static/js/787.2616d46f.chunk.js.map":"1246ed0f07be4668ca768e052f656f4cd4a695de48d90eb8fe1956c05732721b","/static/js/834.ba106549.chunk.js":"844b0eef6b21d0d8cf3e7ee67de8c3774df922d99934aeed37c455f3b1b86dc5","/static/js/834.ba106549.chunk.js.map":"5a217c0b806ceb4028d7acf091b6e1ec8f6c14e1b99682f7d58f490eb37f1ec3","/static/js/main.57a44f6e.js":"ffda4e2927176e8cba369ec99c10aff0d18eb653ca8bc90d1925233972f7d2ee","/static/js/main.57a44f6e.js.LICENSE.txt":"ada89185a27b943ecd7ddbc694648df0854ae4bc8f23dd99d9b390b2f7f87e14","/static/js/main.57a44f6e.js.map":"079d2c52c2da362930210cbabadd56c74b5d202118458249cac93c328b74ec04"}}
+[debug] [2023-04-27T10:43:29.835Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/655217965672/sites/webcrawlernode/versions/a677aa7081b58984:populateFiles 200
+[debug] [2023-04-27T10:43:29.835Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/655217965672/sites/webcrawlernode/versions/a677aa7081b58984:populateFiles {"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/webcrawlernode/versions/a677aa7081b58984/files"}
+[debug] [2023-04-27T10:43:29.835Z] [hosting][populate queue][FINAL] {"max":613,"min":613,"avg":613,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":614}
+[debug] [2023-04-27T10:43:29.835Z] [hosting] uploads queued: 0
+[debug] [2023-04-27T10:43:29.835Z] [hosting][upload queue][FINAL] {"max":0,"min":9999999999,"avg":0,"active":0,"complete":0,"success":0,"errored":0,"retried":0,"total":0,"elapsed":1682592209835}
+[info] ✔  hosting[webcrawlernode]: file upload complete 
+[debug] [2023-04-27T10:43:29.837Z] [hosting] deploy completed after 625ms
+[info] i  functions: updating Node.js 16 function crawler(us-central1)... 
+[info] i  functions: updating Node.js 16 function crawlerQueriesCleanUp(us-central1)... 
+[debug] [2023-04-27T10:43:29.840Z] >>> [apiv2][query] PATCH https://cloudfunctions.googleapis.com/v1/projects/webcrawlernode/locations/us-central1/functions/crawler updateMask=name%2CsourceUploadUrl%2CentryPoint%2Cruntime%2CdockerRegistry%2Clabels%2ChttpsTrigger.securityLevel%2CminInstances%2CmaxInstances%2CingressSettings%2CenvironmentVariables%2CserviceAccountEmail%2CavailableMemoryMb%2Ctimeout%2CvpcConnector%2CvpcConnectorEgressSettings%2CsourceToken%2CbuildEnvironmentVariables
+[debug] [2023-04-27T10:43:29.840Z] >>> [apiv2][body] PATCH https://cloudfunctions.googleapis.com/v1/projects/webcrawlernode/locations/us-central1/functions/crawler {"name":"projects/webcrawlernode/locations/us-central1/functions/crawler","sourceUploadUrl":"https://storage.googleapis.com/uploads-65020699939.us-central1.cloudfunctions.appspot.com/a1d29542-7dbb-4e90-9b28-53466a9d1b30.zip?GoogleAccessId=service-655217965672@gcf-admin-robot.iam.gserviceaccount.com&Expires=1682594008&Signature=WPmqZzGhVPllM3N69yk7EKU1QxMrOjAcbsxf6Xo%2F%2FHWPWpQUOlrpVaNxtUcc5IxDsTrAl6%2BNfNpHGplYIJIxPDyR2kaIOYxXRnuYc1DNkJImvPZB8rUB%2BuSswBrj3opDY8cJcSpJSytrIJAdoFHDw8Cd2uNOcc1tQrm5ADtp5C1SqoqBoqBPfh0E224PB8fvkGQEwjsQZqITM6Sy8QpkWi42QTijFfi4HCl6rYciexYj8JEN6OY1dpR5gvnYheow32yWXFAZEvAJp0QreEiUVhGU1E9MCjl4xo%2BMCig6jPktILx4cobGpZsrVzYqQKZ16rtwccYgkNiTeUjKei44fA%3D%3D","entryPoint":"crawler","runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY","labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"411d4dc0da39185ee0837c309ba00254cc8134ba"},"httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"minInstances":null,"maxInstances":null,"ingressSettings":null,"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"webcrawlernode\",\"databaseURL\":\"https://webcrawlernode-default-rtdb.firebaseio.com\",\"storageBucket\":\"webcrawlernode.appspot.com\"}","GCLOUD_PROJECT":"webcrawlernode","EVENTARC_CLOUD_EVENT_SOURCE":"projects/webcrawlernode/locations/us-central1/functions/crawler"},"serviceAccountEmail":null,"availableMemoryMb":1024,"timeout":"300s","vpcConnector":null,"vpcConnectorEgressSettings":null,"buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}}
+[debug] [2023-04-27T10:43:29.840Z] >>> [apiv2][query] PATCH https://cloudfunctions.googleapis.com/v1/projects/webcrawlernode/locations/us-central1/functions/crawlerQueriesCleanUp updateMask=name%2CsourceUploadUrl%2CentryPoint%2Cruntime%2CdockerRegistry%2Clabels%2CeventTrigger.eventType%2CeventTrigger.resource%2CminInstances%2CmaxInstances%2CingressSettings%2CenvironmentVariables%2CserviceAccountEmail%2CavailableMemoryMb%2Ctimeout%2CvpcConnector%2CvpcConnectorEgressSettings%2CsourceToken%2CbuildEnvironmentVariables
+[debug] [2023-04-27T10:43:29.840Z] >>> [apiv2][body] PATCH https://cloudfunctions.googleapis.com/v1/projects/webcrawlernode/locations/us-central1/functions/crawlerQueriesCleanUp {"name":"projects/webcrawlernode/locations/us-central1/functions/crawlerQueriesCleanUp","sourceUploadUrl":"https://storage.googleapis.com/uploads-65020699939.us-central1.cloudfunctions.appspot.com/a1d29542-7dbb-4e90-9b28-53466a9d1b30.zip?GoogleAccessId=service-655217965672@gcf-admin-robot.iam.gserviceaccount.com&Expires=1682594008&Signature=WPmqZzGhVPllM3N69yk7EKU1QxMrOjAcbsxf6Xo%2F%2FHWPWpQUOlrpVaNxtUcc5IxDsTrAl6%2BNfNpHGplYIJIxPDyR2kaIOYxXRnuYc1DNkJImvPZB8rUB%2BuSswBrj3opDY8cJcSpJSytrIJAdoFHDw8Cd2uNOcc1tQrm5ADtp5C1SqoqBoqBPfh0E224PB8fvkGQEwjsQZqITM6Sy8QpkWi42QTijFfi4HCl6rYciexYj8JEN6OY1dpR5gvnYheow32yWXFAZEvAJp0QreEiUVhGU1E9MCjl4xo%2BMCig6jPktILx4cobGpZsrVzYqQKZ16rtwccYgkNiTeUjKei44fA%3D%3D","entryPoint":"crawlerQueriesCleanUp","runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY","labels":{"deployment-tool":"cli-firebase","deployment-scheduled":"true","firebase-functions-hash":"411d4dc0da39185ee0837c309ba00254cc8134ba"},"eventTrigger":{"eventType":"google.pubsub.topic.publish","resource":"projects/webcrawlernode/topics/firebase-schedule-crawlerQueriesCleanUp-us-central1"},"minInstances":null,"maxInstances":null,"ingressSettings":null,"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"webcrawlernode\",\"databaseURL\":\"https://webcrawlernode-default-rtdb.firebaseio.com\",\"storageBucket\":\"webcrawlernode.appspot.com\"}","GCLOUD_PROJECT":"webcrawlernode","EVENTARC_CLOUD_EVENT_SOURCE":"projects/webcrawlernode/locations/us-central1/functions/crawlerQueriesCleanUp"},"serviceAccountEmail":null,"availableMemoryMb":null,"timeout":null,"vpcConnector":null,"vpcConnectorEgressSettings":null,"buildEnvironmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}}

@@ -174,17 +174,16 @@ const WebCrawler = () => {
 
   return (
     <Container>
-      <Header />
+      <Header/>
       <Row
         style={{
           height: terminalOn ? "60%" : "90%",
         }}
       >
         <CrawlingResult
-          tab={
-            crawlingStarted ? TabType.RESULTS : TabType.INSTRUCTIONS
-          }
+          crawlingStarted={crawlingStarted}
           data={tableData}
+          terminalOn={terminalOn}
         />
         <QueryForm
           loading={loading}

@@ -197,7 +197,7 @@ const Terminal = forwardRef(
     };
 
     return (
-      <TerminalBox style={{ height: terminalOn ? "34%" : "5%" }}>
+      <TerminalBox style={{ height: terminalOn ? "34%" : "4%" }}>
         <Console>
           <Header>
             <TerminalTitleBar>

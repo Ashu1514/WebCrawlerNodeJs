@@ -16,6 +16,7 @@ const ContainerHeader = styled.div`
   justify-content: center;
   width: 100%;
   height: 8%;
+  transition: height 0.2s linear;
   border-bottom: 1px solid #103d24;
 `;
 
@@ -40,6 +41,7 @@ const Wrapper = styled.div`
   margin-bottom: 1rem;
   padding: 0rem 2rem;
   height: 92%;
+  transition: height 0.2s linear;
   overflow-y: hidden;
   overflow-x: hidden;
 
@@ -121,6 +123,7 @@ const Instrcutions = styled.div`
   max-width: 35rem;
   margin: auto;
   font-size: 1rem;
+  text-align: justify;
 
   .website_name {
     color: #4ffa7b;
@@ -137,7 +140,8 @@ const Instrcutions = styled.div`
 type recordTuple = [string, number];
 interface Props {
   data: Array<recordTuple>;
-  tab: number;
+  crawlingStarted: boolean;
+  terminalOn: boolean;
 }
 
 const Tabs = [
@@ -155,16 +159,16 @@ const Tabs = [
   },
 ];
 
-const CrawlingResult = ({ data, tab }: Props) => {
-  const [selectedTab, setSelectedTab] = useState<number>(2);
+const CrawlingResult = ({ data, crawlingStarted, terminalOn }: Props) => {
+  const [selectedTab, setSelectedTab] = useState<number>(TabType.INTRODUCTION);
 
   useEffect(() => {
-    setSelectedTab(tab);
-  }, [tab]);
+    setSelectedTab((prevTab) => crawlingStarted ? TabType.RESULTS : prevTab);
+  }, [crawlingStarted]);
 
   return (
     <Container>
-      <ContainerHeader>
+      <ContainerHeader style={{height: terminalOn ? "8%" : "5%"}}>
         {Tabs.map((el) => (
           <Tab
             onClick={() => setSelectedTab(el.id)}
@@ -175,7 +179,7 @@ const CrawlingResult = ({ data, tab }: Props) => {
           </Tab>
         ))}
       </ContainerHeader>
-      <Wrapper>
+      <Wrapper  style={{height: terminalOn ? "92%" : "95%"}}>
         {selectedTab === TabType.INTRODUCTION ? (
           <Instrcutions>
             <p>
