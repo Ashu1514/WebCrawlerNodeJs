@@ -1,9 +1,4 @@
-import React, {
-  ReactElement,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import QueryForm from "./QueryForm";
 import axios from "axios";
@@ -12,7 +7,7 @@ import { database } from "../firebase";
 import { ref, onChildAdded } from "firebase/database";
 import CrawlingResult from "./CrawlingResult";
 import Terminal from "./Terminal";
-
+import Header from "./commands/Header";
 
 const Container = styled.div`
   display: flex;
@@ -32,21 +27,26 @@ const Row = styled.div`
   transition: height 0.2s ease-out;
 `;
 
-
 type recordTuple = [string, number];
 
 interface TerminalProps {
-  printOnTerminal: (message? : string,  type?: LogType, key?: string, component?: React.ReactNode) => void;
+  printOnTerminal: (
+    message?: string,
+    type?: LogType,
+    key?: string,
+    component?: React.ReactNode
+  ) => void;
   terminalOn: boolean;
   // other properties and methods of the Terminal component
 }
 
 const WebCrawler = () => {
- const [taskId, setTaskId] = useState<string>("");
-const [loading, setLoading] = useState<boolean>(false);
-const [taskCompleted, setTaskCompleted] = useState<boolean>(false);
-const [tableData, setTableData] = useState<Array<recordTuple>>([]);
-const [terminalOn, setTerminalOn] = useState<boolean>(true);
+  const [crawlingStarted, setCrawlingStarted] = useState<boolean>(false);
+  const [taskId, setTaskId] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [taskCompleted, setTaskCompleted] = useState<boolean>(false);
+  const [tableData, setTableData] = useState<Array<recordTuple>>([]);
+  const [terminalOn, setTerminalOn] = useState<boolean>(true);
 
   const TerminalRef = useRef<TerminalProps>(null);
 
@@ -60,13 +60,19 @@ const [terminalOn, setTerminalOn] = useState<boolean>(true);
     }
   }, [taskId]);
 
+  useEffect(() => {
+    if (crawlingStarted) {
+      setTerminalOn(true);
+    }
+  }, [crawlingStarted]);
+
   const resetAllStates = () => {
     setTaskId("");
     setLoading(false);
     setTaskCompleted(false);
     setTableData([]);
     printOnTerminal();
-  }
+  };
 
   const addDataToTable = (url: string, count: number) => {
     const data = [...tableData];
@@ -90,11 +96,16 @@ const [terminalOn, setTerminalOn] = useState<boolean>(true);
     });
   };
 
-  const printOnTerminal = (message?: string, type?: LogType, key?: string, component?: ReactElement) => {
-    if(TerminalRef.current){
+  const printOnTerminal = (
+    message?: string,
+    type?: LogType,
+    key?: string,
+    component?: ReactElement
+  ) => {
+    if (TerminalRef.current) {
       TerminalRef.current.printOnTerminal(message, type, key, component);
     }
-  } 
+  };
 
   const startCrawling = async (id: string) => {
     try {
@@ -145,10 +156,7 @@ const [terminalOn, setTerminalOn] = useState<boolean>(true);
         }
       },
       (err) => {
-        printOnTerminal(
-          err.message,
-          LogType.ERROR
-        );
+        printOnTerminal(err.message, LogType.ERROR);
       }
     );
   };
@@ -157,17 +165,21 @@ const [terminalOn, setTerminalOn] = useState<boolean>(true);
     setTaskCompleted(false);
     setTableData([]);
     printOnTerminal();
+    setCrawlingStarted(false);
   };
 
   const toggleTerminal = () => {
     setTerminalOn(!terminalOn);
-  }
+  };
 
   return (
     <Container>
-      <Row style={{
-        height: terminalOn ? "60%" : "96%"
-      }}>
+      <Header />
+      <Row
+        style={{
+          height: terminalOn ? "60%" : "90%",
+        }}
+      >
         <QueryForm
           setLoading={setLoading}
           loading={loading}
@@ -175,8 +187,9 @@ const [terminalOn, setTerminalOn] = useState<boolean>(true);
           setTaskId={setTaskId}
           isTaskCompleted={taskCompleted}
           clearTerminal={clearTerminal}
+          setCrawlingStarted={setCrawlingStarted}
         />
-        <CrawlingResult data={tableData} />
+        <CrawlingResult crawlingStarted={crawlingStarted} data={tableData} />
       </Row>
       <Terminal
         ref={TerminalRef}
@@ -185,6 +198,7 @@ const [terminalOn, setTerminalOn] = useState<boolean>(true);
         setTableData={setTableData}
         terminalOn={terminalOn}
         toggleTerminal={toggleTerminal}
+        setCrawlingStarted={setCrawlingStarted}
       />
     </Container>
   );

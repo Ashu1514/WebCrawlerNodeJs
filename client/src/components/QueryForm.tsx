@@ -92,6 +92,7 @@ const QueryForm = (props: any) => {
       if(props.isTaskCompleted){
         props.clearTerminal();
       }
+      props.setCrawlingStarted(true);
       props.setLoading(true);
       props.printErrors("validating query inputs...", LogType.HAPPNING, Math.random().toString());
       const isValid = validateFormData();
@@ -109,11 +110,13 @@ const QueryForm = (props: any) => {
           props.setTaskId(response.data.taskId);
         }
       } else {
+        props.setCrawlingStarted(false);
         props.printErrors("Please fill form fields with valid inputs...", LogType.WARNING, Math.random().toString());
       }
     } catch (error: any) {
+      props.setCrawlingStarted(false);
       props.printErrors(error.message, LogType.ERROR, Math.random().toString());
-      } finally {
+    } finally {
       props.setLoading(false);
     }
   }
@@ -295,7 +298,7 @@ const QueryForm = (props: any) => {
         isVariable={true}
         id="maxLevel"
         variableType="const"
-        variableName="_level_deep"
+        variableName="_depth_level"
         type="number"
         inputType="number"
         placeholder="Enter crawling deepness level"

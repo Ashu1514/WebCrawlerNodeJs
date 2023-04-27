@@ -41,7 +41,7 @@ const TerminalBox = styled.div`
   border-bottom: 1px solid #0f3d24;
   border-top: 1px solid #0f3d24;
   width: 100%;
-  height: 40%;
+  height: 33%;
   transition: height 0.2s ease-out;
 `;
 
@@ -153,11 +153,12 @@ interface Props {
   terminalOn: boolean;
   setTaskCompleted: Function;
   setTableData: Function;
-  toggleTerminal:Function
+  toggleTerminal:Function;
+  setCrawlingStarted: Function;
 }
 
 const Terminal = forwardRef(
-  ({ loading, setTaskCompleted, setTableData, terminalOn, toggleTerminal }: Props, ref) => {
+  ({ loading, setTaskCompleted, setTableData, terminalOn, toggleTerminal, setCrawlingStarted }: Props, ref) => {
     const [terminalOutput, setTerminalOutput] = useState<ReactElement[]>([]);
 
     const renderTerminalResponse = (component: ReactElement | undefined) => {
@@ -196,10 +197,11 @@ const Terminal = forwardRef(
       setTaskCompleted(false);
       setTableData([]);
       renderTerminalResponse(undefined);
+      setCrawlingStarted(false);
     };
 
     return (
-      <TerminalBox style={{ height: terminalOn ? "40%" : "4%" }}>
+      <TerminalBox style={{ height: terminalOn ? "34%" : "5%" }}>
         <Console>
           <Header>
             <TerminalTitleBar>
